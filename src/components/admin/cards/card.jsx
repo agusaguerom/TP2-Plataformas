@@ -23,12 +23,12 @@ const Card = () => {
     const cardData = [
       {
         tipo: "info",
-        titulo: "Cantidad de Seguidores",
+        titulo: "Cantidad de Seguidores:",
         valor: cantidadSeguidores
       },
       {
         tipo: "info",
-        titulo: "Cantidad de Canciones",
+        titulo: "Cantidad de Canciones:",
         valor: cantidadCanciones
       },
       {
@@ -41,7 +41,7 @@ const Card = () => {
       },
       {
         tipo: "gestion",
-        imgSrc: "https://fakeimg.pl/300x300/?text=1",
+        imgSrc: "/ondas.png",
         alttxt: "Gestion de canciones",
         titulo: "Gestion de canciones",
         descripcion: "Administra todas la canciones disponibles en la plataforma",
