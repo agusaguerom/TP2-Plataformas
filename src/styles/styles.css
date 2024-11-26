@@ -1,0 +1,92 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+*{
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    margin-left: 5rem;
+}
+
+.navbarVertical{
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    background-color: #EAA9A9;
+}
+
+.navbar-nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+
+.nav-item{
+    align-items: center;
+    width: 100%;
+    font-size: 2em;
+    margin-top: 30px;
+}
+.nav-item a{
+    color: #FFFFFF;
+    display: flex; 
+    justify-content: center; 
+
+}
+
+.nav-item:last-child{
+    margin-top: auto;
+}
+
+.tituloSeccion{
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.itemrelease{
+    text-align: center;
+}
+.imgRelease{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px){
+    .navbarVertical{
+        bottom: 0;
+        width: 100vw;
+        height: 5rem;
+    }
+
+    .navbar-nav{
+        flex-direction: row;
+    }
+
+    .nav-link{
+        justify-content: center;
+    }
+
+    .main{
+        margin: 0;
+    }
+}
