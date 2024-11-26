@@ -9,10 +9,8 @@ import './styles/styles.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/admin/panel_admin/Dashboard'; 
 
-const rutas = [
-{ path:"/", element: < RecentsReleases />, name: "Home" },
-{ path:"/Dashboard", element: <Dashboard />, name: "Panel Artista"}
-]
+import { AppRoutes } from './components/AppRoutes/AppRoutes';
+
 
 
 function App() {
@@ -22,15 +20,9 @@ function App() {
       <Navbar />
     
       <main className="main">
-        <Routes>
-          
-          {rutas.map(ruta => (
+      
+      <AppRoutes />
 
-            <Route key={ruta.name} path={ruta.path} element={ruta.element} />
-
-          ))}
-          
-        </Routes>
       </main>
     
     </BrowserRouter>
