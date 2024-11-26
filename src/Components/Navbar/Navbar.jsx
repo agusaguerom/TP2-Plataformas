@@ -1,33 +1,34 @@
 import '../../styles/styles.css';
+import { Link } from 'react-router-dom';
 
 export function Navbar(){
     return(
     <>
-      <nav class="navbarVertical">
+      <nav className="navbarVertical">
         <ul className='navbar-nav'>
 
             <li className='nav-item'>
             <a href="" className='nav-link'>
-            <i class="bi bi-search"></i>
+            <i className="bi bi-search"></i>
             </a>
             </li>
 
             <li className='nav-item'>
             <a href="" className='nav-link'>
-            <i class="bi bi-music-note-beamed"></i>   
+            <i className="bi bi-music-note-beamed"></i>   
             </a>
         
             </li>
 
             <li className='nav-item'>
             <a href="" className='nav-link'>
-            <i class="bi bi-star"></i>    
+            <i className="bi bi-star"></i>    
             </a>
             </li>
 
             <li className='nav-item'>
             <a href="" className='nav-link'>
-            <i class="bi bi-person-circle"></i>          
+            <i className="bi bi-person-circle"></i>          
             </a>  
             </li>
 

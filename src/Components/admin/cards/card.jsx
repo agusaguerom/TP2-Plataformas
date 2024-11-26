@@ -32,17 +32,19 @@ const Card = () =>
               {
               cardData.map((card, indice) => (
 
-                <div className="card" key={indice}>
+                <div className="custom-card" key={indice}>
 
                     <img src={card.imgSrc} alt={card.alttxt} className="card-img"/>
 
                     <div className="card-content">
 
-                        <h2>{card.titulo}</h2>
+                        <h2 className="card_titulos">{card.titulo}</h2>
 
                         <p>{card.descripcion}</p>
 
+                    <div className="btn_margen_inf">
                         <Link to={card.link} className="cbutton">ir a {card.titulo}</Link>
+                    </div>
 
                     </div>
 
