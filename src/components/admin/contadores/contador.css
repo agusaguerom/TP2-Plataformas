@@ -1,0 +1,27 @@
+.info-card {
+    background: #ff66b2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    border: 2px solid black;
+    margin: 30px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  
+  .card-content {
+    padding: 15px;
+  }
+  
+  .card-content h2 {
+    font-size: 1.5em;
+    margin: 10px 0;
+    margin-bottom: 30px;
+  }
+  
+  .card-content p {
+    color: #ffffff;
+    font-size: 1em;
+    margin-bottom: 40px;
+  }
