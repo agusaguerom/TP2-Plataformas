@@ -21,9 +21,9 @@ export function Navbar(){
             </li>
 
             <li className='nav-item'>
-            <a href="" className='nav-link'>
+            <Link to="/Dashboard" className='nav-link'>
             <i className="bi bi-star"></i>    
-            </a>
+            </Link>
             </li>
 
             <li className='nav-item'>

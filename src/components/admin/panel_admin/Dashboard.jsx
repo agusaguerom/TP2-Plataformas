@@ -8,7 +8,7 @@ return (
 
     <>
 
-            <h1 className="titulo_Dashboard">Panel de Artista</h1>
+            <h1 className="titulo_Dashboard">Panel del Artista</h1>
 
             <h2 className="subtitulo_Dashboard">Seleccionar categoria</h2>
 

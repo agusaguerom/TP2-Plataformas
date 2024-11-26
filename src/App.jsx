@@ -6,22 +6,34 @@ import { Navbar } from './Components/Navbar/Navbar'
 import { RecentsReleases } from './Components/RecentsRelease/RecentsRelease'
 
 import './styles/styles.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/admin/panel_admin/Dashboard'; 
+
+const rutas = [
+{ path:"/", element: < RecentsReleases />, name: "Home" },
+{ path:"/Dashboard", element: <Dashboard />, name: "Panel Artista"}
+]
+
 
 function App() {
   return (
     <>
-    <Router>
+    <BrowserRouter>
       <Navbar />
+    
       <main className="main">
         <Routes>
-          <Route path="/" element={<RecentsReleases />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          
+          {rutas.map(ruta => (
+
+            <Route key={ruta.name} path={ruta.path} element={ruta.element} />
+
+          ))}
           
         </Routes>
       </main>
-    </Router>
+    
+    </BrowserRouter>
     </>
   )
 }
