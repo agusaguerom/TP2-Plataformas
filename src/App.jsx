@@ -7,7 +7,7 @@ import { RecentsReleases } from './Components/RecentsRelease/RecentsRelease'
 
 import './styles/styles.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Dashboard from './components/admin/panel_admin/Dashboard'; 
+
 
 
 import { AppRoutes } from './components/AppRoutes/AppRoutes';
