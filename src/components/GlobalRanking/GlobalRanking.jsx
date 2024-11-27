@@ -18,6 +18,7 @@ export function GlobalRanking() {
                             name={song.name}
                             artist={artistLinks}
                             image={song.image}
+                            audio={song.audio}
                         />
                     </div>
                  );
