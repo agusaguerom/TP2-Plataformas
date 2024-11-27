@@ -3,17 +3,9 @@
 import React from "react";
 import FilaCancion from '../filas_tabla_canciones/filas_canciones';
 import './tabla_canciones.css';
+import { songs } from '../../../../src/data/data';
 
 const TablaCancion = () => {
-
-
-const canciones = [
-
-    {id: 1, name: 'cancion 1', duracion: '3:45'},
-    {id: 2, name: 'cancion 2', duracion: '3:50'},
-    {id:3, name: 'cancion 3', duracion: '4:30'}
-
-]
 
 return (
 
@@ -24,11 +16,15 @@ return (
 
 
 <thead>
+            <tr>
 
-        <th>id</th>
-        <th>Nombre</th>
-        <th>Duracion</th>
-        <th>Acciones</th>
+                        <th className="centrar-th-tabla">Id</th>
+                        <th className="centrar-th-tabla">Imágen</th>
+                        <th className="centrar-th-tabla">Canción</th>
+                        <th className="centrar-th-tabla">Artista</th>
+                        <th className="centrar-th-tabla">Acciones</th>
+
+            </tr>
 
 </thead>
 
@@ -36,7 +32,7 @@ return (
 
 {
     
-    canciones.map(cancion => ( <FilaCancion key={cancion.id} id={cancion.id} nombre={cancion.name} duracion={cancion.duracion}/> ))
+    songs.map(song => ( <FilaCancion key={song.id} id={song.id} nombre={song.name} artista={song.artist} imagen={song.image} /> ))
     
 }
 
