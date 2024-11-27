@@ -9,10 +9,11 @@ import './styles/styles.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/admin/panel_admin/Dashboard'; 
 
+
 import { AppRoutes } from './components/AppRoutes/AppRoutes';
 
-
-
+import { GlobalRanking } from './components/GlobalRanking/GlobalRanking';
+import { Home } from '../pages/Home';
 function App() {
   return (
     <>
@@ -22,7 +23,6 @@ function App() {
       <main className="main">
       
       <AppRoutes />
-
       </main>
     
     </BrowserRouter>
