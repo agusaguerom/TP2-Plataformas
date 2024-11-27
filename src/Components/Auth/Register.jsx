@@ -1,39 +1,38 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
-  const { register, login } = useAuth();
-  const navigate = useNavigate();
-
+  const { register, login } = useAuth(); 
+  const navigate = useNavigate(); 
 
   const usernameRef = useRef(null);
+  const emailRef = useRef(null); 
   const passwordRef = useRef(null);
   const roleRef = useRef(null);
   const birthdateRef = useRef(null);
   const genderRef = useRef(null);
 
   const handleRegister = () => {
-    if (!username || !password || !role || !birthdate || !gender) {
+    if (!username ||!email || !password || !role || !birthdate || !gender) {
       alert('Por favor, complete todos los campos');
       return;
     }
 
+    register(username, email, password, role, birthdate, gender);
 
-    register(username, password, role);
-    alert('Usuario registrado con éxito');
-
-
-    if (login(username, password)) { 
-        navigate('/'); 
-      } else { 
-        alert('Error al iniciar sesión automáticamente. Por favor, inicie sesión manualmente.'); 
-      }
+    const loginSuccess = login(username, password);
+    if (loginSuccess) {
+      navigate('/'); 
+    } else {
+      alert('Error al iniciar sesión automáticamente. Por favor, inicie sesión manualmente.');
+    }
   };
 
   return (
@@ -49,9 +48,18 @@ const Register = () => {
           className="form-control"
         />
       </div>
+      <div> 
+        <label onClick={() => emailRef.current.focus()}>Ingrese su correo electrónico</label> 
+        <input 
+        type="email" 
+        ref={emailRef} 
+        value={email} 
+        onChange={(e) => setEmail(e.target.value)} 
+        placeholder="Email" 
+        className="form-control" /> 
+        </div>
       <div>
         <label onClick={() => passwordRef.current.focus()}>Ingrese su contraseña</label>
-      
         <input 
           type="password" 
           ref={passwordRef} 
@@ -63,7 +71,6 @@ const Register = () => {
       </div>
       <div>
         <label onClick={() => roleRef.current.focus()}>Seleccione el tipo de cuenta</label>
-
         <select 
           ref={roleRef} 
           value={role} 
@@ -77,7 +84,6 @@ const Register = () => {
       </div>
       <div>
         <label onClick={() => birthdateRef.current.focus()}>Ingrese su fecha de nacimiento</label>
-
         <input 
           type="date" 
           ref={birthdateRef} 
@@ -88,7 +94,6 @@ const Register = () => {
       </div>
       <div>
         <label onClick={() => genderRef.current.focus()}>Seleccione su género</label>
-
         <select 
           ref={genderRef} 
           value={gender} 
@@ -99,7 +104,6 @@ const Register = () => {
           <option value="male">Hombre</option>
           <option value="female">Mujer</option>
           <option value="non-binary">No Binario</option>
-          
         </select>
       </div>
       <button onClick={handleRegister} className="btn btn-primary">Register</button>

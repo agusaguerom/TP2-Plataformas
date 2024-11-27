@@ -4,8 +4,10 @@ import { RecentsReleases } from "../Components/RecentsRelease/RecentsRelease";
 import { Gestion_Canciones } from "../../pages/gestion_canciones/Gestion_Canciones";
 import { ArtistProfile } from "../../pages/ArtistProfile";
 
-import LoginPage from "../../pages/LoginPge/Login";
+import LoginPage from "../../pages/LoginPage/Login";
 import RegisterPage from "../../pages/RegisterPage/Register";
+import ProfilePage from "../../pages/ProfilePage/Profile";
+import EditProfilePage from "../../pages/ProfilePage/EditProfile";
 
 import Login from "../Components/Auth/Login";
 import Register from "../Components/Auth/Register";

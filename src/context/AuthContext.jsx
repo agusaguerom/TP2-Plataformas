@@ -1,25 +1,17 @@
-import { useContext } from "react";
-import { useState } from "react";
-import { createContext } from "react";
-
+import { useContext, useState, createContext } from "react";
 
 const AuthContext = createContext();
-
-
 
 export function AuthProvider({ children }) {
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
 
-
-
   const [userLogueado, setUserLogueado] = useState(
     localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
       : null
   );
-
 
   const login = (username, password) => {
     const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -35,7 +27,6 @@ export function AuthProvider({ children }) {
     return false;
   };
 
-
   const logout = () => {
     setIsLogueado(false);
     setUserLogueado(null);
@@ -43,14 +34,23 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-
-  const register = (username, password, role) => {
-    const newUser = { id: Date.now(), username, password, role };
+  const register = (username, email, password, role, birthdate, gender) => {
+    const newUser = { id: Date.now(), username, email, password, role, birthdate, gender };
     const users = JSON.parse(localStorage.getItem('users')) || [];
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
   };
 
+  const updateUser = (updatedUser) => {
+    setUserLogueado(updatedUser);
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(u => u.id === updatedUser.id);
+    if (userIndex > -1) {
+      users[userIndex] = updatedUser;
+      localStorage.setItem('users', JSON.stringify(users));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+  };
 
   return (
     <AuthContext.Provider
@@ -59,13 +59,13 @@ export function AuthProvider({ children }) {
         login,
         logout,
         userLogueado,
-        register, 
+        register,
+        updateUser,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 }
-
 
 export const useAuth = () => useContext(AuthContext);
