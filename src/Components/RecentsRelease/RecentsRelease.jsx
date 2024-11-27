@@ -9,7 +9,7 @@ export function RecentsReleases(){
 
                 <div className="row">
 
-                        {albums.map((lanzamiento)=>(
+                        {albums.slice(-4).map((lanzamiento)=>(
                         <div className="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div className="itemrelease">
                             <img src={lanzamiento.image} alt={lanzamiento.name} className="imgRelease" />
