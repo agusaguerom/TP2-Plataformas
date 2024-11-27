@@ -49,7 +49,7 @@ const Card = () => {
       },
       {
         tipo: "gestion",
-        imgSrc: "/ondas.png",
+        imgSrc: "/album.jpg",
         alttxt: "Gestión de álbumes",
         titulo: "Gestion de álbumes",
         descripcion: "Administrar mis álbumes",

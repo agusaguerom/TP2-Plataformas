@@ -14,9 +14,9 @@ export function Navbar(){
             </li>
 
             <li className='nav-item'>
-            <a href="" className='nav-link'>
+            <Link to="/" className='nav-link'>
             <i className="bi bi-music-note-beamed"></i>   
-            </a>
+            </Link>
         
             </li>
 
