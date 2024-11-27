@@ -1,0 +1,28 @@
+.tabla-de-canciones{
+
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    
+
+}
+
+
+.tabla-de-canciones th,
+.tabla-de-canciones td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.tabla-de-canciones th {
+    background-color: #f4f4f4;
+  }
+
+
+  .tabla-padding{
+
+
+    padding-left: 70px;
+    padding-right: 70px;
+
+  }

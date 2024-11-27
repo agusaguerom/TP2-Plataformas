@@ -45,7 +45,7 @@ const Card = () => {
         alttxt: "Gestion de canciones",
         titulo: "Gestion de canciones",
         descripcion: "Administrar mis canciones",
-        link: "/admin/songs"
+        link: "/Dashboard/Gestion_Canciones"
       },
       {
         tipo: "gestion",
