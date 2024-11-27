@@ -1,4 +1,5 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 *{
     padding: 0;
     margin: 0;
@@ -43,9 +44,22 @@ main{
 }
 
 .tituloSeccion{
+    padding: 20px;
     margin-bottom: 20px;
     font-weight: 700;
 }
+
+.TitleRelease{
+    margin-top: 15px;
+    font-family: "Inter", sans-serif;
+    font-size: 1.0625em;
+    font-weight: bold;
+}
+.ArtistRelease{
+    font-family: "Inter", sans-serif;
+    font-size: 1.0625em;
+}
+
 .itemrelease{
     text-align: center;
 }
