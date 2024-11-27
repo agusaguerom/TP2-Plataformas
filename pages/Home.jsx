@@ -10,7 +10,6 @@ export function Home(){
             <RecentsReleases/>
             <GlobalRanking/>
             <GenerosList/>
-            <FavoritePlaylist/>
 
      
               

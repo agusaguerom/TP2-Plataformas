@@ -25,7 +25,7 @@ export function GlobalRanking() {
                 })}
             </div>
             <div className="d-flex justify-content-end mt-3">
-                <small className="text-muted">Ver Más</small>
+                <small className="text-muted"><a href="/GlobalRanking">Ver Más</a></small>
             </div>        
         </div>
     );

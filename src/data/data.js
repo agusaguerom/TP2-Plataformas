@@ -5,26 +5,26 @@ export const playlist = [
 ]
 
 export const generos = [
-{ id: 1, nombre: 'Rock' },
-{ id: 2, nombre: 'Pop' },
-{ id: 3, nombre: 'Hip Hop' },
-{ id: 4, nombre: 'Jazz' },
-{ id: 5, nombre: 'Reggaeton' },
-{ id: 6, nombre: 'Electrónica' },
-{ id: 7, nombre: 'R&B' },
-{ id: 8, nombre: 'Country' },
-{ id: 9, nombre: 'Indie' },
-{ id: 10, nombre: 'Blues' },
-{ id: 11, nombre: 'Classical' },
-{ id: 12, nombre: 'Metal' },
-{ id: 13, nombre: 'Folk' },
-{ id: 14, nombre: 'Salsa' },
-{ id: 15, nombre: 'Bachata' },
-{ id: 16, nombre: 'Reggae' },
-{ id: 17, nombre: 'Punk' },
-{ id: 18, nombre: 'Dancehall' },
-{ id: 19, nombre: 'K-Pop' },
-{ id: 20, nombre: 'Trap' }
+{ id: 1, name: 'Rock' },
+{ id: 2, name: 'Pop' },
+{ id: 3, name: 'Hip Hop' },
+{ id: 4, name: 'Jazz' },
+{ id: 5, name: 'Reggaeton' },
+{ id: 6, name: 'Electrónica' },
+{ id: 7, name: 'R&B' },
+{ id: 8, name: 'Country' },
+{ id: 9, name: 'Indie' },
+{ id: 10, name: 'Blues' },
+{ id: 11, name: 'Classical' },
+{ id: 12, name: 'Metal' },
+{ id: 13, name: 'Folk' },
+{ id: 14, name: 'Salsa' },
+{ id: 15, name: 'Bachata' },
+{ id: 16, name: 'Reggae' },
+{ id: 17, name: 'Punk' },
+{ id: 18, name: 'Dancehall' },
+{ id: 19, name: 'K-Pop' },
+{ id: 20, name: 'Trap' }
 ];
 
 export const artists = [
@@ -120,42 +120,51 @@ export const songs = [
         name: "Die With a Smile", 
         artistIds: [6, 5], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652811/600x600bf-60_ri0ooi.jpg" ,
-        audio: "https://res.cloudinary.com/drswstgcv/video/upload/v1732732651/Lady_Gaga_Bruno_Mars_-_Die_With_A_Smile_n6ohmf.mp3"
+        audio: "https://res.cloudinary.com/drswstgcv/video/upload/v1732732651/Lady_Gaga_Bruno_Mars_-_Die_With_A_Smile_n6ohmf.mp3",
+        generoId: 2
     },
     { 
         id: 2, 
         name: "APT", 
         artistIds: [12, 5], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652811/0x1900-000000-80-0-0_f7673j.jpg" ,
-        audio: null
+        audio: null,
+        generoId: 19
+
     },
     { 
         id: 3, 
         name: "Birds of a Feather", 
         artistIds: [8], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652810/ab67616d00001e0271d62ea7ea8a5be92d3c1f62_m9mpje.jpg" ,
-        audio: null
+        audio: null,
+        generoId: 2
+
     },
     { 
         id: 4, 
         name: "That's so True", 
         artistIds: [11], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652809/33a2020c25d85afb870759b4e3dd24e7.1000x1000x1_rs9mvo.png" ,
-        audio: null
+        audio: null,
+        generoId: 2
+
     },
     { 
         id: 5, 
         name: "Who", 
         artistIds: [7], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652809/ab67616d0000b273f02c451189a709b9a952aaec_mnuz1g.jpg" ,
-        audio: null
+        audio: null,
+        generoId: 19
     },
     { 
         id: 6, 
         name: "Tu Boda", 
         artistIds: [10, 9], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652809/ab67616d0000b273b51d9a74d356d785cce9dea9_dni8pf.jpg",
-        audio: null
+        audio: null,
+        generoId: 8
     },
 ];
 
