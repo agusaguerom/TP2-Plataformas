@@ -23,12 +23,6 @@ function App() {
       <main className="main">
       
       <AppRoutes />
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-          
-        </Routes>
       </main>
     
     </BrowserRouter>

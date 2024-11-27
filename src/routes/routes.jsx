@@ -1,8 +1,9 @@
+import { Home } from "../../pages/Home";
 import Dashboard from "../components/admin/panel_admin/Dashboard";
 import { RecentsReleases } from "../Components/RecentsRelease/RecentsRelease";
-
+Home
 export const rutas = [
-    { path:"/", element: < RecentsReleases />, name: "Home" },
+    { path:"/", element: < Home />, name: "Home" },
     { path:"/Dashboard", element: <Dashboard />, name: "Panel Artista"}
     
     ]
