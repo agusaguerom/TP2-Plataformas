@@ -27,7 +27,7 @@ export function Navbar(){
             </li>
 
             <li className='nav-item'>
-            <a href="" className='nav-link'>
+            <a href="/profile" className='nav-link'>
             <i className="bi bi-person-circle"></i>          
             </a>  
             </li>
