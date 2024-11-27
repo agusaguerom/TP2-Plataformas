@@ -1,40 +1,35 @@
-import '../../styles/styles.css';
-import { Link } from 'react-router-dom';
+import "../../styles/styles.css";
+import { Link } from "react-router-dom";
 
-export function Navbar(){
-    return(
+export function Navbar() {
+  return (
     <>
       <nav className="navbarVertical">
-        <ul className='navbar-nav'>
-
-            <li className='nav-item'>
-            <a href="" className='nav-link'>
-            <i className="bi bi-search"></i>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              <i className="bi bi-music-note-beamed"></i>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <a href="/search" className="nav-link">
+              <i className="bi bi-search"></i>
             </a>
-            </li>
+          </li>
 
-            <li className='nav-item'>
-            <Link to="/" className='nav-link'>
-            <i className="bi bi-music-note-beamed"></i>   
+          <li className="nav-item">
+            <Link to="/Dashboard" className="nav-link">
+              <i className="bi bi-star"></i>
             </Link>
-        
-            </li>
+          </li>
 
-            <li className='nav-item'>
-            <Link to="/Dashboard" className='nav-link'>
-            <i className="bi bi-star"></i>    
-            </Link>
-            </li>
-
-            <li className='nav-item'>
-            <a href="" className='nav-link'>
-            <i className="bi bi-person-circle"></i>          
-            </a>  
-            </li>
-
+          <li className="nav-item">
+            <a href="" className="nav-link">
+              <i className="bi bi-person-circle"></i>
+            </a>
+          </li>
         </ul>
       </nav>
-
     </>
-    );
+  );
 }

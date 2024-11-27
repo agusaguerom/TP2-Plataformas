@@ -5,15 +5,42 @@ import { Gestion_Canciones } from "../../pages/gestion_canciones/Gestion_Cancion
 import { ArtistProfile } from "../../pages/ArtistProfile";
 import EditarCancion from "../../pages/editar_Canciones/EditarCancion";
 import { Gestion_Albumes } from "../../pages/gestion_albumes/Gestion_Albumes";
+import { Generos } from "../../pages/Generos";
+import { GlobalRanking } from "../../pages/GlobalRanking";
+import { Search } from "../../pages/Search";
 
 export const rutas = [
-    { path:"/", element: < Home />, name: "Home" },
-    { path:"/Dashboard", element: <Dashboard />, name: "Panel Artista"},
-    { path: "/Dashboard/Gestion_Canciones", element: <Gestion_Canciones />, name: "Panel canciones" },
-    { path:"/Dashboard/Gestion_Canciones/EditarCancion/:id", element: <EditarCancion/>, name: "Editar Cancion" },
-    { path:"/Dashboard/Gestion_Albumes", element: <Gestion_Albumes />, name: "Panel albumes"},
+  { path: "/", element: <Home />, name: "Home" },
+  { path: "/Dashboard", element: <Dashboard />, name: "Panel Artista" },
+  {
+    path: "/Dashboard/Gestion_Canciones",
+    element: <Gestion_Canciones />,
+    name: "Panel canciones",
+  },
+  {
+    path: "/Dashboard/Gestion_Canciones/EditarCancion/:id",
+    element: <EditarCancion />,
+    name: "Editar Cancion",
+  },
+  { path: "/Dashboard/Gestion_Albumes", element: <Gestion_Albumes />, name: "Panel albumes" },
 
-    //Artistas
-    { path: "/artist/:id", element: <ArtistProfile />, name: "Perfil del Artista" },
-    
-    ]
+  // Artistas
+  {
+    path: "/artist/:id",
+    element: <ArtistProfile />,
+    name: "Perfil del Artista",
+  },
+
+  // Genero
+  { path: "/generos/:id", element: <Generos />, name: "Lista Genero" },
+
+  // Listas
+  {
+    path: "/globalRanking",
+    element: <GlobalRanking />,
+    name: "Ranking Global",
+  },
+
+  // Buscador
+  { path: "/search", element: <Search />, name: "Search" },
+];

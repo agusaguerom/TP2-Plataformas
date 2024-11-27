@@ -1,4 +1,4 @@
-import { artists } from "./data";
+import { artists, songs } from "./data";
 export function getArtistLinks(artistIds) {
     const artistLinks = artistIds
         .map(id => {
@@ -17,3 +17,12 @@ export function getArtistLinks(artistIds) {
         return acc;
     }, []) : artistLinks;
 }
+
+
+export function getAllCanciones(){
+    return songs;
+}
+
+export function getSongsByGenero(generoId){
+    return songs.filter(song => song.generoId === generoId);
+};
