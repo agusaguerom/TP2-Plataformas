@@ -35,8 +35,8 @@ const Card = () => {
         tipo: "gestion",
         imgSrc: "https://fakeimg.pl/300x300/?text=1",
         alttxt: "Gestion de usuarios",
-        titulo: "Gestion de usuarios",
-        descripcion: "Administra todos los usuarios registrados en el sistema",
+        titulo: "Configuración de Perfil",
+        descripcion: "Modificar perfil",
         link: "/admin/users"
       },
       {
@@ -44,7 +44,15 @@ const Card = () => {
         imgSrc: "/ondas.png",
         alttxt: "Gestion de canciones",
         titulo: "Gestion de canciones",
-        descripcion: "Administra todas la canciones disponibles en la plataforma",
+        descripcion: "Administrar mis canciones",
+        link: "/admin/songs"
+      },
+      {
+        tipo: "gestion",
+        imgSrc: "/ondas.png",
+        alttxt: "Gestión de álbumes",
+        titulo: "Gestion de álbumes",
+        descripcion: "Administrar mis álbumes",
         link: "/admin/songs"
       }
     ];
