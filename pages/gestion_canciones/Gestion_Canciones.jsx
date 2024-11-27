@@ -8,7 +8,7 @@ export const Gestion_Canciones = () => {
         <>
             <h1 className="titulo-canciones">Gestión de canciones</h1>
             <div className="contenedor-botones">
-                <button className="btn btn-primary btn-agregar-cancion">Agregar</button>
+                
                 <Link to={"/Dashboard"} className="button-volver">Volver</Link>
             </div>
             <Tabla />

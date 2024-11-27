@@ -3,18 +3,6 @@
   padding: 60px;
 }
 
-.btn-agregar-cancion {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-agregar-cancion:hover {
-  background-color: #0056b3;
-}
 
 .button-volver {
   background: #007bff;
@@ -27,7 +15,7 @@
 }
 
 .button-volver:hover {
-  background: #ffffff;
+  background: #00f7ff;
   color: #ff66b2;
 }
 
@@ -41,7 +29,6 @@
 }
 
 
-.btn-agregar-cancion,
 .button-volver {
   margin: 0 10px; 
 }

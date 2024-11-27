@@ -35,3 +35,36 @@
 
 
   }
+
+
+  .form-agregar-cancion {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #EAA9A9;
+}
+
+.form-agregar-cancion div {
+  margin-bottom: 10px;
+}
+
+.form-agregar-cancion label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.btn-agregar-cancion {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-agregar-cancion:hover {
+  background-color: #0056b3;
+}
