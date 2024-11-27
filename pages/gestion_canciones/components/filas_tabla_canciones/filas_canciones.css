@@ -3,3 +3,24 @@
   margin: 0 5px;
   padding: 5px 10px;
 }
+
+.imagenes-canciones {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.contenido-centrado-tabla{
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.centrar-txt{
+
+text-align: center;
+
+}
