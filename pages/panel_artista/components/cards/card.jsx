@@ -53,7 +53,7 @@ const Card = () => {
         alttxt: "Gestión de álbumes",
         titulo: "Gestion de álbumes",
         descripcion: "Administrar mis álbumes",
-        link: "/admin/songs"
+        link: "/Dashboard/Gestion_Albumes"
       }
     ];
 
