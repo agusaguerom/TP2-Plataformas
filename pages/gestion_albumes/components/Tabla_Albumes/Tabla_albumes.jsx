@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { albums as initialAlbums, artists } from "../../../../src/data/data";
 import Filas_Albumes from "../Filas_Albumes/filas_albumes";
 import "./Tabla_albumes.css";
-import { useAuth } from "../../../../src/context/AuthContext"; // Importar el contexto de autenticación
+import { useAuth } from "../../../../src/context/AuthContext"; 
 
 const TablaAlbum = () => {
-  const { userLogueado } = useAuth(); // Obtén el usuario logueado del contexto
+  const { userLogueado } = useAuth(); 
   const [albums, setAlbums] = useState(initialAlbums);
   const [name, setName] = useState("");
   const [artistIds, setArtistIds] = useState("");
