@@ -56,15 +56,20 @@ const Profile = () => {
           <label>Género:</label>
           <p>{userData.gender}</p>
         </div>
+        
 
         <div className="profile-actions">
-          <button onClick={() => navigate('/edit-profile')} className="btn btn-primary btn-action">
+          
+
+          <button onClick={() => navigate('/edit-profile')} className="btn btn-primary btn-action mrg-btn-editar">
             Editar Perfil
           </button>
+         
           <button onClick={handleLogout} className="btn btn-danger btn-action">
             Cerrar Sesión
           </button>
         </div>
+       
       </div>
     </div>
   );
