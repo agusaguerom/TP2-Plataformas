@@ -65,7 +65,7 @@ const Card = ({ admin }) => {
           alttxt: "Gestión de perfil",
           titulo: "Configuración de Perfil",
           descripcion: "Modificar perfil",
-          link: "/admin/users"
+          link: "/profile"
         }
       ];
 
