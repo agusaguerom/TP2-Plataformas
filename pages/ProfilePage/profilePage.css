@@ -18,7 +18,7 @@
 
 .profile-container h1 {
   margin-bottom: 30px;
-  color: #333;
+  color: #333; 
   font-family: 'Arial', sans-serif;
 }
 
@@ -29,12 +29,13 @@
 .profile-info label {
   font-weight: bold;
   display: block;
+  color: #333; 
 }
 
 .profile-info p {
   margin: 0;
   font-size: 16px;
-  color: #666;
+  color: #666; 
 }
 
 .profile-actions {
