@@ -1,18 +1,32 @@
-.centrar-titulo-usuarios {
-    text-align: center;
-    margin: 20px 0;
+/* Gestion_Usuarios.css */
+.titulo-usuarios {
+  text-align: center;
+  padding: 60px;
 }
 
-.button-volver-usuarios, .button-agregar-usuario {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+.button-volver-usuarios {
+  background: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 15px;
+  text-decoration: none;
 }
 
-.button-volver-usuarios:hover, .button-agregar-usuario:hover {
-    background-color: #0056b3;
+.button-volver-usuarios:hover {
+  background: #00f7ff;
+  color: #ff66b2;
+}
+
+.contenedor-botones-usuarios {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 100px;
+  margin-bottom: 30px;
+}
+
+.button-volver-usuarios {
+  margin: 0 10px;
 }

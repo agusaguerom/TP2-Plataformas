@@ -1,5 +1,6 @@
 import React from "react";
 import "./Filas_Usuarios.css";
+import { Link } from "react-router-dom";
 
 const FilasUsuarios = ({ id, nombre, email, rol }) => {
   return (
@@ -9,7 +10,7 @@ const FilasUsuarios = ({ id, nombre, email, rol }) => {
       <td className="contenido-txt-usuarios">{email}</td>
       <td className="contenido-txt-usuarios">{rol}</td>
       <td className="contenido-txt-usuarios">
-        <button className="btn btn-warning btn-deshabilitar">Modificar</button>
+        <Link to={`/Dashboard/Gestion_Usuarios/EditarUsuario/${id}`} className="btn btn-warning Modificar-boton">Modificar</Link>
         <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
       </td>
     </tr>
