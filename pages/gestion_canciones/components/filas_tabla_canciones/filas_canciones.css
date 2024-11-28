@@ -2,15 +2,15 @@
 .centrarBtns{
 
   display: flex;
-  gap: 10px; /* Agrega espacio entre los botones */
+  gap: 10px; 
   align-items: center;
 
 }
 .Modificar-boton, 
 .btn-deshabilitar {
-  padding: 5px 15px;  /* Ajusta el tamaño del padding para que los botones sean consistentes */
-  min-width: 100px;  /* Asegura que ambos botones tengan un tamaño mínimo igual */
-  text-align: center;  /* Centra el texto dentro de los botones */
+  padding: 5px 15px;  
+  min-width: 100px;  
+  text-align: center; 
 }
 
 .btn-deshabilitar {
@@ -25,17 +25,13 @@
 
 .Modificar-boton:hover, 
 .btn-deshabilitar:hover {
-  opacity: 0.8; /* Agrega un efecto al pasar el ratón */
+  opacity: 0.8;
 }
 
-.imagenes-canciones {
-  width: 100px;  /* Puedes ajustar el tamaño de la imagen */
-  height: 100px;
-  object-fit: cover;
-  border-radius: 5px;
-}
 
-.contenido-centrado-tabla{
+
+
+.centrar-imagen-cancion{
 
 display: flex;
 justify-content: center;
@@ -48,3 +44,12 @@ align-items: center;
 text-align: center;
 
 }
+
+
+.imagenes-cancion {
+  width: 250px;  
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+

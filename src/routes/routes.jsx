@@ -19,6 +19,7 @@ import Gestion_Albumes from "../../pages/gestion_albumes/Gestion_Albumes";  // A
 import Generos from "../../pages/Generos";  
 import GlobalRanking from "../../pages/GlobalRanking";  
 import Search from "../../.pages/Search";  
+import EditarAlbumes from "../../pages/editar_Albumes/EditarAlbumes";
 
 export const rutas = [
     { path: "/", element: <Home />, name: "Home" },
@@ -27,6 +28,8 @@ export const rutas = [
     { path: "Dashboard/Gestion_Canciones", element: <Gestion_Canciones />, name: "Panel canciones" },
     { path: "Dashboard/Gestion_Canciones/EditarCancion/:id", element: <EditarCancion />, name: "Editar Canción" },
     { path: "Dashboard/Gestion_Albumes", element: <Gestion_Albumes />, name: "Panel álbumes" },
+    { path: "Dashboard/Gestion_Albumes/EditarAlbum/:id", element: <EditarAlbumes />, name: "Editar albumes"},
+
 
     // Género
     { path: "/generos/:id", element: <Generos />, name: "Lista Género" },

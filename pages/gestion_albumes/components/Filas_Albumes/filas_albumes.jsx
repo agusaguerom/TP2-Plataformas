@@ -1,5 +1,6 @@
 import React from "react";
-import "./filas_albumes.css"
+import "./filas_albumes.css";
+import { Link } from "react-router-dom";
 const Filas_Albumes = ({ id, imagen, nombre, artista}) => {
 
 return (
@@ -15,7 +16,9 @@ return (
 
         <div className="Centrar-botones-album">
 
-        <button className="btn btn-warning btn-deshabilitar">Modificar</button>
+        <Link to={`/Dashboard/Gestion_Albumes/EditarAlbum/${id}`} className="btn btn-warning Modificar-boton">
+                        Modificar
+                    </Link>
         <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
 
         </div>

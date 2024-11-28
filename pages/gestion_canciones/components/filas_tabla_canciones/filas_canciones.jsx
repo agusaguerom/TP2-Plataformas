@@ -7,8 +7,11 @@ const CancionFila = ({ id, nombre, artista, imagen }) => {
   return (
     <tr>
       <td className="centrar-txt">{id}</td>
-      <td className="contenido-centrado-tabla">
-        <img src={imagen} alt={nombre} className="imagenes-canciones" />
+      <td>
+        
+        <img src={imagen} alt={nombre} className="imagenes-cancion"/>
+        
+
       </td>
       <td className="centrar-txt">{nombre}</td>
       <td className="centrar-txt">{artista}</td>
