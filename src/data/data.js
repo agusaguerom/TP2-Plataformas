@@ -7,8 +7,20 @@ export const playlist = [
 
 export const users = [
     { id: 1, name: 'John Doe', username:"johnd", email: 'john@example.com',password:"pass", role: 'admin' },
-    { id: 2, name: 'Jane Smith',username:"janes", email: 'jane@example.com',password:"pass", role: 'artist', artistId: 5},
     { id: 3, name: 'Bob Johnson',username:"bobj", email: 'bob@example.com', role: 'user' },
+    { id: 3, name: 'Kendrick Lamar',username:"kendrick", email: 'kendrick@example.com',password:"pass", role: 'artist', artistId: 1},
+    { id: 4, name: 'Wicked Movie Cast', username: 'wickedcast', email: 'wickedcast@example.com', password: 'wickedcast2024', role: 'artist', artistId: 2 },
+    { id: 5, name: 'Maluma', username: 'maluma', email: 'maluma@example.com', password: 'malumacol', role: 'artist', artistId: 3 },
+    { id: 6, name: 'Tyler, The Creator', username: 'tylercreator', email: 'tylercreator@example.com', password: 'tylercreator', role: 'artist', artistId: 4 },
+    { id: 7, name: 'Bruno Mars', username: 'brunomars', email: 'brunomars@example.com', password: 'brunomars', role: 'artist', artistId: 5 },
+    { id: 8, name: 'Lady Gaga', username: 'ladygaga', email: 'ladygaga@example.com', password: 'ladygaga', role: 'artist', artistId: 6 },
+    { id: 9, name: 'Jimin', username: 'jimin', email: 'jimin@example.com', password: 'jiminbts', role: 'artist', artistId: 7 },
+    { id: 10, name: 'Billie Eilish', username: 'billieeilish', email: 'billieeilish@example.com', password: 'billieeilish', role: 'artist', artistId: 8 },
+    { id: 11, name: 'Fuerza Regida', username: 'fuerzaregida', email: 'fuerzaregida@example.com', password: 'fuerzaregida', role: 'artist', artistId: 9 },
+    { id: 12, name: 'Oscar Maydon', username: 'oscarmaydon', email: 'oscarmaydon@example.com', password: 'oscarmaydon', role: 'artist', artistId: 10 },
+    { id: 13, name: 'Gracie Abrams', username: 'gracieabrams', email: 'gracieabrams@example.com', password: 'gracieabrams', role: 'artist', artistId: 11 },
+    { id: 14, name: 'ROSE', username: 'rose', email: 'rose@example.com', password: 'roseblackpink', role: 'artist', artistId: 12 },
+   
 ];
 
 
@@ -174,27 +186,226 @@ export const songs = [
         audio: null,
         generoId: 8
     },
+    { 
+        id: 7, 
+        name: "Wacced Out Murals", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 8, 
+        name: "Squabble Up", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 9, 
+        name: "Luther", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 10, 
+        name: "Man at the Garden", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 31
+    },
+    { 
+        id:11, 
+        name: "Hey Now", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 12, 
+        name: "Reincarnated", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 13, 
+        name: "TV Off", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 14, 
+        name: "Dodger Blue", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 15, 
+        name: "Peekaboo", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 16, 
+        name: "Heart Pt. 6", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 17, 
+        name: "GNX", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 18, 
+        name: "Gloria", 
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp", 
+        audio: null, 
+        generoId: 3,
+        album: 3
+    },
+    { 
+        id: 19, 
+        name: "Young Girls", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 20, 
+        name: "Locked Out of Heaven", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 21, 
+        name: "Gorilla", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 22, 
+        name: "Treasure", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 23, 
+        name: "Moonshine", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 24, 
+        name: "When I Was Your Man", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 25, 
+        name: "Natalie", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 26, 
+        name: "Show Me", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 27, 
+        name: "Money Make Her Smile", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    },
+    { 
+        id: 28, 
+        name: "If I Knew", 
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg", 
+        audio: null, 
+        generoId: 2,
+        album: 5
+    }    
 ];
 
 export const albums = [
     {
         id: 1,
-        name: "GNX",
-        artistIds: [1], 
-        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp"
-    },
-    {
-        id: 2,
         name: "WICKED: THE SOUNDTRACK",
         artistIds: [2], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652812/wicked_lvwjtr.webp"
     },
     {
-        id: 3,
+        id: 2,
         name: "COSAS PENDIENTES",
         artistIds: [3], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652812/ab67616d0000b2733e6665989eeb44e512a29571_wunkpr.jpg"
     },
+    {
+        id: 3,
+        name: "GNX",
+        artistIds: [1], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/316x316bb_bryqpe.webp"
+    },
+ 
     {
         id: 4,
         name: "CHROMAKOPIA",
