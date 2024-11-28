@@ -10,11 +10,14 @@ const FilasUsuarios = ({ id, nombre, email, rol }) => {
       <td className="contenido-txt-usuarios">{email}</td>
       <td className="contenido-txt-usuarios">{rol}</td>
       <td className="contenido-txt-usuarios">
+        <div className="centrar-btns-usuarios">
         <Link to={`/Dashboard/Gestion_Usuarios/EditarUsuario/${id}`} className="btn btn-warning">Modificar</Link>
-        <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
+        <button className="btn btn-danger btn-deshabilitar">Banear</button>
+        </div>
       </td>
     </tr>
   );
 };
 
 export default FilasUsuarios;
+

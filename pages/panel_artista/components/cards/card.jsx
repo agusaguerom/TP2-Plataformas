@@ -17,7 +17,7 @@ const Card = ({ admin }) => {
     ? [
         {
           tipo: "gestion",
-          imgSrc: "https://fakeimg.pl/300x300/?text=1",
+          imgSrc: "/Editar_Perfil.jpg",
           alttxt: "Gestión de perfil",
           titulo: "Configuración de Perfil",
           descripcion: "Modificar perfil",
@@ -25,7 +25,7 @@ const Card = ({ admin }) => {
         },
         {
           tipo: "gestion",
-          imgSrc: "https://fakeimg.pl/300x300/?text=2",
+          imgSrc: "/Admin.jpg",
           alttxt: "Gestión de usuarios",
           titulo: "Administrar Usuarios",
           descripcion: "Administrar usuarios",

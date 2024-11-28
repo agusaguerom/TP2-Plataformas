@@ -32,3 +32,11 @@
 .btn-danger:hover {
     background-color: #c82333;
 }
+
+.centrar-btns-usuarios{
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
