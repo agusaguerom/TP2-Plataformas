@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
@@ -9,29 +9,33 @@ const Register = () => {
   const [role, setRole] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
-  const { register, login } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { register, login } = useAuth();
+  const navigate = useNavigate();
 
   const usernameRef = useRef(null);
-  const emailRef = useRef(null); 
+  const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const roleRef = useRef(null);
   const birthdateRef = useRef(null);
   const genderRef = useRef(null);
 
   const handleRegister = () => {
-    if (!username ||!email || !password || !role || !birthdate || !gender) {
+    if (!username || !email || !password || !role || !birthdate || !gender) {
       alert('Por favor, complete todos los campos');
       return;
     }
 
-    register(username, email, password, role, birthdate, gender);
+    const registrationSuccess = register(username, email, password, role, birthdate, gender);
 
-    const loginSuccess = login(username, password);
-    if (loginSuccess) {
-      navigate('/'); 
+    if (registrationSuccess) {
+      const loginSuccess = login(username, password);
+      if (loginSuccess) {
+        navigate('/');
+      } else {
+        alert('Error al iniciar sesión automáticamente. Por favor, inicie sesión manualmente.');
+      }
     } else {
-      alert('Error al iniciar sesión automáticamente. Por favor, inicie sesión manualmente.');
+      alert('Error al registrar. Por favor, intente nuevamente.');
     }
   };
 
@@ -39,42 +43,43 @@ const Register = () => {
     <div className="register-form">
       <div>
         <label onClick={() => usernameRef.current.focus()}>Ingrese su usuario</label>
-        <input 
-          type="text" 
-          ref={usernameRef} 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-          placeholder="Username" 
+        <input
+          type="text"
+          ref={usernameRef}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
           className="form-control"
         />
       </div>
-      <div> 
-        <label onClick={() => emailRef.current.focus()}>Ingrese su correo electrónico</label> 
-        <input 
-        type="email" 
-        ref={emailRef} 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
-        placeholder="Email" 
-        className="form-control" /> 
-        </div>
+      <div>
+        <label onClick={() => emailRef.current.focus()}>Ingrese su correo electrónico</label>
+        <input
+          type="email"
+          ref={emailRef}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          className="form-control"
+        />
+      </div>
       <div>
         <label onClick={() => passwordRef.current.focus()}>Ingrese su contraseña</label>
-        <input 
-          type="password" 
-          ref={passwordRef} 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          placeholder="Password" 
+        <input
+          type="password"
+          ref={passwordRef}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
           className="form-control"
         />
       </div>
       <div>
         <label onClick={() => roleRef.current.focus()}>Seleccione el tipo de cuenta</label>
-        <select 
-          ref={roleRef} 
-          value={role} 
-          onChange={(e) => setRole(e.target.value)} 
+        <select
+          ref={roleRef}
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
           className="form-control"
         >
           <option value="" disabled>Elija el tipo de cuenta</option>
@@ -84,20 +89,20 @@ const Register = () => {
       </div>
       <div>
         <label onClick={() => birthdateRef.current.focus()}>Ingrese su fecha de nacimiento</label>
-        <input 
-          type="date" 
-          ref={birthdateRef} 
-          value={birthdate} 
-          onChange={(e) => setBirthdate(e.target.value)} 
+        <input
+          type="date"
+          ref={birthdateRef}
+          value={birthdate}
+          onChange={(e) => setBirthdate(e.target.value)}
           className="form-control"
         />
       </div>
       <div>
         <label onClick={() => genderRef.current.focus()}>Seleccione su género</label>
-        <select 
-          ref={genderRef} 
-          value={gender} 
-          onChange={(e) => setGender(e.target.value)} 
+        <select
+          ref={genderRef}
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
           className="form-control"
         >
           <option value="" disabled>Elija su género</option>

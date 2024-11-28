@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = () => {
     if (!login(username, password)) {
       alert('Usuario o contraseña incorrectos');
-    }else{
+    } else {
       navigate('/');
     }
   };
@@ -35,7 +35,7 @@ const Login = () => {
       <button onClick={handleLogin} className="btn btn-primary">Login</button>
       <div className="register-link">
         <span>¿No tienes cuenta?</span>
-        <Link to="/register">Registrarse</Link> {}
+        <Link to="/register">Registrarse</Link>
       </div>
     </div>
   );

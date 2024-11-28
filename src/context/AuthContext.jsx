@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
   );
 
   const login = (username, password) => {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
     const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
@@ -35,15 +35,21 @@ export function AuthProvider({ children }) {
   };
 
   const register = (username, email, password, role, birthdate, gender) => {
-    const newUser = { id: Date.now(), username, email, password, role, birthdate, gender };
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
+    try {
+      const newUser = { id: Date.now(), username, email, password, role, birthdate, gender };
+      const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      return true;  // Registro exitoso
+    } catch (error) {
+      console.error('Error al registrar:', error);
+      return false;  // Registro fallido
+    }
   };
 
   const updateUser = (updatedUser) => {
     setUserLogueado(updatedUser);
-    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
     const userIndex = users.findIndex(u => u.id === updatedUser.id);
     if (userIndex > -1) {
       users[userIndex] = updatedUser;
@@ -57,7 +63,7 @@ export function AuthProvider({ children }) {
       value={{
         isLogueado,
         login,
-        logout, 
+        logout,
         userLogueado,
         register,
         updateUser,

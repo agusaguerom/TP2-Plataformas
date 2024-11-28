@@ -8,8 +8,8 @@ import GlobalRanking from '../pages/GlobalRanking';
 import { Home } from '../pages/Home';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import Login from './Components/Auth/Login';
-import Register from './Components/Auth/Register';
+import LoginPage from '../pages/LoginPage/Login';  // Importar LoginPage correctamente
+import RegisterPage from '../pages/RegisterPage/Register';  // Importar RegisterPage correctamente
 import Logout from './Components/Auth/Logout';
 
 import Profile from './Components/Profile-todo/Profile';
@@ -35,7 +35,9 @@ function App() {
             <Route path="/artist/:id" element={<ArtistProfile />} />
             <Route path="/Dashboard" element={<ProtectedRoute roles={['artist', 'admin']} component={Dashboard} />} />
             <Route path="/generos/:id" element={<Generos />} />
-            <Route path="/edit-profile" element={<EditProfilePage />} />  {/* Asegúrate de que la ruta coincida */}
+            <Route path="/edit-profile" element={<EditProfilePage />} />
+            <Route path="/login" element={<LoginPage />} />  {/* Asegúrate de que la ruta coincida */}
+            <Route path="/register" element={<RegisterPage />} />  {/* Asegúrate de que la ruta coincida */}
           </Routes>
         </main>
       </BrowserRouter>
@@ -67,9 +69,9 @@ const AuthContent = () => {
     return (
       <div>
         {showRegister ? (
-          <Register />
+          <RegisterPage />  // Asegúrate de que RegisterPage esté siendo utilizado correctamente
         ) : (
-          <Login />
+          <LoginPage />  // Asegúrate de que LoginPage esté siendo utilizado correctamente
         )}
         <button onClick={() => setShowRegister(!showRegister)}>
           {showRegister ? 'Back to Login' : 'Register'}
