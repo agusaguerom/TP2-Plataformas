@@ -9,9 +9,9 @@ return (
     <tr>
 
         <td className="contenido-txt-album">{id}</td>
+        <td className="contenido-centrado-tabla-album"><img src={imagen} alt={nombre} className="imagenes-album"/></td>
         <td className="contenido-txt-album">{nombre}</td>
         <td className="contenido-txt-album">{artista}</td>
-        <td className="contenido-centrado-tabla-album"><img src={imagen} alt={nombre} className="imagenes-album"/></td>
         <td  className="contenido-txt-album">
 
         <div className="Centrar-botones-album">

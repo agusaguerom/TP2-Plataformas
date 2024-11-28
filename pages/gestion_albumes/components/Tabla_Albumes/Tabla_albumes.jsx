@@ -95,7 +95,7 @@ const TablaAlbum = () => {
           <tr>
             <th className="centrar-th-album">Id</th>
             <th className="centrar-th-album">Imágen</th>
-            <th className="centrar-th-album">Nombre</th>
+            <th className="centrar-th-album">Álbum</th>
             <th className="centrar-th-album">Artista</th>
             <th className="centrar-th-album">Acciones</th>
           </tr>
