@@ -17,9 +17,12 @@ return(
     <td className="centrar-txt">{artista}</td>
     <td className="centrar-txt">
 
+    <div className="centrarBtns">
+
     <Link to={`/Dashboard/Gestion_Canciones/EditarCancion/${id}`} className="btn btn-warning Modificar-boton">Modificar</Link>
     <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
     
+    </div>
     </td>
     
     </tr>

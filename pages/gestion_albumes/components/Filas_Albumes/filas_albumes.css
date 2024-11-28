@@ -28,3 +28,11 @@
   margin: 0 5px;
   padding: 5px 10px;
 }
+
+.Centrar-botones-album{
+
+display: flex;
+justify-content: center;
+
+
+}

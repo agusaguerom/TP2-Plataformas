@@ -13,12 +13,15 @@ return (
         <td className="contenido-centrado-tabla-album"><img src={imagen} alt={nombre} className="imagenes-album"/></td>
         <td  className="contenido-txt-album">
 
+        <div className="Centrar-botones-album">
+
         <button className="btn btn-warning btn-deshabilitar">Modificar</button>
         <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
 
+        </div>
+
         </td>
 </tr>
-
 
 )
 

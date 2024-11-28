@@ -24,3 +24,11 @@ align-items: center;
 text-align: center;
 
 }
+
+.centrarBtns{
+
+
+  display: flex;
+  justify-content: center;
+
+}
