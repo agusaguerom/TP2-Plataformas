@@ -6,6 +6,7 @@ const TablaUsuarios = () => {
   const [users, setUsers] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [gender, setGender] = useState('');
@@ -13,6 +14,7 @@ const TablaUsuarios = () => {
 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const roleRef = useRef(null);
   const birthdateRef = useRef(null);
   const genderRef = useRef(null);
@@ -28,6 +30,7 @@ const TablaUsuarios = () => {
       id: users.length + 1,
       username,
       email,
+      password,
       role,
       birthdate,
       gender
@@ -37,6 +40,7 @@ const TablaUsuarios = () => {
     localStorage.setItem('users', JSON.stringify(updatedUsers)); // Actualiza local storage inmediatamente después de agregar un usuario
     setUsername('');
     setEmail('');
+    setPassword('');
     setRole('');
     setBirthdate('');
     setGender('');
@@ -51,7 +55,7 @@ const TablaUsuarios = () => {
       {mostrarFormulario && (
         <form onSubmit={handleAgregarUsuario} className="form-agregar-usuario">
           <div>
-            <label onClick={() => usernameRef.current.focus()}>Nombre:</label>
+            <label onClick={() => usernameRef.current.focus()}>Nombre Usuario:</label>
             <input
               type="text"
               ref={usernameRef}
@@ -73,6 +77,17 @@ const TablaUsuarios = () => {
             />
           </div>
           <div>
+            <label onClick={() => passwordRef.current.focus()}>Contraseña:</label>
+            <input
+              type="password"
+              ref={passwordRef}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="form-control"
+            />
+          </div>
+          <div>
             <label onClick={() => roleRef.current.focus()}>Rol:</label>
             <select
               ref={roleRef}
@@ -84,7 +99,7 @@ const TablaUsuarios = () => {
               <option value="" disabled>Elija el tipo de cuenta</option>
               <option value="user">User</option>
               <option value="admin">Admin</option>
-              <option value="artist">Artist</option> {/* Corrección aquí */}
+              <option value="artist">Artist</option>
             </select>
           </div>
           <div>
@@ -120,7 +135,7 @@ const TablaUsuarios = () => {
         <thead>
           <tr>
             <th className="centrar-th-usuarios">Id</th>
-            <th className="centrar-th-usuarios">Nombre</th>
+            <th className="centrar-th-usuarios">Nombre Usuario</th>
             <th className="centrar-th-usuarios">Email</th>
             <th className="centrar-th-usuarios">Rol</th>
             <th className="centrar-th-usuarios">Acciones</th>
