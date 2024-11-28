@@ -31,7 +31,6 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="edit-profile-page">
       <div className="edit-profile-container">
         <h1>Editar Perfil</h1>
         <form onSubmit={handleSubmit} className="edit-profile-form">
@@ -86,7 +85,6 @@ const EditProfile = () => {
           <button type="submit" className="btn btn-primary">Guardar Cambios</button>
         </form>
       </div>
-    </div>
   );
 };
 

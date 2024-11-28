@@ -47,6 +47,13 @@ main {
   font-weight: 700;
 }
 
+body { 
+  margin: 0; 
+ -webkit-font-smoothing: antialiased; 
+ -moz-osx-font-smoothing: grayscale; 
+ background-color: #ffffff; 
+}
+
 .TitleRelease {
   margin-top: 15px;
   font-family: "Inter", sans-serif;

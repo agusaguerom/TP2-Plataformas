@@ -13,7 +13,7 @@ import Register from './Components/Auth/Register';
 import Logout from './Components/Auth/Logout';
 
 import Profile from './Components/Profile-todo/Profile';
-import EditProfile from './Components/Profile-todo/EditProfile';
+import EditProfilePage from '../pages/ProfilePage/EditProfile';  
 import ProtectedRoute from './components/ProtectedRoutes/ProtectedRoute';
 
 import Dashboard from '../pages/panel_artista/panel_admin/Dashboard';
@@ -29,12 +29,13 @@ function App() {
         <main className="main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />  {}
+            <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/globalRanking" element={<GlobalRanking />} />  {}
+            <Route path="/globalRanking" element={<GlobalRanking />} />
             <Route path="/artist/:id" element={<ArtistProfile />} />
             <Route path="/Dashboard" element={<ProtectedRoute roles={['artist', 'admin']} component={Dashboard} />} />
-            <Route path="/generos/:id" element={<Generos />} />  {}
+            <Route path="/generos/:id" element={<Generos />} />
+            <Route path="/edit-profile" element={<EditProfilePage />} />  {/* Asegúrate de que la ruta coincida */}
           </Routes>
         </main>
       </BrowserRouter>
