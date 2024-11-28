@@ -1,0 +1,18 @@
+.tabla-padding-usuarios {
+    padding: 20px;
+}
+
+.tabla-de-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.centrar-th-usuarios, .contenido-txt-usuarios {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.btn-deshabilitar {
+    margin: 5px;
+}

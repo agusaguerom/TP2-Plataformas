@@ -1,7 +1,7 @@
-import { Home } from "../../pages/Home";
+import Home from "../../pages/Home";  // Asegúrate de importar Home correctamente
 import Dashboard from "../../pages/panel_artista/panel_admin/Dashboard";
 import { RecentsReleases } from "../Components/RecentsRelease/RecentsRelease";
-import { Gestion_Canciones } from "../../pages/gestion_canciones/Gestion_Canciones";
+import Gestion_Canciones from "../../pages/gestion_canciones/Gestion_Canciones";  // Asegúrate de importar Gestion_Canciones correctamente
 import ArtistProfile from "../../pages/ArtistProfile";  
 
 import LoginPage from "../../pages/LoginPage/Login";  
@@ -14,11 +14,11 @@ import Register from "../Components/Auth/Register";
 import EditProfile from "../Components/Profile-todo/EditProfile";
 import Profile from "../Components/Profile-todo/Profile";
 
-import EditarCancion from "../../pages/editar_Canciones/EditarCancion";
-import Gestion_Albumes from "../../pages/gestion_albumes/Gestion_Albumes";
+import EditarCancion from "../../pages/editar_Canciones/EditarCancion";  // Asegúrate de importar EditarCancion correctamente
+import Gestion_Albumes from "../../pages/gestion_albumes/Gestion_Albumes";  // Asegúrate de importar Gestion_Albumes correctamente
 import Generos from "../../pages/Generos";  
 import GlobalRanking from "../../pages/GlobalRanking";  
-import Search from "../../pages/Search";  
+import Search from "../../.pages/Search";  
 
 export const rutas = [
     { path: "/", element: <Home />, name: "Home" },

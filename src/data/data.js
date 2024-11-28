@@ -4,6 +4,14 @@ export const playlist = [
     {id:3, nombre:"Playlist 3", img:"https://res.cloudinary.com/drswstgcv/image/upload/v1732652808/ss_ksn4nx.webp"},
 ]
 
+
+export const users = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'artist' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'user' },
+];
+
+
 export const generos = [
 { id: 1, name: 'Rock' },
 { id: 2, name: 'Pop' },

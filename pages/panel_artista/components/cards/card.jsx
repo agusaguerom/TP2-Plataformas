@@ -29,7 +29,7 @@ const Card = ({ admin }) => {
           alttxt: "Gestión de usuarios",
           titulo: "Administrar Usuarios",
           descripcion: "Administrar usuarios",
-          link: "/admin/users/manage"
+          link: "/Dashboard/Gestion_Usuarios"
         }
       ]
     : [

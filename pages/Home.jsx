@@ -3,16 +3,14 @@ import { GlobalRanking } from "../src/components/GlobalRanking/GlobalRanking";
 import { GenerosList } from "../src/components/GenerosList/GenerosList";
 import { useRef } from "react";
 import { FavoritePlaylist } from "../src/components/FavoritePlaylist/FavoritePlaylist";
-export function Home(){
 
-    return(
+export default function Home() {  // Cambiar a exportación por defecto
+    return (
         <>
-            <RecentsReleases/>
-            <GlobalRanking/>
-            <GenerosList/>
-
-     
-              
+            <RecentsReleases />
+            <GlobalRanking />
+            <GenerosList />
+            {}
         </>
     );
 }
