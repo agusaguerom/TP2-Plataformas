@@ -24,6 +24,7 @@ import Gestion_Canciones from '../pages/gestion_canciones/Gestion_Canciones';
 import EditarCancion from '../pages/editar_Canciones/EditarCancion';  
 import Gestion_Albumes from '../pages/gestion_albumes/Gestion_Albumes';  
 import Gestion_Usuarios from '../pages/gestion_usuarios/Gestion_Usuarios';  
+import EditarUsuario from '../pages/editar_Usuarios/EditarUsuario';  
 
 function App() {
   return (
@@ -42,7 +43,8 @@ function App() {
               <Route path="Gestion_Canciones" element={<Gestion_Canciones />} />
               <Route path="Gestion_Canciones/EditarCancion/:id" element={<EditarCancion />} />
               <Route path="Gestion_Albumes" element={<Gestion_Albumes />} />
-              <Route path="Gestion_Usuarios" element={<Gestion_Usuarios />} />  {/* Añadir Gestion_Usuarios a las rutas */}
+              <Route path="Gestion_Usuarios" element={<Gestion_Usuarios />} />  
+              <Route path="Gestion_Usuarios/EditarUsuario/:id" element={<EditarUsuario />} />  {/* Añadir EditarUsuario a las rutas */}
             </Route>
             <Route path="/generos/:id" element={<Generos />} />
             <Route path="/edit-profile" element={<EditProfilePage />} />
