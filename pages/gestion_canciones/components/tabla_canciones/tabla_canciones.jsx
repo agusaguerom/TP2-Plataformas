@@ -41,7 +41,7 @@ const TablaCancion = () => {
         setName('');
         setArtistIds('');
         setImage('');
-        setShowForm(false);
+        setMostrarFormulario(false);
     };
 
     return (

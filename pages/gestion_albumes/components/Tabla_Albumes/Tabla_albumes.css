@@ -32,3 +32,64 @@ text-align: center;
 .tabla-de-albumes th {
     background-color: #f4f4f4;
   }
+
+.pos-form{
+
+  margin-left: 70px;
+
+}
+
+.form-agregar-album {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #030000;
+  border-radius: 8px;
+  background-color: #EAA9A9;
+  max-width: 600px;
+
+}
+
+.form-agregar-album input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-agregar-album button {
+  padding: 10px;
+  background-color: #2e10d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-agregar-album button:hover {
+  background-color: #6e0483;
+}
+
+.contenedor-btn-mostrar-form{
+
+margin-top: 30px;
+margin-left: 18px;
+
+}
+
+
+.btn-agregar-album{
+
+  background: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 15px;
+  text-decoration: none; 
+  
+
+}
