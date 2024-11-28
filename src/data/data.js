@@ -22,7 +22,7 @@ export const users = [
     { id: 14, name: 'ROSE', username: 'rose', email: 'rose@example.com', password: 'roseblackpink', role: 'artist', artistId: 12 },
    
 ];
-
+ 
 
 export const generos = [
 { id: 1, name: 'Rock' },

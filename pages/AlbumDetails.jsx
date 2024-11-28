@@ -10,7 +10,7 @@ export const AlbumDetails = () => {
   const [album, setAlbum] = useState(null);
 
   useEffect(() => {
-    const foundAlbum = albums.find((album) => album.id === parseInt(id)); // Convertir ID a número
+    const foundAlbum = albums.find((album) => album.id === parseInt(id));
     setAlbum(foundAlbum);
   }, [id]);
 
@@ -59,7 +59,6 @@ export const AlbumDetails = () => {
                 >
                   {album.name}
                 </h2>
-                {/* Descripción del álbum */}
                 <p
                   className="card-text"
                   style={{ fontSize: "1rem", color: "#555" }}
@@ -72,7 +71,6 @@ export const AlbumDetails = () => {
         </div>
       </div>
 
-      {/* Renderizar canciones del álbum */}
       <div className="container">
         <h3
           className="tituloSeccion text-center mb-4"
