@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from '../../src/Components/Profile-todo/Profile'; 
-import './profilePage.css';  
+import './ProfilePage.css';  
 
 const ProfilePage = () => {
   return (

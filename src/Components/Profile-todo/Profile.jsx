@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+import '../../../pages/ProfilePage/ProfilePage.css';
+
 const Profile = () => {
   const { isLogueado, userLogueado, logout } = useAuth(); 
   const navigate = useNavigate();
