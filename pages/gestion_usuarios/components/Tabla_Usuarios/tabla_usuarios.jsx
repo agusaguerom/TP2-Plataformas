@@ -84,6 +84,7 @@ const TablaUsuarios = () => {
               <option value="" disabled>Elija el tipo de cuenta</option>
               <option value="user">User</option>
               <option value="admin">Admin</option>
+              <option value="artist">Artist</option> {/* Corrección aquí */}
             </select>
           </div>
           <div>
