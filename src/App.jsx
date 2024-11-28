@@ -26,15 +26,6 @@ import Gestion_Albumes from "../pages/gestion_albumes/Gestion_Albumes";
 import Gestion_Usuarios from "../pages/gestion_usuarios/Gestion_Usuarios";
 import EditarUsuario from "../pages/editar_Usuarios/EditarUsuario";
 import EditarAlbum from "../pages/editar_Albumes/EditarAlbumes";
-import Dashboard from "../pages/panel_artista/panel_admin/Dashboard";
-import ArtistProfile from "../pages/ArtistProfile";
-import Generos from "../pages/Generos";
-import Search from "../pages/Search";
-import Gestion_Canciones from "../pages/gestion_canciones/Gestion_Canciones";
-import EditarCancion from "../pages/editar_Canciones/EditarCancion";
-import Gestion_Albumes from "../pages/gestion_albumes/Gestion_Albumes";
-import Gestion_Usuarios from "../pages/gestion_usuarios/Gestion_Usuarios";
-import EditarUsuario from "../pages/editar_Usuarios/EditarUsuario";
 import { AlbumDetails } from "../pages/AlbumDetails";
 
 function App() {
