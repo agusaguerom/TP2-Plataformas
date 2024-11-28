@@ -1,0 +1,30 @@
+.imagenes-album{
+
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+
+}
+
+.contenido-txt-album{
+
+
+    text-align: center;
+
+
+}
+
+.contenido-centrado-tabla-album{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Modificar-boton,
+.btn-deshabilitar {
+  margin: 0 5px;
+  padding: 5px 10px;
+}

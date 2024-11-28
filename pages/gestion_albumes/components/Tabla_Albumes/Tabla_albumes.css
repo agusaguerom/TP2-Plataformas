@@ -1,0 +1,34 @@
+.tabla-padding-albumes{
+
+    padding-left: 70px;
+    padding-right: 70px;
+
+}
+
+
+.tabla-de-albumes{
+
+
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+
+
+}
+
+.centrar-th-album{
+
+text-align: center;
+
+
+}
+
+.tabla-de-albumes th,
+.tabla-de-albumes td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.tabla-de-albumes th {
+    background-color: #f4f4f4;
+  }

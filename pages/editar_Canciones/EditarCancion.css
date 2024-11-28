@@ -1,0 +1,41 @@
+
+.titulo-editar-cancion{
+
+
+    text-align: center;
+
+    padding: 50px;
+
+}
+
+.formulario-editar-canciones{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #EAA9A9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+
+form div {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+    color: #ffffff;
+}
+
