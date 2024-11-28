@@ -1,12 +1,26 @@
 import { useContext, useState, createContext } from "react";
+import { users as defaultUsers } from "../data/data";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+  // Inicializar usuarios combinando los de localStorage y los de data.js
+  const initializeUsers = () => {
+    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+    const combinedUsers = [
+      ...defaultUsers,
+      ...storedUsers.filter(
+        (su) => !defaultUsers.some((du) => du.id === su.id)
+      ),
+    ];
+    localStorage.setItem("users", JSON.stringify(combinedUsers)); // Guardar la combinación en localStorage
+    return combinedUsers;
+  };
+
+  const [users, setUsers] = useState(initializeUsers);
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
-
   const [userLogueado, setUserLogueado] = useState(
     localStorage.getItem("user")
       ? JSON.parse(localStorage.getItem("user"))
@@ -14,8 +28,9 @@ export function AuthProvider({ children }) {
   );
 
   const login = (username, password) => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
-    const user = users.find(u => u.username === username && u.password === password);
+    const user = users.find(
+      (u) => u.username === username && u.password === password
+    );
 
     if (user) {
       setIsLogueado(true);
@@ -36,26 +51,33 @@ export function AuthProvider({ children }) {
 
   const register = (username, email, password, role, birthdate, gender) => {
     try {
-      const newUser = { id: Date.now(), username, email, password, role, birthdate, gender };
-      const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-      return true;  // Registro exitoso
+      const newUser = {
+        id: Date.now(),
+        username,
+        email,
+        password,
+        role,
+        birthdate,
+        gender,
+      };
+      const updatedUsers = [...users, newUser];
+      setUsers(updatedUsers); // Actualizar estado local
+      localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage
+      return true; // Registro exitoso
     } catch (error) {
-      console.error('Error al registrar:', error);
-      return false;  // Registro fallido
+      console.error("Error al registrar:", error);
+      return false; // Registro fallido
     }
   };
 
   const updateUser = (updatedUser) => {
+    const updatedUsers = users.map((user) =>
+      user.id === updatedUser.id ? updatedUser : user
+    );
+    setUsers(updatedUsers);
     setUserLogueado(updatedUser);
-    const users = JSON.parse(localStorage.getItem('users') || '[]');  // Manejar la cadena vacía
-    const userIndex = users.findIndex(u => u.id === updatedUser.id);
-    if (userIndex > -1) {
-      users[userIndex] = updatedUser;
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-    }
+    localStorage.setItem("users", JSON.stringify(updatedUsers));
+    localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
   return (

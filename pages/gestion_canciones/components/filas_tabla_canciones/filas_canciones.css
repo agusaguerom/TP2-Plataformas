@@ -1,11 +1,35 @@
-.Modificar-boton,
+
+.centrarBtns{
+
+  display: flex;
+  gap: 10px; /* Agrega espacio entre los botones */
+  align-items: center;
+
+}
+.Modificar-boton, 
 .btn-deshabilitar {
-  margin: 0 5px;
-  padding: 5px 10px;
+  padding: 5px 15px;  /* Ajusta el tamaño del padding para que los botones sean consistentes */
+  min-width: 100px;  /* Asegura que ambos botones tengan un tamaño mínimo igual */
+  text-align: center;  /* Centra el texto dentro de los botones */
+}
+
+.btn-deshabilitar {
+  background-color: red;
+  color: white;
+}
+
+.Modificar-boton {
+  background-color: #ffc107;
+  color: white;
+}
+
+.Modificar-boton:hover, 
+.btn-deshabilitar:hover {
+  opacity: 0.8; /* Agrega un efecto al pasar el ratón */
 }
 
 .imagenes-canciones {
-  width: 100px;
+  width: 100px;  /* Puedes ajustar el tamaño de la imagen */
   height: 100px;
   object-fit: cover;
   border-radius: 5px;
@@ -22,13 +46,5 @@ align-items: center;
 .centrar-txt{
 
 text-align: center;
-
-}
-
-.centrarBtns{
-
-
-  display: flex;
-  justify-content: center;
 
 }

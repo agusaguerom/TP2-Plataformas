@@ -6,9 +6,9 @@ export const playlist = [
 
 
 export const users = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'artist' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'user' },
+    { id: 1, name: 'John Doe', username:"johnd", email: 'john@example.com',password:"pass", role: 'admin' },
+    { id: 2, name: 'Jane Smith',username:"janes", email: 'jane@example.com',password:"pass", role: 'artist', artistId: 5},
+    { id: 3, name: 'Bob Johnson',username:"bobj", email: 'bob@example.com', role: 'user' },
 ];
 
 
