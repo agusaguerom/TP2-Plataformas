@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
       value={{
         isLogueado,
         login,
-        logout,
+        logout, 
         userLogueado,
         register,
         updateUser,
