@@ -201,4 +201,10 @@ export const albums = [
         artistIds: [4], 
         image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732652813/chromakopia_i42vjj.jpg"
     },
+    {
+        id: 5,
+        name: "Unorthodox Jukebox",
+        artistIds: [5], 
+        image: "https://res.cloudinary.com/drswstgcv/image/upload/v1732819125/Unorthodox_Jukebox_j0r3xh.jpg"
+    },
 ];

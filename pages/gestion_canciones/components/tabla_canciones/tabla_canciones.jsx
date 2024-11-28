@@ -37,6 +37,11 @@ const TablaCancion = () => {
 
   const handleAgregarCancion = (e) => {
     e.preventDefault();
+    if (!userLogueado) {
+      alert("Debe estar logueado para agregar una canción.");
+      return;
+    }
+
     const newSong = {
       id: songs.length + 1,
       name,
@@ -45,7 +50,6 @@ const TablaCancion = () => {
     };
     setSongs([...songs, newSong]);
     setName("");
-    setArtistIds("");
     setImage("");
     setMostrarFormulario(false);
   };
