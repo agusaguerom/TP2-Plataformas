@@ -1,22 +1,16 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; 
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
-const ProtectedRoute = ({ component: Component, roles, ...rest }) => {
+const ProtectedRoute = ({ roles }) => {
   const { isLogueado, userLogueado } = useAuth();
+  const location = useLocation();
 
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isLogueado && roles.includes(userLogueado.role) ? (
-          <Component {...props} />
-        ) : (
-          <Navigate to="/" />
-        )
-      }
-    />
-  );
+  if (isLogueado && roles.includes(userLogueado.role)) {
+    return <Outlet />;
+  }
+
+  return <Navigate to="/login" state={{ from: location }} />;
 };
 
 export default ProtectedRoute;

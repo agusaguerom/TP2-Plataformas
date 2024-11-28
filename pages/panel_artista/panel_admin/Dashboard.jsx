@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {userLogueado.role === 'admin' ? (
+      {userLogueado?.role === 'admin' ? (
         <>
           <h1 className="titulo_Dashboard">Panel del Admin</h1>
           <Card admin />

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { rutas } from '../../routes/routes'; 
 import { useAuth } from '../../context/AuthContext';
 
-
 export function AppRoutes() {
   const { isLogueado } = useAuth();
   const navigate = useNavigate();

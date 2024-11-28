@@ -73,7 +73,7 @@ const Card = ({ admin }) => {
     <div className="contenedor-card">
       <div className="card-row">
         {cardData.filter(card => card.tipo === "info").map((card, indice) => (
-          <div key={indice} >
+          <div key={indice}>
             <Contador
               titulo={card.titulo}
               valor={card.valor}

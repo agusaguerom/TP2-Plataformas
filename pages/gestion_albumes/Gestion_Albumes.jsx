@@ -29,3 +29,5 @@ export const Gestion_Albumes = () => {
 
 
 }
+
+export default Gestion_Albumes;
