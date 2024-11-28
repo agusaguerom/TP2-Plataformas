@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { artists } from "../src/data/data";
 import { songs } from "../src/data/data";
 
-import '../src/styles/styles.css'
+import '../src/styles/styles.css';
 import { SongItemByArtist } from "../src/components/SongItem/SongItemByArtist";
 
-export function ArtistProfile() {
+const ArtistProfile = () => {
     const { id } = useParams(); 
     const [artist, setArtist] = useState(null);
 
@@ -45,8 +45,10 @@ export function ArtistProfile() {
                 </div>
             </div>
 
-            {/* Aquí renderizas las canciones del artista */}
+            {/* Renderizar las canciones del artista */}
             <SongItemByArtist artist={artist} songs={songs} />
         </>
     );    
 }
+
+export default ArtistProfile;  

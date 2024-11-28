@@ -64,8 +64,6 @@ const Profile = () => {
             Cerrar Sesión
           </button>
         </div>
-
-
       </div>
     </div>
   );

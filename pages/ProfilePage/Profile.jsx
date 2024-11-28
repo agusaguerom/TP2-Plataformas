@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from '../../src/Components/Profile-todo/Profile'; 
-import './profilePage.css'; 
+import './profilePage.css';  
 
 const ProfilePage = () => {
   return (
@@ -13,4 +13,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-

@@ -1,7 +1,10 @@
 import "../../styles/styles.css";
 import { Link } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext';
 
 export function Navbar() {
+  const { userLogueado } = useAuth();
+
   return (
     <>
       <nav className="navbarVertical">
@@ -17,18 +20,20 @@ export function Navbar() {
             </a>
           </li>
 
-          <li className="nav-item">
-            <Link to="/Dashboard" className="nav-link">
-              <i className="bi bi-star"></i>
-            </Link>
-          </li>
-
-            <li className='nav-item'>
-            <a href="/profile" className='nav-link'>
-            <i className="bi bi-person-circle"></i>          
-            </a>  
+          {}
+          {(userLogueado && (userLogueado.role === 'artist' || userLogueado.role === 'admin')) && (
+            <li className="nav-item">
+              <Link to="/Dashboard" className="nav-link">
+                <i className="bi bi-star"></i>
+              </Link>
             </li>
+          )}
 
+          <li className='nav-item'>
+            <a href="/profile" className='nav-link'>
+              <i className="bi bi-person-circle"></i>          
+            </a>  
+          </li>
         </ul>
       </nav>
     </>
