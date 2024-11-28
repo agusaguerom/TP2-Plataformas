@@ -1,4 +1,3 @@
-/* card.css */
 .contenedor-card {
   display: flex;
   flex-direction: column;
@@ -69,5 +68,3 @@
 .btn_margen_inf {
   margin-bottom: 30px;
 }
-
-
