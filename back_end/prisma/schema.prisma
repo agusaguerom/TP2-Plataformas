@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Suscripcion {
+  id             Int       @id @default(autoincrement())
+  nombre         String
+  precio_mensual Float
+  duracion_dias  Int
+  Usuario        Usuario[]
+}
+
+model Usuario {
+  id             String      @id @default(uuid())
+  nombre         String
+  apellido       String
+  correo         String      @unique
+  password       String
+  createdAt      DateTime    @default(now())
+  isArtist       Boolean     @default(false)
+  suscripcion    Suscripcion @relation(fields: [fk_suscripcion], references: [id])
+  fk_suscripcion Int
+  Artista        Artista[]
+  Playlist       Playlist[]
+  Seguidor       Seguidor[]
+}
+
+model Artista {
+  id          String     @id @default(uuid())
+  nombre      String
+  descripcion String
+  image       String
+  genero      Genero     @relation(fields: [fk_genero], references: [id])
+  fk_genero   Int
+  usuario     Usuario    @relation(fields: [fk_usuario], references: [id])
+  fk_usuario  String
+  Cancion     Cancion[]
+  Album       Album[]
+  Seguidor    Seguidor[]
+}
+
+model Genero {
+  id      Int       @id @default(autoincrement())
+  nombre  String
+  Artista Artista[]
+  Cancion Cancion[]
+}
+
+model Playlist {
+  id               Int                @id @default(autoincrement())
+  nombre           String
+  fecha_creacion   DateTime           @default(now())
+  descripcion      String?
+  usuario          Usuario            @relation(fields: [fk_usuario], references: [id])
+  fk_usuario       String
+  Playlist_cancion Playlist_cancion[]
+}
+
+model Album {
+  id          String   @id @default(uuid())
+  nombre      String
+  publicacion DateTime @default(now())
+
+  artista     Artista   @relation(fields: [fk_artista], references: [id])
+  fk_artista  String
+  descripcion String
+  Cancion     Cancion[]
+}
+
+model Cancion {
+  id               String             @id @default(uuid())
+  nombre           String
+  duracion         DateTime
+  album            Album              @relation(fields: [fk_album], references: [id])
+  fk_album         String
+  genero           Genero             @relation(fields: [fk_genero], references: [id])
+  fk_genero        Int
+  artista          Artista            @relation(fields: [fk_artista], references: [id])
+  fk_artista       String
+  Playlist_cancion Playlist_cancion[]
+  reproducciones   Int                @default(0)
+}
+
+model Playlist_cancion {
+  id String @id @default(uuid())
+
+  playlist    Playlist @relation(fields: [fk_playlist], references: [id])
+  fk_playlist Int
+
+  cancion    Cancion @relation(fields: [fk_cancion], references: [id])
+  fk_cancion String
+}
+
+model Seguidor {
+  id         String  @id @default(uuid())
+  usuario    Usuario @relation(fields: [fk_usuario], references: [id])
+  fk_usuario String
+  artista    Artista @relation(fields: [fk_artista], references: [id])
+  fk_artista String
+}
