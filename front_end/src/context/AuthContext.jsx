@@ -1,9 +1,23 @@
 import { useContext, useState, createContext } from "react";
+import { users as defaultUsers } from "../data/data";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [users, setUsers] = useState([]);
+  // Inicializar usuarios combinando los de localStorage y los de data.js
+  const initializeUsers = () => {
+    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+    const combinedUsers = [
+      ...defaultUsers,
+      ...storedUsers.filter(
+        (su) => !defaultUsers.some((du) => du.id === su.id)
+      ),
+    ];
+    localStorage.setItem("users", JSON.stringify(combinedUsers)); // Guardar la combinación en localStorage
+    return combinedUsers;
+  };
+
+  const [users, setUsers] = useState(initializeUsers);
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
@@ -13,64 +27,19 @@ export function AuthProvider({ children }) {
       : null
   );
 
-  const login = async (username, password) => {
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+  const login = (username, password) => {
+    const user = users.find(
+      (u) => u.username === username && u.password === password
+    );
 
-      const data = await response.json();
-      if (response.ok) {
-        setIsLogueado(true);
-        setUserLogueado(data.user);
-        localStorage.setItem("isLogueado", true);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        return true;
-      } else {
-        return false;
-      }
-    } catch (error) {
-      console.error("Error en login:", error);
-      return false;
+    if (user) {
+      setIsLogueado(true);
+      setUserLogueado(user);
+      localStorage.setItem("isLogueado", true);
+      localStorage.setItem("user", JSON.stringify(user));
+      return true;
     }
-  };
-
-  const register = async (username, email, password, role, birthdate, gender) => {
-    try {
-      const newUser = {
-        username,
-        email,
-        password,
-        role,
-        birthdate,
-        gender,
-      };
-
-      const response = await fetch('http://localhost:5000/api/usuarios', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        const updatedUsers = [...users, data.user];
-        setUsers(updatedUsers);
-        localStorage.setItem("users", JSON.stringify(updatedUsers));
-        return true;
-      } else {
-        throw new Error(data.error);
-      }
-    } catch (error) {
-      console.error("Error al registrar:", error);
-      return false;
-    }
+    return false;
   };
 
   const logout = () => {
@@ -78,6 +47,27 @@ export function AuthProvider({ children }) {
     setUserLogueado(null);
     localStorage.removeItem("isLogueado");
     localStorage.removeItem("user");
+  };
+
+  const register = (username, email, password, role, birthdate, gender) => {
+    try {
+      const newUser = {
+        id: Date.now(),
+        username,
+        email,
+        password,
+        role,
+        birthdate,
+        gender,
+      };
+      const updatedUsers = [...users, newUser];
+      setUsers(updatedUsers); // Actualizar estado local
+      localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage
+      return true; // Registro exitoso
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      return false; // Registro fallido
+    }
   };
 
   const updateUser = (updatedUser) => {

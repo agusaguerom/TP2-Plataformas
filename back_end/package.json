@@ -6,7 +6,7 @@
   "scripts": {
     "seed": "node prisma/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,6 @@
   "dependencies": {
     "@prisma/client": "^6.0.1",
     "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
     "express": "^4.21.1",
     "joi": "^17.13.3",
     "ts-node": "^10.9.2",
