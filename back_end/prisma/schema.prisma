@@ -81,7 +81,7 @@ model Album {
 model Cancion {
   id               String             @id @default(uuid())
   nombre           String
-  duracion         DateTime
+  duracion         String             
   album            Album              @relation(fields: [fk_album], references: [id])
   fk_album         String
   genero           Genero             @relation(fields: [fk_genero], references: [id])
