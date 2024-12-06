@@ -38,4 +38,38 @@ router.post('/usuarios', async (req,res) =>{
 })
 
 
+// Actualizar usuario
+
+router.put('/usuarios/:id', async (req, res) => {
+    const { id } = req.params; 
+    const { error, value } = UsuarioDto.validate(req.body);
+
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
+    try {
+        const { nombre, apellido, correo, password, isArtist, fk_suscripcion } = value;
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        
+        const ActualizarUsuario = await prisma.usuario.update({
+            where: { id: id }, 
+            data: {
+                nombre, apellido, correo, password: hashedPassword, isArtist, fk_suscripcion
+            }
+        });
+
+        res.status(200).json({
+            message: "Usuario actualizado",
+            user: ActualizarUsuario
+        });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+
+
+
 export default router;
