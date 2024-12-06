@@ -1,47 +1,46 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import { UsuarioDto } from "../dto/UserDTO.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 
-const router = Router()
+const router = Router();
 const prisma = new PrismaClient();
 
-router.get('/usuarios', async (req, res) =>{
+router.get('/usuarios', async (req, res) => {
     const usuarios = await prisma.usuario.findMany();
-    res.json(usuarios)
-})
+    res.json(usuarios);
+});
 
-router.post('/usuarios', async (req,res) =>{
-    try{
-        const {error, value} = UsuarioDto.validate(req.body);
+router.post('/usuarios', async (req, res) => {
+    try {
+        const { error, value } = UsuarioDto.validate(req.body);
 
-        if(error){
-            return res.status(400).json({error: error.details[0].message})
+        if (error) {
+            return res.status(400).json({ error: error.details[0].message });
         }
 
-        const {nombre, apellido, correo, password, isArtist, fk_suscripcion} = value;
+        const { nombre, apellido, correo, password, fk_suscripcion, fk_rol } = value;
 
-        const hashedPassword = await bcrypt.hash(password, 10)
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = await prisma.usuario.create({
             data: {
-                nombre, apellido,correo,password:hashedPassword,isArtist,fk_suscripcion
+                nombre, apellido, correo, password: hashedPassword, fk_suscripcion, fk_rol
             }
         });
         res.status(201).json({
-            message: "Usuario creado con exito",
+            message: "Usuario creado con éxito",
             user: newUser
         });
-    }catch(error){
-        res.status(400).json({error: error.message})
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-})
-
+});
 
 // Actualizar usuario
 
 router.put('/usuarios/:id', async (req, res) => {
-    const { id } = req.params; 
+    const { id } = req.params;
     const { error, value } = UsuarioDto.validate(req.body);
 
     if (error) {
@@ -49,15 +48,14 @@ router.put('/usuarios/:id', async (req, res) => {
     }
 
     try {
-        const { nombre, apellido, correo, password, isArtist, fk_suscripcion } = value;
+        const { nombre, apellido, correo, password, fk_suscripcion, fk_rol } = value;
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        
         const ActualizarUsuario = await prisma.usuario.update({
-            where: { id: id }, 
+            where: { id: id },
             data: {
-                nombre, apellido, correo, password: hashedPassword, isArtist, fk_suscripcion
+                nombre, apellido, correo, password: hashedPassword, fk_suscripcion, fk_rol
             }
         });
 
@@ -69,7 +67,5 @@ router.put('/usuarios/:id', async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
-
 
 export default router;
