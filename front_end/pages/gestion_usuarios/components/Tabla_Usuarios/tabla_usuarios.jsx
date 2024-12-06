@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import FilasUsuarios from "../Filas_Usuarios/Filas_Usuarios";
+import { UserContext } from "../../../../src/context/UserContext";
 import './Tabla_Usuarios.css';
 
 const TablaUsuarios = () => {
-  const [users, setUsers] = useState([]);
+  const { users, addUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
+  const [apellido, setApellido] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
@@ -13,38 +15,45 @@ const TablaUsuarios = () => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
   const usernameRef = useRef(null);
+  const apellidoRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const roleRef = useRef(null);
   const birthdateRef = useRef(null);
   const genderRef = useRef(null);
 
-  useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-    setUsers(storedUsers);
-  }, []);
-
   const handleAgregarUsuario = (e) => {
     e.preventDefault();
     const newUser = {
-      id: users.length + 1,
-      username,
-      email,
+      nombre: username,
+      apellido,
+      correo: email,
       password,
-      role,
+      rol: role,
       birthdate,
       gender
     };
-    const updatedUsers = [...users, newUser];
-    setUsers(updatedUsers);
-    localStorage.setItem('users', JSON.stringify(updatedUsers)); // Actualiza local storage inmediatamente después de agregar un usuario
-    setUsername('');
-    setEmail('');
-    setPassword('');
-    setRole('');
-    setBirthdate('');
-    setGender('');
-    setMostrarFormulario(false);
+
+    fetch('http://localhost:5000/api/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+    .then(response => response.json())
+    .then(data => {
+      addUser(data.user);
+      setUsername('');
+      setApellido('');
+      setEmail('');
+      setPassword('');
+      setRole('');
+      setBirthdate('');
+      setGender('');
+      setMostrarFormulario(false);
+    })
+    .catch(error => console.error('Error adding user:', error));
   };
 
   return (
@@ -61,6 +70,17 @@ const TablaUsuarios = () => {
               ref={usernameRef}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
+              className="form-control"
+            />
+          </div>
+          <div>
+            <label onClick={() => apellidoRef.current.focus()}>Apellido:</label>
+            <input
+              type="text"
+              ref={apellidoRef}
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
               required
               className="form-control"
             />
@@ -135,7 +155,8 @@ const TablaUsuarios = () => {
         <thead>
           <tr>
             <th className="centrar-th-usuarios">Id</th>
-            <th className="centrar-th-usuarios">Nombre Usuario</th>
+            <th className="centrar-th-usuarios">Nombre</th>
+            <th className="centrar-th-usuarios">Apellido</th>
             <th className="centrar-th-usuarios">Email</th>
             <th className="centrar-th-usuarios">Rol</th>
             <th className="centrar-th-usuarios">Acciones</th>
@@ -144,11 +165,12 @@ const TablaUsuarios = () => {
         <tbody>
           {users.map(user => (
             <FilasUsuarios
-              key={user.id}
+              key={user.id}  // Aquí nos aseguramos de que la `key` sea única.
               id={user.id}
-              nombre={user.username}
-              email={user.email}
-              rol={user.role}
+              nombre={user.nombre}
+              apellido={user.apellido}
+              email={user.correo}
+              rol={user.isArtist ? 'Artist' : 'User'}  // Asignar rol basado en `isArtist`
             />
           ))}
         </tbody>
