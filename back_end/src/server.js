@@ -12,7 +12,6 @@ app.use(express.json());
 
 app.use("/api", usuariosRoutes);
 app.use("/api", suscripcionesRoutes);
-app.use("/api", artistasRoutes); 
 app.use("/api", generosRoutes); 
 app.use("/api", albumsRoutes); 
 app.use("/api", cancionesRoutes);
