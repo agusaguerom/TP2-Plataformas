@@ -57,8 +57,7 @@ function App() {
               <Route
                 path="Gestion_Usuarios/EditarUsuario/:id"
                 element={<EditarUsuario />}
-              />{" "}
-              {/* Añadir EditarUsuario a las rutas */}
+              /> {/* Añadir EditarUsuario a las rutas */}
               <Route
                 path="Gestion_Albumes/EditarAlbum/:id"
                 element={<EditarAlbum />}
@@ -67,8 +66,7 @@ function App() {
               <Route
                 path="Gestion_Usuarios/EditarUsuario/:id"
                 element={<EditarUsuario />}
-              />{" "}
-              {/* Añadir EditarUsuario a las rutas */}
+              /> {/* Añadir EditarUsuario a las rutas */}
             </Route>
             <Route path="/generos/:id" element={<Generos />} />
             <Route path="/edit-profile" element={<EditProfilePage />} />

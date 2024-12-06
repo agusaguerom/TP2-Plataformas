@@ -1,23 +1,10 @@
-import { useContext, useState, createContext } from "react";
-import { users as defaultUsers } from "../data/data";
+import React, { useContext, useState, useEffect, createContext } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  // Inicializar usuarios combinando los de localStorage y los de data.js
-  const initializeUsers = () => {
-    const storedUsers = JSON.parse(localStorage.getItem("users") || "[]");
-    const combinedUsers = [
-      ...defaultUsers,
-      ...storedUsers.filter(
-        (su) => !defaultUsers.some((du) => du.id === su.id)
-      ),
-    ];
-    localStorage.setItem("users", JSON.stringify(combinedUsers)); // Guardar la combinación en localStorage
-    return combinedUsers;
-  };
-
-  const [users, setUsers] = useState(initializeUsers);
+  const [users, setUsers] = useState([]);
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
@@ -26,6 +13,19 @@ export function AuthProvider({ children }) {
       ? JSON.parse(localStorage.getItem("user"))
       : null
   );
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/usuarios");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const login = (username, password) => {
     const user = users.find(
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-  const register = (username, email, password, role, birthdate, gender) => {
+  const register = async (username, email, password, role, birthdate, gender) => {
     try {
       const newUser = {
         id: Date.now(),
@@ -60,9 +60,9 @@ export function AuthProvider({ children }) {
         birthdate,
         gender,
       };
-      const updatedUsers = [...users, newUser];
-      setUsers(updatedUsers); // Actualizar estado local
-      localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage
+      const response = await axios.post("http://localhost:5000/api/usuarios", newUser);
+      const updatedUsers = [...users, response.data];
+      setUsers(updatedUsers);
       return true; // Registro exitoso
     } catch (error) {
       console.error("Error al registrar:", error);
@@ -70,14 +70,19 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const updateUser = (updatedUser) => {
-    const updatedUsers = users.map((user) =>
-      user.id === updatedUser.id ? updatedUser : user
-    );
-    setUsers(updatedUsers);
-    setUserLogueado(updatedUser);
-    localStorage.setItem("users", JSON.stringify(updatedUsers));
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+  const updateUser = async (updatedUser) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/usuarios/${updatedUser.id}`, updatedUser);
+      const updatedUsers = users.map((user) =>
+        user.id === updatedUser.id ? response.data : user
+      );
+      setUsers(updatedUsers);
+      setUserLogueado(updatedUser);
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    } catch (error) {
+      console.error("Error al actualizar:", error);
+    }
   };
 
   return (
@@ -89,6 +94,7 @@ export function AuthProvider({ children }) {
         userLogueado,
         register,
         updateUser,
+        users, 
       }}
     >
       {children}
@@ -97,3 +103,4 @@ export function AuthProvider({ children }) {
 }
 
 export const useAuth = () => useContext(AuthContext);
+export { AuthContext };
