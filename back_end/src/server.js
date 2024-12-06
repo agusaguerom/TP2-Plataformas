@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import usuariosRoutes from "./routes/usuarios.routes.js";
 import suscripcionesRoutes from "./routes/suscripciones.routes.js";
 import artistasRoutes from "./routes/artistas.routes.js";
@@ -9,6 +10,7 @@ import playlistsRoutes from "./routes/playlists.routes.js";
 import playlistCancionesRoutes from "./routes/playlist_canciones.routes.js";
 
 const app = express();
+app.use(cors());
 const PORT = 5000;
 
 app.use(express.json());

@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -28,12 +22,19 @@ model Usuario {
   correo         String      @unique
   password       String
   createdAt      DateTime    @default(now())
-  isArtist       Boolean     @default(false)
   suscripcion    Suscripcion @relation(fields: [fk_suscripcion], references: [id])
   fk_suscripcion Int
+  fk_rol         Int
+  rol            Rol         @relation(fields: [fk_rol], references: [id])
   Artista        Artista[]
   Playlist       Playlist[]
   Seguidor       Seguidor[]
+}
+
+model Rol {
+  id          Int      @id @default(autoincrement())
+  nombre      String
+  Usuario     Usuario[]
 }
 
 model Artista {
@@ -71,8 +72,7 @@ model Album {
   id          String   @id @default(uuid())
   nombre      String
   publicacion DateTime @default(now())
-
-  artista     Artista   @relation(fields: [fk_artista], references: [id])
+  artista     Artista  @relation(fields: [fk_artista], references: [id])
   fk_artista  String
   descripcion String
   Cancion     Cancion[]
