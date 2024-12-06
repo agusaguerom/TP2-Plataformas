@@ -20,11 +20,15 @@ router.get('/usuarios', async (req, res) => {
   }
 });
 
+
+
 router.post('/usuarios', async (req, res) => {
   try {
+    console.log("Datos recibidos del frontend:", req.body);
     const { error, value } = UsuarioDto.validate(req.body);
 
     if (error) {
+      console.log("Error de validación:", error.details); 
       return res.status(400).json({ error: error.details[0].message });
     }
 
@@ -42,9 +46,12 @@ router.post('/usuarios', async (req, res) => {
       user: newUser
     });
   } catch (error) {
+    console.error("Error al crear el usuario:", error);
     res.status(400).json({ error: error.message });
   }
 });
+
+
 
 router.put('/usuarios/:id', async (req, res) => {
   const { id } = req.params;
