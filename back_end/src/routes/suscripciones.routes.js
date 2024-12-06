@@ -15,6 +15,8 @@ router.get('/suscripciones', async (req, res) => {
   }
 });
 
+
+
 // Crear una nueva suscripción
 router.post('/suscripciones', async (req, res) => {
   try {
@@ -42,6 +44,8 @@ router.post('/suscripciones', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+
 
 // Actualizar una suscripción existente
 router.put('/suscripciones/:id', async (req, res) => {
@@ -72,6 +76,8 @@ router.put('/suscripciones/:id', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+
 
 // Eliminar una suscripción
 router.delete('/suscripciones/:id', async (req, res) => {
