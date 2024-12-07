@@ -16,10 +16,18 @@ CREATE TABLE "Usuario" (
     "correo" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "isArtist" BOOLEAN NOT NULL DEFAULT false,
     "fk_suscripcion" INTEGER NOT NULL,
+    "fk_rol" INTEGER NOT NULL,
 
     CONSTRAINT "Usuario_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Rol" (
+    "id" SERIAL NOT NULL,
+    "nombre" TEXT NOT NULL,
+
+    CONSTRAINT "Rol_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -68,7 +76,7 @@ CREATE TABLE "Album" (
 CREATE TABLE "Cancion" (
     "id" TEXT NOT NULL,
     "nombre" TEXT NOT NULL,
-    "duracion" TIMESTAMP(3) NOT NULL,
+    "duracion" TEXT NOT NULL,
     "fk_album" TEXT NOT NULL,
     "fk_genero" INTEGER NOT NULL,
     "fk_artista" TEXT NOT NULL,
@@ -100,6 +108,9 @@ CREATE UNIQUE INDEX "Usuario_correo_key" ON "Usuario"("correo");
 
 -- AddForeignKey
 ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_suscripcion_fkey" FOREIGN KEY ("fk_suscripcion") REFERENCES "Suscripcion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_rol_fkey" FOREIGN KEY ("fk_rol") REFERENCES "Rol"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Artista" ADD CONSTRAINT "Artista_fk_genero_fkey" FOREIGN KEY ("fk_genero") REFERENCES "Genero"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
