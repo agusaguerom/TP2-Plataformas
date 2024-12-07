@@ -1,34 +1,50 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [gender, setGender] = useState('');
+  const [fkRol, setFkRol] = useState('');
+  const [fkSuscripcion, setFkSuscripcion] = useState("");
+  const [suscripciones, setSuscripciones] = useState([]);
   const { register, login } = useAuth();
   const navigate = useNavigate();
 
-  const usernameRef = useRef(null);
-  const emailRef = useRef(null);
+  const nombreRef = useRef(null);
+  const apellidoRef = useRef(null);
+  const correoRef = useRef(null);
   const passwordRef = useRef(null);
-  const roleRef = useRef(null);
-  const birthdateRef = useRef(null);
-  const genderRef = useRef(null);
+  const fkRolRef = useRef(null);
+  const fkSuscripcionRef = useRef(null);
+
+
+  useEffect(() => {
+    const fetchSuscripciones = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/suscripciones");
+        setSuscripciones(response.data);
+      } catch (error) {
+        console.error("Error al obtener las suscripciones:", error);
+      }
+    };
+
+    fetchSuscripciones();
+  }, []);
 
   const handleRegister = () => {
-    if (!username || !email || !password || !role || !birthdate || !gender) {
+    if (!nombre || !apellido || !correo || !password || !fkRol || !fkSuscripcion) {
       alert('Por favor, complete todos los campos');
       return;
     }
 
-    const registrationSuccess = register(username, email, password, role, birthdate, gender);
+    const registrationSuccess = register(nombre, apellido, correo, password, fkRol, fkSuscripcion);
 
     if (registrationSuccess) {
-      const loginSuccess = login(username, password);
+      const loginSuccess = login(correo, password);
       if (loginSuccess) {
         navigate('/');
       } else {
@@ -42,24 +58,35 @@ const Register = () => {
   return (
     <div className="register-form">
       <div>
-        <label onClick={() => usernameRef.current.focus()}>Ingrese su usuario</label>
+        <label onClick={() => nombreRef.current.focus()}>Ingrese su nombre</label>
         <input
           type="text"
-          ref={usernameRef}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          ref={nombreRef}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          placeholder="Nombre"
           className="form-control"
         />
       </div>
       <div>
-        <label onClick={() => emailRef.current.focus()}>Ingrese su correo electrónico</label>
+        <label onClick={() => apellidoRef.current.focus()}>Ingrese su apellido</label>
+        <input
+          type="text"
+          ref={apellidoRef}
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
+          placeholder="Apellido"
+          className="form-control"
+        />
+      </div>
+      <div>
+        <label onClick={() => correoRef.current.focus()}>Ingrese su correo electrónico</label>
         <input
           type="email"
-          ref={emailRef}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          ref={correoRef}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
+          placeholder="Correo Electrónico"
           className="form-control"
         />
       </div>
@@ -70,48 +97,44 @@ const Register = () => {
           ref={passwordRef}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Contraseña"
           className="form-control"
         />
       </div>
       <div>
-        <label onClick={() => roleRef.current.focus()}>Seleccione el tipo de cuenta</label>
+        <label onClick={() => fkRolRef.current.focus()}>Seleccione el tipo de cuenta</label>
         <select
-          ref={roleRef}
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
+          ref={fkRolRef}
+          value={fkRol}
+          onChange={(e) => setFkRol(e.target.value)}
           className="form-control"
         >
           <option value="" disabled>Elija el tipo de cuenta</option>
-          <option value="user">User</option>
-          <option value="artist">Artist</option>
+          <option value="1">User</option>
+          <option value="2">Artist</option>
         </select>
       </div>
       <div>
-        <label onClick={() => birthdateRef.current.focus()}>Ingrese su fecha de nacimiento</label>
-        <input
-          type="date"
-          ref={birthdateRef}
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-          className="form-control"
-        />
-      </div>
-      <div>
-        <label onClick={() => genderRef.current.focus()}>Seleccione su género</label>
-        <select
-          ref={genderRef}
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className="form-control"
-        >
-          <option value="" disabled>Elija su género</option>
-          <option value="male">Hombre</option>
-          <option value="female">Mujer</option>
-          <option value="non-binary">No Binario</option>
-        </select>
-      </div>
-      <button onClick={handleRegister} className="btn btn-primary">Register</button>
+      <label onClick={() => fkSuscripcionRef.current.focus()}>
+        Seleccione el tipo de suscripción
+      </label>
+      <select
+        ref={fkSuscripcionRef}
+        value={fkSuscripcion}
+        onChange={(e) => setFkSuscripcion(e.target.value)}
+        className="form-control"
+      >
+        <option value="" disabled>
+          Elija el tipo de suscripción
+        </option>
+        {suscripciones.map((suscripcion) => (
+          <option key={suscripcion.id} value={suscripcion.id}>
+            {suscripcion.nombre}
+          </option>
+        ))}
+      </select>
+    </div>
+      <button onClick={handleRegister} className="btn btn-primary">Registrar</button>
     </div>
   );
 };

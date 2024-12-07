@@ -74,25 +74,26 @@ export function AuthProvider({ children }) {
   const register = async (nombre, apellido, correo, password, fk_rol, fk_suscripcion) => {
     try {
       const newUser = {
-        nombre,
+        nombre, 
         apellido,
         correo,
         password,
         fk_suscripcion: parseInt(fk_suscripcion, 10),
         fk_rol: parseInt(fk_rol, 10),
       };
+  
       console.log("Datos enviados al backend:", newUser);
       const response = await axios.post("http://localhost:5000/api/usuarios", newUser);
       const createdUser = response.data.user;
-
+  
       const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
       setUsers(updatedUsersResponse.data);
-
-      return true; 
+  
+      return true;
     } catch (error) {
       console.error("Error al registrar:", error);
-      console.error("Respuesta del servidor:", error.response.data); 
-      return false; 
+      console.error("Respuesta del servidor:", error.response?.data); // Añadido un chequeo de seguridad
+      return false;
     }
   };
 
