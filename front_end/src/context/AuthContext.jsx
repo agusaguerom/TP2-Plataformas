@@ -5,6 +5,8 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [users, setUsers] = useState([]);
+  const [suscripciones, setSuscripciones] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
@@ -24,7 +26,27 @@ export function AuthProvider({ children }) {
       }
     };
 
+    const fetchSuscripciones = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/suscripciones");
+        setSuscripciones(response.data);
+      } catch (error) {
+        console.error("Error fetching suscripciones:", error);
+      }
+    };
+
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/roles");
+        setRoles(response.data);
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
     fetchUsers();
+    fetchSuscripciones();
+    fetchRoles();
   }, []);
 
   const login = (username, password) => {
@@ -49,36 +71,45 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-  const register = async (username, email, password, role, birthdate, gender) => {
+  const register = async (nombre, apellido, correo, password, fk_rol, fk_suscripcion) => {
     try {
       const newUser = {
-        id: Date.now(),
-        username,
-        email,
+        nombre,
+        apellido,  
+        correo,
         password,
-        role,
-        birthdate,
-        gender,
+        fk_suscripcion: parseInt(fk_suscripcion, 10),
+        fk_rol: parseInt(fk_rol, 10),
       };
+      console.log("Datos enviados al backend:", newUser);
       const response = await axios.post("http://localhost:5000/api/usuarios", newUser);
-      const updatedUsers = [...users, response.data];
-      setUsers(updatedUsers);
-      return true; // Registro exitoso
+      const createdUser = response.data.user;
+  
+      // Opcionalmente, podemos hacer una nueva solicitud para obtener la lista completa de usuarios
+      const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
+      setUsers(updatedUsersResponse.data);
+  
+      return true; 
     } catch (error) {
       console.error("Error al registrar:", error);
-      return false; // Registro fallido
+      console.error("Respuesta del servidor:", error.response.data); 
+      return false; 
     }
   };
+  
+  
+  
 
   const updateUser = async (updatedUser) => {
     try {
       const response = await axios.put(`http://localhost:5000/api/usuarios/${updatedUser.id}`, updatedUser);
-      const updatedUsers = users.map((user) =>
-        user.id === updatedUser.id ? response.data : user
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === updatedUser.id ? response.data.user : user
+        )
       );
-      setUsers(updatedUsers);
       setUserLogueado(updatedUser);
-      localStorage.setItem("users", JSON.stringify(updatedUsers));
+      localStorage.setItem("users", JSON.stringify(users));
       localStorage.setItem("user", JSON.stringify(updatedUser));
     } catch (error) {
       console.error("Error al actualizar:", error);
@@ -94,7 +125,9 @@ export function AuthProvider({ children }) {
         userLogueado,
         register,
         updateUser,
-        users, 
+        users,
+        suscripciones,
+        roles,
       }}
     >
       {children}
