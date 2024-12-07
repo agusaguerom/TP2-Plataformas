@@ -106,3 +106,6 @@ export const AlbumDetails = () => {
     </>
   );
 };
+
+
+export default AlbumDetails;

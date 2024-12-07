@@ -33,3 +33,6 @@ export function RecentsReleases() {
     </div>
   );
 }
+
+
+export default RecentsReleases;

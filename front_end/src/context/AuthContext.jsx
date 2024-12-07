@@ -75,7 +75,7 @@ export function AuthProvider({ children }) {
     try {
       const newUser = {
         nombre,
-        apellido,  
+        apellido,
         correo,
         password,
         fk_suscripcion: parseInt(fk_suscripcion, 10),
@@ -84,11 +84,10 @@ export function AuthProvider({ children }) {
       console.log("Datos enviados al backend:", newUser);
       const response = await axios.post("http://localhost:5000/api/usuarios", newUser);
       const createdUser = response.data.user;
-  
-      // Opcionalmente, podemos hacer una nueva solicitud para obtener la lista completa de usuarios
+
       const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
       setUsers(updatedUsersResponse.data);
-  
+
       return true; 
     } catch (error) {
       console.error("Error al registrar:", error);
@@ -96,25 +95,30 @@ export function AuthProvider({ children }) {
       return false; 
     }
   };
-  
-  
-  
 
-  const updateUser = async (updatedUser) => {
+  const updateUser = async (id, updatedUser) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/usuarios/${updatedUser.id}`, updatedUser);
+      console.log("Datos enviados para actualización:", updatedUser);
+      const response = await axios.put(`http://localhost:5000/api/usuarios/${id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
-          user.id === updatedUser.id ? response.data.user : user
+          user.id === id ? response.data.user : user
         )
       );
-      setUserLogueado(updatedUser);
+      if (userLogueado?.id === id) {
+        setUserLogueado(response.data.user);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
       localStorage.setItem("users", JSON.stringify(users));
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return true;   
     } catch (error) {
       console.error("Error al actualizar:", error);
+      console.error("Respuesta del servidor:", error.response.data);
+      return false; 
     }
   };
+  
+  
 
   return (
     <AuthContext.Provider

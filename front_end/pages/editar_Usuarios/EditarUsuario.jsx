@@ -1,42 +1,61 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../src/context/AuthContext"; // Asegúrate de tener la ruta correcta al contexto de autenticación
 import './EditarUsuario.css';
+import axios from 'axios';
 
 const EditarUsuario = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { updateUser, suscripciones, roles } = useAuth(); // Usa el contexto de autenticación
 
-  const [users, setUsers] = useState([]);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [gender, setGender] = useState('');
+  const [user, setUser] = useState(null);
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [password, setPassword] = useState('');
+  const [fk_suscripcion, setFk_suscripcion] = useState('');
+  const [fk_rol, setFk_rol] = useState('');
 
   useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-    setUsers(storedUsers);
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/usuarios/${id}`);
+        setUser(response.data);
+        setNombre(response.data.nombre);
+        setApellido(response.data.apellido);
+        setCorreo(response.data.correo);
+        setFk_suscripcion(response.data.fk_suscripcion);
+        setFk_rol(response.data.fk_rol);
+      } catch (error) {
+        alert('Usuario no encontrado');
+        navigate("/Dashboard/Gestion_Usuarios");
+      }
+    };
+    fetchUser();
+  }, [id, navigate]);
 
-    const user = storedUsers.find(user => user.id === parseInt(id));
-    if (user) {
-      setUsername(user.username);
-      setEmail(user.email);
-      setBirthdate(user.birthdate);
-      setGender(user.gender);
-    }
-  }, [id]);
-
-  const handleEditarUsuario = (e) => {
+  const handleEditarUsuario = async (e) => {
     e.preventDefault();
-    const updatedUsers = users.map(user =>
-      user.id === parseInt(id)
-        ? { ...user, username, email, birthdate, gender }
-        : user
-    );
-    setUsers(updatedUsers);
-    localStorage.setItem('users', JSON.stringify(updatedUsers));
-    alert('Usuario actualizado correctamente');
+    const updatedUser = {
+      nombre, 
+      apellido, 
+      correo, 
+      fk_suscripcion, 
+      fk_rol,
+      password: password ? password : undefined // Solo incluir la contraseña si ha sido proporcionada
+    };
+    console.log("Datos enviados para actualización:", updatedUser); // Añadir log de los datos enviados
+    const success = await updateUser(id, updatedUser);
+    if (success) {
+      alert('Usuario actualizado correctamente');
+      navigate("/Dashboard/Gestion_Usuarios");
+    } else {
+      alert('Error al actualizar el usuario. Por favor, verifica los datos.');
+    }
   };
 
-  if (!users.some(user => user.id === parseInt(id))) {
+  if (!user) {
     return <div>Usuario no encontrado</div>;
   }
 
@@ -49,8 +68,18 @@ const EditarUsuario = () => {
             <label>Nombre Usuario:</label>
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              required
+              className="form-control"
+            />
+          </div>
+          <div>
+            <label>Apellido:</label>
+            <input
+              type="text"
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
               required
               className="form-control"
             />
@@ -59,34 +88,48 @@ const EditarUsuario = () => {
             <label>Email:</label>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={correo}
+              onChange={(e) => setCorreo(e.target.value)}
               required
               className="form-control"
             />
           </div>
           <div>
-            <label>Fecha de Nacimiento:</label>
+            <label>Contraseña:</label>
             <input
-              type="date"
-              value={birthdate}
-              onChange={(e) => setBirthdate(e.target.value)}
-              required
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="form-control"
+              placeholder="Dejar vacío si no desea cambiar"
             />
           </div>
           <div>
-            <label>Género:</label>
+            <label>Tipo de Suscripción:</label>
             <select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              value={fk_suscripcion}
+              onChange={(e) => setFk_suscripcion(e.target.value)}
               required
               className="form-control"
             >
-              <option value="" disabled>Elija su género</option>
-              <option value="male">Hombre</option>
-              <option value="female">Mujer</option>
-              <option value="non-binary">No Binario</option>
+              <option value="" disabled>Elija el tipo de suscripción</option>
+              {suscripciones.map(suscripcion => (
+                <option key={suscripcion.id} value={suscripcion.id}>{suscripcion.nombre}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Rol:</label>
+            <select
+              value={fk_rol}
+              onChange={(e) => setFk_rol(e.target.value)}
+              required
+              className="form-control"
+            >
+              <option value="" disabled>Elija el rol</option>
+              {roles.map(rol => (
+                <option key={rol.id} value={rol.id}>{rol.nombre}</option>
+              ))}
             </select>
           </div>
           <div className="botones-formulario">
