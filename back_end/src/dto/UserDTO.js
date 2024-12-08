@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 export const createUserDto = Joi.object({
   nombre: Joi.string().min(3).max(50).required(),
@@ -6,7 +6,17 @@ export const createUserDto = Joi.object({
   correo: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
   fk_suscripcion: Joi.number().integer().required(),
-  fk_rol: Joi.number().integer().required()
+  fk_rol: Joi.number().integer().required(),
+  artistaInfo: Joi.object({
+    nombreArtista: Joi.string().required(),
+    descripcion: Joi.string().required(),
+    image: Joi.string().uri().required(),
+    fk_genero: Joi.number().required(),
+  }).when("fk_rol", {
+    is: 2,
+    then: Joi.required(),
+    otherwise: Joi.forbidden(),
+  }), // Permitir solo si fk_rol es 2
 });
 
 export const updateUserDto = Joi.object({
@@ -15,5 +25,5 @@ export const updateUserDto = Joi.object({
   correo: Joi.string().email().required(),
   password: Joi.string().min(6).optional(),
   fk_suscripcion: Joi.number().integer().required(),
-  fk_rol: Joi.number().integer().required()
+  fk_rol: Joi.number().integer().required(),
 });

@@ -6,7 +6,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // Obtener todos los géneros
-router.get('/generos', async (req, res) => {
+router.get("/generos", async (req, res) => {
   try {
     const generos = await prisma.genero.findMany();
     res.json(generos);
@@ -16,7 +16,7 @@ router.get('/generos', async (req, res) => {
 });
 
 // Crear un nuevo género
-router.post('/generos', async (req, res) => {
+router.post("/generos", async (req, res) => {
   try {
     const { error, value } = GeneroDto.validate(req.body);
 
@@ -40,7 +40,7 @@ router.post('/generos', async (req, res) => {
 });
 
 // Actualizar un género existente
-router.put('/generos/:id', async (req, res) => {
+router.put("/generos/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { error, value } = GeneroDto.validate(req.body);
@@ -66,7 +66,7 @@ router.put('/generos/:id', async (req, res) => {
 });
 
 // Eliminar un género
-router.delete('/generos/:id', async (req, res) => {
+router.delete("/generos/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.genero.delete({
