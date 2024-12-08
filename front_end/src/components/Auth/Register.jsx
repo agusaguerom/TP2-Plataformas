@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import axios from "axios";
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
@@ -28,17 +27,15 @@ const Register = () => {
 
   const nombreArtistaRef = useRef(null);
   const imageRef = useRef(null);
-
   const descripcionRef = useRef(null);
   const fkGeneroRef = useRef(null);
 
   useEffect(() => {
     const fetchSuscripciones = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/suscripciones"
-        );
-        setSuscripciones(response.data);
+        const response = await fetch("http://localhost:5000/api/suscripciones");
+        const data = await response.json();
+        setSuscripciones(data);
       } catch (error) {
         console.error("Error al obtener las suscripciones:", error);
       }
@@ -46,8 +43,9 @@ const Register = () => {
 
     const fetchGenero = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/generos");
-        setGeneros(response.data);
+        const response = await fetch("http://localhost:5000/api/generos");
+        const data = await response.json();
+        setGeneros(data);
       } catch (error) {
         console.error("Error al obtener los generos musicales:", error);
       }
@@ -57,7 +55,47 @@ const Register = () => {
     fetchGenero();
   }, []);
 
+  const validateForm = () => {
+    if (
+      !nombre ||
+      !apellido ||
+      !correo ||
+      !password ||
+      !fkRol ||
+      !fkSuscripcion
+    ) {
+      setMensaje("Todos los campos son obligatorios.");
+      return false;
+    }
+
+    // Validar correo electrónico
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(correo)) {
+      setMensaje("Por favor ingrese un correo electrónico válido.");
+      return false;
+    }
+
+    // Validar contraseña (mínimo 6 caracteres)
+    if (password.length < 6) {
+      setMensaje("La contraseña debe tener al menos 6 caracteres.");
+      return false;
+    }
+
+    // Validar campos de artista si el rol es "Artist"
+    if (fkRol === "2") {
+      if (!nombreArtista || !descripcion || !image || !fkGenero) {
+        setMensaje("Por favor, complete todos los campos de artista.");
+        return false;
+      }
+    }
+
+    setMensaje(""); // Limpiar mensaje de error si todo es válido
+    return true;
+  };
+
   const handleRegister = async () => {
+    if (!validateForm()) return;
+
     const usuarioData = {
       nombre,
       apellido,
@@ -67,11 +105,7 @@ const Register = () => {
       fk_rol: parseInt(fkRol),
     };
 
-    if (fkRol == "2") {
-      if (!nombreArtista || !descripcion || !image || !fkGenero) {
-        setMensaje("Por favor, complete todos los campos de artista.");
-        return;
-      }
+    if (fkRol === "2") {
       usuarioData.artistaInfo = {
         nombreArtista,
         descripcion,
@@ -81,14 +115,18 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/register",
-        usuarioData
-      );
-      setMensaje(response.data.message);
-      alert(response.data.message);
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(usuarioData),
+      });
+      const data = await response.json();
+      setMensaje(data.message);
+      alert(data.message);
     } catch (error) {
-      console.error(error.response.data);
+      console.error("Error al registrar usuario:", error);
       setMensaje("Error al registrar usuario");
     }
   };
@@ -96,7 +134,7 @@ const Register = () => {
   return (
     <div className="register-form">
       {mensaje && (
-        <div class="alert alert-info" role="alert">
+        <div className="alert alert-info" role="alert">
           {mensaje}
         </div>
       )}
@@ -190,7 +228,7 @@ const Register = () => {
           ))}
         </select>
 
-        {fkRol == "2" && (
+        {fkRol === "2" && (
           <>
             <div>
               <label onClick={() => nombreArtistaRef.current.focus()}>
