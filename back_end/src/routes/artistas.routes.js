@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { PrismaClient } from "@prisma/client";
+
 
 import { artistaController } from "../controllers/artistas.controller.js";
 
 const router = Router();
-const prisma = new PrismaClient();
+
 
 // Obtener todos los artistas
 router.get('/artistas', artistaController.getAll);
