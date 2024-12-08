@@ -5,16 +5,16 @@ import { useAuth } from '../../context/AuthContext';
 const Login = () => {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleLogin = async () => {
+    setError(''); // Reset any previous error
     const success = await login(correo, password);
     if (!success) {
-      setError('Correo o contraseña incorrectos');
+      setError('Correo o contraseña incorrectos o no tiene permisos suficientes');
     } else {
-      setError('');
       navigate('/');
     }
   };

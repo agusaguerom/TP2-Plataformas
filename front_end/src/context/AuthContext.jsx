@@ -56,12 +56,21 @@ export function AuthProvider({ children }) {
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
-        setIsLogueado(true);
-        setUserLogueado(user);
-        localStorage.setItem("isLogueado", true);
-        localStorage.setItem("user", JSON.stringify(user));
-        return true;
+        if (user.fk_rol === 3) { // Verificar si es administrador
+          setIsLogueado(true);
+          setUserLogueado(user);
+          localStorage.setItem("isLogueado", true);
+          localStorage.setItem("user", JSON.stringify(user));
+          return true;
+        } else {
+          console.error("No tiene permisos suficientes");
+          return false;
+        }
+      } else {
+        console.error("Contraseña incorrecta");
       }
+    } else {
+      console.error("Usuario no encontrado");
     }
     return false;
   };
@@ -75,11 +84,12 @@ export function AuthProvider({ children }) {
 
   const register = async (nombre, apellido, correo, password, fk_rol, fk_suscripcion) => {
     try {
+      const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = {
-        nombre, 
+        nombre,
         apellido,
         correo,
-        password,
+        password: hashedPassword, // Usar la contraseña encriptada
         fk_suscripcion: parseInt(fk_suscripcion, 10),
         fk_rol: parseInt(fk_rol, 10),
       };
@@ -115,7 +125,6 @@ export function AuthProvider({ children }) {
       return false;
     }
   };
-  
 
   return (
     <AuthContext.Provider
