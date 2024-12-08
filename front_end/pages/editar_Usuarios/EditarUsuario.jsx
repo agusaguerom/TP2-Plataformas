@@ -7,7 +7,7 @@ import axios from 'axios';
 const EditarUsuario = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { updateUser, suscripciones, roles } = useAuth(); // Usa el contexto de autenticación
+  const { updateAdminUser, suscripciones, roles } = useAuth(); // Usa el contexto de autenticación
 
   const [user, setUser] = useState(null);
   const [nombre, setNombre] = useState('');
@@ -46,7 +46,9 @@ const EditarUsuario = () => {
       password: password ? password : undefined // Solo incluir la contraseña si ha sido proporcionada
     };
     console.log("Datos enviados para actualización:", updatedUser); // Añadir log de los datos enviados
-    const success = await updateUser(id, updatedUser);
+
+    const success = await updateAdminUser(id, updatedUser);
+
     if (success) {
       alert('Usuario actualizado correctamente');
       navigate("/Dashboard/Gestion_Usuarios");

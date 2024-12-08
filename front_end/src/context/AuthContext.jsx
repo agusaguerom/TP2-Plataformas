@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import axios from "axios";
-import bcrypt from "bcryptjs"; // Importar bcryptjs para comparar contraseñas
+import bcrypt from "bcryptjs"; 
 
 const AuthContext = createContext();
 
@@ -124,10 +124,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const updateUser = async (id, updatedUser) => {
+  const updateAdminUser = async (id, updatedUser) => {
     try {
+      console.log("ID enviado para actualización (admin):", id); // Log para verificar el ID enviado
       const response = await axios.put(
-        `http://localhost:5000/api/usuarios/${id}`,
+        `http://localhost:5000/api/admin/usuarios/${id}`,
         updatedUser
       );
       setUsers((prevUsers) =>
@@ -139,7 +140,28 @@ export function AuthProvider({ children }) {
       }
       return true;
     } catch (error) {
-      console.error("Error al actualizar:", error);
+      console.error("Error al actualizar (admin):", error);
+      return false;
+    }
+  };
+
+  const updateRegularUser = async (id, updatedUser) => {
+    try {
+      console.log("ID enviado para actualización (regular):", id); // Log para verificar el ID enviado
+      const response = await axios.put(
+        `http://localhost:5000/api/usuarios/actualizar/${id}`,
+        updatedUser
+      );
+      setUsers((prevUsers) =>
+        prevUsers.map((user) => (user.id === id ? response.data.user : user))
+      );
+      if (userLogueado?.id === id) {
+        setUserLogueado(response.data.user);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+      }
+      return true;
+    } catch (error) {
+      console.error("Error al actualizar (regular):", error);
       return false;
     }
   };
@@ -152,7 +174,8 @@ export function AuthProvider({ children }) {
         logout,
         userLogueado,
         register,
-        updateUser,
+        updateAdminUser,
+        updateRegularUser,
         users,
         suscripciones,
         roles,

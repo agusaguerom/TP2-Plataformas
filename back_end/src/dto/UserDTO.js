@@ -16,7 +16,7 @@ export const createUserDto = Joi.object({
     is: 2,
     then: Joi.required(),
     otherwise: Joi.forbidden(),
-  }), // Permitir solo si fk_rol es 2
+  }), 
 });
 
 export const updateUserAdminDto = Joi.object({
