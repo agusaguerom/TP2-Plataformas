@@ -6,7 +6,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // Obtener todos los artistas
-router.get('/artistas', async (req, res) => {
+router.get("/artistas", async (req, res) => {
   try {
     const artistas = await prisma.artista.findMany();
     res.json(artistas);
@@ -16,7 +16,7 @@ router.get('/artistas', async (req, res) => {
 });
 
 // Crear un nuevo artista
-router.post('/artistas', async (req, res) => {
+router.post("/artistas", async (req, res) => {
   try {
     const { error, value } = ArtistaDto.validate(req.body);
 
@@ -46,7 +46,7 @@ router.post('/artistas', async (req, res) => {
 });
 
 // Actualizar un artista existente
-router.put('/artistas/:id', async (req, res) => {
+router.put("/artistas/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { error, value } = ArtistaDto.validate(req.body);
@@ -78,7 +78,7 @@ router.put('/artistas/:id', async (req, res) => {
 });
 
 // Eliminar un artista
-router.delete('/artistas/:id', async (req, res) => {
+router.delete("/artistas/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.artista.delete({
@@ -87,6 +87,24 @@ router.delete('/artistas/:id', async (req, res) => {
     res.json({ message: "Artista eliminado con éxito" });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+router.get("/search/artista", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const artists = await prisma.artista.findMany({
+      where: {
+        nombre: {
+          contains: query,
+          mode: "insensitive",
+        },
+      },
+    });
+    res.json(artists);
+  } catch (error) {
+    res.status(500).send("Error al buscar Artista");
   }
 });
 

@@ -1,27 +1,37 @@
 import React, { useState } from "react";
+import axios from "axios"; // Importa axios
 import { SongItem } from "../SongItem/SongItem";
-import { getArtistLinks } from "../../data/DataUtils";
 import { ArtistItem } from "../ArtistItem/ArtistItem";
 
-export function SearchComponent({ songs, artists }) {
+export function SearchComponent() {
   const [searchType, setSearchType] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false); // Nuevo estado
 
-  const handleSearch = () => {
-    setHasSearched(true); // Marcamos que ya se realizó una búsqueda
+  const handleSearch = async () => {
+    setHasSearched(true);
 
-    if (searchType === "Canciones") {
-      const filteredSongs = songs.filter((song) =>
-        song.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setResults(filteredSongs);
-    } else if (searchType === "Artistas") {
-      const filteredArtists = artists.filter((artist) =>
-        artist.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setResults(filteredArtists);
+    try {
+      let response;
+      if (searchType === "Canciones") {
+        console.log("antes del link");
+        response = await axios.get(
+          `http://localhost:5000/api/search/canciones?query=${searchQuery}`
+        );
+        console.log(response);
+        setResults(Array.isArray(response.data.data) ? response.data.data : []);
+      } else if (searchType === "Artistas") {
+        console.log("antes del link");
+        response = await axios.get(
+          `http://localhost:5000/api/search/artista?query=${searchQuery}`
+        );
+        console.log(response.data);
+        setResults(Array.isArray(response.data) ? response.data : []);
+      }
+    } catch (error) {
+      console.error("Error al buscar:", error.message);
+      setResults([]);
     }
   };
 
@@ -72,27 +82,22 @@ export function SearchComponent({ songs, artists }) {
 
       <div>
         <h5>Resultados:</h5>
-        {/* Solo mostramos el mensaje "No se encontraron resultados" después de buscar */}
         {hasSearched && results.length === 0 && (
           <p>No se encontraron resultados.</p>
         )}
         <div className="row g-4">
           {results.map((item, index) => {
             if (searchType === "Canciones") {
-              const artistLinks = item.artistIds
-                ? getArtistLinks(item.artistIds)
-                : null;
-
               return (
                 <div
                   key={index}
                   className="col-12 col-md-4 col-lg-4 col-xl-4 mb-4"
                 >
                   <SongItem
-                    name={item.name}
-                    artist={artistLinks}
+                    name={item.nombre}
+                    artist={item.descripcion}
                     image={item.image}
-                    audio={item.audio}
+                    audio="aa"
                   />
                 </div>
               );
@@ -103,7 +108,7 @@ export function SearchComponent({ songs, artists }) {
                   className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
                 >
                   <ArtistItem
-                    name={item.name}
+                    name={item.nombre}
                     image={item.image}
                     id={item.id}
                   />

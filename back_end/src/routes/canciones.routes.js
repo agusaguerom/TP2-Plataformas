@@ -6,7 +6,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // Obtener todas las canciones
-router.get('/canciones', async (req, res) => {
+router.get("/canciones", async (req, res) => {
   try {
     const canciones = await prisma.cancion.findMany();
     res.json(canciones);
@@ -16,7 +16,7 @@ router.get('/canciones', async (req, res) => {
 });
 
 // Crear una nueva canción
-router.post('/canciones', async (req, res) => {
+router.post("/canciones", async (req, res) => {
   try {
     const { error, value } = CancionDto.validate(req.body);
 
@@ -46,7 +46,7 @@ router.post('/canciones', async (req, res) => {
 });
 
 // Actualizar una canción existente
-router.put('/canciones/:id', async (req, res) => {
+router.put("/canciones/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { error, value } = CancionDto.validate(req.body);
@@ -78,7 +78,7 @@ router.put('/canciones/:id', async (req, res) => {
 });
 
 // Eliminar una canción
-router.delete('/canciones/:id', async (req, res) => {
+router.delete("/canciones/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.cancion.delete({
@@ -87,6 +87,27 @@ router.delete('/canciones/:id', async (req, res) => {
     res.json({ message: "Canción eliminada con éxito" });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+router.get("/search/canciones", async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const songs = await prisma.cancion.findMany({
+      where: {
+        nombre: {
+          contains: query,
+          mode: "insensitive",
+        },
+      },
+      include: {
+        artista: true,
+      },
+    });
+    res.json(songs);
+  } catch (error) {
+    res.status(500).send("Error al buscar cancion");
   }
 });
 
