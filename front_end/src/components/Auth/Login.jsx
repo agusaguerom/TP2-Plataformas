@@ -3,14 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (!login(username, password)) {
-      alert('Usuario o contraseña incorrectos');
+    if (!login(correo, password)) {
+      alert('Correo o contraseña incorrectos');
     } else {
       navigate('/');
     }
@@ -19,17 +19,17 @@ const Login = () => {
   return (
     <div className="login-form">
       <input 
-        type="text" 
-        value={username} 
-        onChange={(e) => setUsername(e.target.value)} 
-        placeholder="Username" 
+        type="email" 
+        value={correo} 
+        onChange={(e) => setCorreo(e.target.value)} 
+        placeholder="Correo" 
         className="form-control"
       />
       <input 
         type="password" 
         value={password} 
         onChange={(e) => setPassword(e.target.value)} 
-        placeholder="Password" 
+        placeholder="Contraseña" 
         className="form-control"
       />
       <button onClick={handleLogin} className="btn btn-primary">Login</button>

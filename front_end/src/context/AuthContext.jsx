@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import axios from "axios";
+import bcrypt from "bcryptjs"; 
 
 const AuthContext = createContext();
 
@@ -49,17 +50,18 @@ export function AuthProvider({ children }) {
     fetchRoles();
   }, []);
 
-  const login = (username, password) => {
-    const user = users.find(
-      (u) => u.username === username && u.password === password
-    );
-
+  const login = async (correo, password) => {
+    const user = users.find(u => u.correo === correo);
+    
     if (user) {
-      setIsLogueado(true);
-      setUserLogueado(user);
-      localStorage.setItem("isLogueado", true);
-      localStorage.setItem("user", JSON.stringify(user));
-      return true;
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        setIsLogueado(true);
+        setUserLogueado(user);
+        localStorage.setItem("isLogueado", true);
+        localStorage.setItem("user", JSON.stringify(user));
+        return true;
+      }
     }
     return false;
   };
@@ -83,7 +85,7 @@ export function AuthProvider({ children }) {
       };
   
       console.log("Datos enviados al backend:", newUser);
-      const response = await axios.post("http://localhost:5000/api/usuarios", newUser);
+      const response = await axios.post("http://localhost:5000/api/register", newUser);
       const createdUser = response.data.user;
   
       const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
@@ -119,8 +121,6 @@ export function AuthProvider({ children }) {
     }
   };
   
-  
-
   return (
     <AuthContext.Provider
       value={{
