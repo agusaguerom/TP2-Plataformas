@@ -89,7 +89,7 @@ export function AuthProvider({ children }) {
         nombre,
         apellido,
         correo,
-        password: hashedPassword, // Usar la contraseña encriptada
+        password: hashedPassword, 
         fk_suscripcion: parseInt(fk_suscripcion, 10),
         fk_rol: parseInt(fk_rol, 10),
       };
@@ -104,7 +104,7 @@ export function AuthProvider({ children }) {
       return true;
     } catch (error) {
       console.error("Error al registrar:", error);
-      console.error("Respuesta del servidor:", error.response?.data); // Añadido un chequeo de seguridad
+      console.error("Respuesta del servidor:", error.response?.data); 
       return false;
     }
   };
