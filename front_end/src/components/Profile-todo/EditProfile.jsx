@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../../../pages/ProfilePage/EditProfile.css';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Importar estilos de Bootstrap
 
 const EditProfile = () => {
-  const { userLogueado, updateUser, suscripciones } = useAuth();
+  const { userLogueado, updateRegularUser, suscripciones } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: '',
@@ -34,7 +33,7 @@ const EditProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Datos enviados:", formData); // Log para verificar los datos enviados
-    const success = await updateUser(userLogueado.id, formData);
+    const success = await updateRegularUser(userLogueado.id, formData);
     if (success) {
       setSuccessMessage('Perfil actualizado con éxito.');
     } else {
