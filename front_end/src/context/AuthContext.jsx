@@ -58,8 +58,8 @@ export function AuthProvider({ children }) {
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
-        if (user.fk_rol === 3) {
-          // Verificar si es administrador
+        if (user.fk_rol === 1 || user.fk_rol === 2 || user.fk_rol === 3) {
+          // Verificar si es un rol permitido
           setIsLogueado(true);
           setUserLogueado(user);
           localStorage.setItem("isLogueado", true);
