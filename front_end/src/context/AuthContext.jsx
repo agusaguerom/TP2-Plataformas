@@ -29,7 +29,9 @@ export function AuthProvider({ children }) {
 
     const fetchSuscripciones = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/suscripciones");
+        const response = await axios.get(
+          "http://localhost:5000/api/suscripciones"
+        );
         setSuscripciones(response.data);
       } catch (error) {
         console.error("Error fetching suscripciones:", error);
@@ -51,12 +53,13 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (correo, password) => {
-    const user = users.find(u => u.correo === correo);
-    
+    const user = users.find((u) => u.correo === correo);
+
     if (user) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
-        if (user.fk_rol === 3) { // Verificar si es administrador
+        if (user.fk_rol === 3) {
+          // Verificar si es administrador
           setIsLogueado(true);
           setUserLogueado(user);
           localStorage.setItem("isLogueado", true);
@@ -82,38 +85,53 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-  const register = async (nombre, apellido, correo, password, fk_rol, fk_suscripcion) => {
+  const register = async (
+    nombre,
+    apellido,
+    correo,
+    password,
+    fk_rol,
+    fk_suscripcion
+  ) => {
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = {
         nombre,
         apellido,
         correo,
-        password: hashedPassword, 
+        password: hashedPassword,
         fk_suscripcion: parseInt(fk_suscripcion, 10),
         fk_rol: parseInt(fk_rol, 10),
       };
-  
+
       console.log("Datos enviados al backend:", newUser);
-      const response = await axios.post("http://localhost:5000/api/register", newUser);
+      const response = await axios.post(
+        "http://localhost:5000/api/register",
+        newUser
+      );
       const createdUser = response.data.user;
-  
-      const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
+
+      const updatedUsersResponse = await axios.get(
+        "http://localhost:5000/api/usuarios"
+      );
       setUsers(updatedUsersResponse.data);
-  
+
       return true;
     } catch (error) {
       console.error("Error al registrar:", error);
-      console.error("Respuesta del servidor:", error.response?.data); 
+      console.error("Respuesta del servidor:", error.response?.data);
       return false;
     }
   };
 
   const updateUser = async (id, updatedUser) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/usuarios/${id}`, updatedUser);
-      setUsers(prevUsers =>
-        prevUsers.map(user => (user.id === id ? response.data.user : user))
+      const response = await axios.put(
+        `http://localhost:5000/api/usuarios/${id}`,
+        updatedUser
+      );
+      setUsers((prevUsers) =>
+        prevUsers.map((user) => (user.id === id ? response.data.user : user))
       );
       if (userLogueado?.id === id) {
         setUserLogueado(response.data.user);

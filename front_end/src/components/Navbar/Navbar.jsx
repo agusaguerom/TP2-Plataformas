@@ -1,6 +1,6 @@
 import "../../styles/styles.css";
 import { Link } from "react-router-dom";
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from "../../context/AuthContext";
 
 export function Navbar() {
   const { userLogueado } = useAuth();
@@ -21,18 +21,20 @@ export function Navbar() {
           </li>
 
           {}
-          {(userLogueado && (userLogueado.role === 'artist' || userLogueado.role === 'admin')) && (
-            <li className="nav-item">
-              <Link to="/Dashboard" className="nav-link">
-                <i className="bi bi-star"></i>
-              </Link>
-            </li>
-          )}
+          {userLogueado &&
+            (userLogueado.rol.nombre === "Artist" ||
+              userLogueado.rol.nombre === "Admin") && (
+              <li className="nav-item">
+                <Link to="/Dashboard" className="nav-link">
+                  <i className="bi bi-star"></i>
+                </Link>
+              </li>
+            )}
 
-          <li className='nav-item'>
-            <a href="/profile" className='nav-link'>
-              <i className="bi bi-person-circle"></i>          
-            </a>  
+          <li className="nav-item">
+            <a href="/profile" className="nav-link">
+              <i className="bi bi-person-circle"></i>
+            </a>
           </li>
         </ul>
       </nav>
