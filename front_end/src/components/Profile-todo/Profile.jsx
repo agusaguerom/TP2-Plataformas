@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import '../../../pages/ProfilePage/ProfilePage.css';
 
 const Profile = () => {
-  const { isLogueado, userLogueado, logout } = useAuth(); 
+  const { isLogueado, userLogueado, logout } = useAuth();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
-    username: '',
-    email: '', 
-    role: '',
-    birthdate: '',
-    gender: ''
+    nombre: '',
+    apellido: '',
+    correo: '',
+    suscripcion: { nombre: '' },
+    rol: { nombre: '' },
   });
 
   useEffect(() => {
@@ -33,34 +33,31 @@ const Profile = () => {
         <h1>Mi Perfil</h1>
         
         <div className="profile-info">
-          <label>Nombre de Usuario:</label>
-          <p>{userData.username}</p>
+          <label>Nombre:</label>
+          <p>{userData.nombre}</p>
         </div>
 
         <div className="profile-info">
-          <label>Email:</label>
-          <p>{userData.email}</p>
+          <label>Apellido:</label>
+          <p>{userData.apellido}</p>
         </div>
 
         <div className="profile-info">
-          <label>Tipo de Cuenta:</label>
-          <p>{userData.role}</p>
+          <label>Correo:</label>
+          <p>{userData.correo}</p>
         </div>
 
         <div className="profile-info">
-          <label>Fecha de Nacimiento:</label>
-          <p>{userData.birthdate}</p>
+          <label>Tipo de Suscripción:</label>
+          <p>{userData.suscripcion.nombre}</p>
         </div>
 
         <div className="profile-info">
-          <label>Género:</label>
-          <p>{userData.gender}</p>
+          <label>Rol:</label>
+          <p>{userData.rol.nombre}</p>
         </div>
-        
 
         <div className="profile-actions">
-          
-
           <button onClick={() => navigate('/edit-profile')} className="btn btn-primary btn-action mrg-btn-editar">
             Editar Perfil
           </button>
@@ -69,7 +66,6 @@ const Profile = () => {
             Cerrar Sesión
           </button>
         </div>
-       
       </div>
     </div>
   );

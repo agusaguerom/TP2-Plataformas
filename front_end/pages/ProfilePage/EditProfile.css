@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f0f0
+  background-color: #f0f0f0;
 }
 
 .edit-profile-container {
@@ -39,7 +39,7 @@
 .edit-profile-form label {
   font-weight: bold;
   display: block;
-  color: #333; 
+  color: #333;
   margin-bottom: 5px;
 }
 
@@ -50,8 +50,13 @@
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  color: #333; 
+  color: #333;
   width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-primary {
@@ -62,9 +67,22 @@
   border-radius: 8px;
   color: white;
   cursor: pointer;
-  margin-top: 20px;
 }
 
 .btn-primary:hover {
   background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
 }

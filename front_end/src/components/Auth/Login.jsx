@@ -5,19 +5,23 @@ import { useAuth } from '../../context/AuthContext';
 const Login = () => {
   const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (!login(correo, password)) {
-      alert('Correo o contraseña incorrectos');
+  const handleLogin = async () => {
+    const success = await login(correo, password);
+    if (!success) {
+      setError('Correo o contraseña incorrectos');
     } else {
+      setError('');
       navigate('/');
     }
   };
 
   return (
     <div className="login-form">
+      {error && <div className="alert alert-danger">{error}</div>}
       <input 
         type="email" 
         value={correo} 

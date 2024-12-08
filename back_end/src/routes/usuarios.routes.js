@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { PrismaClient } from "@prisma/client";
-import { createUserDto, updateUserDto } from "../dto/UserDTO.js";
+import { createUserDto, updateUserAdminDto, updateUserDto } from "../dto/UserDTO.js";
 import bcrypt from "bcrypt";
 
 const router = Router();
@@ -24,7 +24,7 @@ router.get("/usuarios/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const usuario = await prisma.usuario.findUnique({
-      where: { id },
+      where: { id: parseInt(id) },
       include: {
         suscripcion: true,
         rol: true,
@@ -40,7 +40,52 @@ router.get("/usuarios/:id", async (req, res) => {
   }
 });
 
-//CREACION DE USUARIO Y ARTISTA(EN CASO DE SERLO)
+// Ruta para actualización por administradores
+router.put("/admin/usuarios/:id", async (req, res) => {
+  const { id } = req.params;
+  const { error, value } = updateUserAdminDto.validate(req.body);
+
+  if (error) {
+    console.log("Error de validación:", error.details);
+    return res.status(400).json({ error: error.details[0].message });
+  }
+
+  try {
+    console.log("Datos recibidos para actualización por admin:", value);
+    const { nombre, apellido, correo, password, fk_suscripcion, fk_rol } = value;
+
+    const data = {
+      nombre,
+      apellido,
+      correo,
+      fk_suscripcion,
+      fk_rol,
+    };
+
+    if (password) {
+      data.password = await bcrypt.hash(password, 10);
+    }
+
+    const updatedUser = await prisma.usuario.update({
+      where: { id: parseInt(id) },
+      data,
+      include: {
+        suscripcion: true,
+        rol: true,
+      },
+    });
+
+    res.status(200).json({
+      message: "Usuario actualizado por admin",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error al actualizar el usuario por admin:", error);
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// Ruta para creación de usuario y artista (en caso de serlo)
 router.post("/register", async (req, res) => {
   try {
     console.log("Datos recibidos del frontend:", req.body);
@@ -106,8 +151,10 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// Ruta para actualización por usuarios con rol 1
 router.put("/usuarios/:id", async (req, res) => {
   const { id } = req.params;
+  console.log("Datos recibidos para actualización (antes de validar):", req.body); // Log para verificar los datos recibidos
   const { error, value } = updateUserDto.validate(req.body);
 
   if (error) {
@@ -116,24 +163,18 @@ router.put("/usuarios/:id", async (req, res) => {
   }
 
   try {
-    console.log("Datos recibidos para actualización:", value);
-    const { nombre, apellido, correo, password, fk_suscripcion, fk_rol } =
-      value;
+    console.log("Datos validados para actualización:", value);
+    const { nombre, apellido, correo, fk_suscripcion } = value;
 
     const data = {
       nombre,
       apellido,
       correo,
       fk_suscripcion,
-      fk_rol,
     };
 
-    if (password) {
-      data.password = await bcrypt.hash(password, 10);
-    }
-
-    const ActualizarUsuario = await prisma.usuario.update({
-      where: { id },
+    const updatedUser = await prisma.usuario.update({
+      where: { id: id }, // Asegúrate de que el id se maneje como cadena de texto
       data,
       include: {
         suscripcion: true,
@@ -142,13 +183,14 @@ router.put("/usuarios/:id", async (req, res) => {
     });
 
     res.status(200).json({
-      message: "Usuario actualizado",
-      user: ActualizarUsuario,
+      message: "Usuario actualizado por usuario con rol 1",
+      user: updatedUser,
     });
   } catch (error) {
-    console.error("Error al actualizar el usuario:", error);
+    console.error("Error al actualizar el usuario por usuario con rol 1:", error);
     res.status(400).json({ error: error.message });
   }
 });
+
 
 export default router;

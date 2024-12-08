@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import axios from "axios";
-import bcrypt from "bcryptjs"; 
+import bcrypt from "bcryptjs"; // Importar bcryptjs para comparar contraseñas
 
 const AuthContext = createContext();
 
@@ -101,26 +101,22 @@ export function AuthProvider({ children }) {
 
   const updateUser = async (id, updatedUser) => {
     try {
-      console.log("Datos enviados para actualización:", updatedUser);
       const response = await axios.put(`http://localhost:5000/api/usuarios/${id}`, updatedUser);
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === id ? response.data.user : user
-        )
+      setUsers(prevUsers =>
+        prevUsers.map(user => (user.id === id ? response.data.user : user))
       );
       if (userLogueado?.id === id) {
         setUserLogueado(response.data.user);
         localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-      localStorage.setItem("users", JSON.stringify(users));
-      return true;   
+      return true;
     } catch (error) {
       console.error("Error al actualizar:", error);
-      console.error("Respuesta del servidor:", error.response.data);
-      return false; 
+      return false;
     }
   };
   
+
   return (
     <AuthContext.Provider
       value={{

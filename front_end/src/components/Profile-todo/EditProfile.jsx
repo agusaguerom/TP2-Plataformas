@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
 import '../../../pages/ProfilePage/EditProfile.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css'; // Importar estilos de Bootstrap
 
 const EditProfile = () => {
-  const { userLogueado, updateUser } = useAuth();
+  const { userLogueado, updateUser, suscripciones } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    username: '',
-    email: '', 
-    role: '',
-    birthdate: '',
-    gender: ''
+    nombre: '',
+    apellido: '',
+    correo: '',
+    fk_suscripcion: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     if (userLogueado) {
-      setFormData(userLogueado);
+      setFormData({
+        nombre: userLogueado.nombre,
+        apellido: userLogueado.apellido,
+        correo: userLogueado.correo,
+        fk_suscripcion: userLogueado.suscripcion.id,
+      });
     }
   }, [userLogueado]);
 
@@ -27,67 +31,78 @@ const EditProfile = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    updateUser(formData);
-    navigate('/profile');
+    console.log("Datos enviados:", formData); // Log para verificar los datos enviados
+    const success = await updateUser(userLogueado.id, formData);
+    if (success) {
+      setSuccessMessage('Perfil actualizado con éxito.');
+    } else {
+      console.error("Error updating user data");
+    }
   };
 
   return (
-      <div className="edit-profile-container">
-        <h1>Editar Perfil</h1>
-        <form onSubmit={handleSubmit} className="edit-profile-form">
-          <div>
-            <label htmlFor="username">Nombre de Usuario:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="birthdate">Fecha de Nacimiento:</label>
-            <input
-              type="date"
-              id="birthdate"
-              name="birthdate"
-              value={formData.birthdate}
-              onChange={handleChange}
-              className="form-control"
-            />
-          </div>
-          <div>
-            <label htmlFor="gender">Género:</label>
-            <select
-              id="gender"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="form-control"
-            >
-              <option value="male">Hombre</option>
-              <option value="female">Mujer</option>
-              <option value="non-binary">No Binario</option>
-            </select>
-          </div>
+    <div className="edit-profile-container">
+      <h1>Editar Perfil</h1>
+      {successMessage && <div className="alert alert-success">{successMessage}</div>}
+      <form onSubmit={handleSubmit} className="edit-profile-form">
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="apellido">Apellido:</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            value={formData.apellido}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="correo">Correo:</label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            value={formData.correo}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fk_suscripcion">Tipo de Suscripción:</label>
+          <select
+            id="fk_suscripcion"
+            name="fk_suscripcion"
+            value={formData.fk_suscripcion}
+            onChange={handleChange}
+            className="form-control"
+          >
+            <option value="" disabled>Seleccione una suscripción</option>
+            {suscripciones.map((suscripcion) => (
+              <option key={suscripcion.id} value={suscripcion.id}>
+                {suscripcion.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="button-group d-flex justify-content-between">
+          <button onClick={() => navigate('/profile')} type="button" className="btn btn-secondary">Volver</button>
           <button type="submit" className="btn btn-primary">Guardar Cambios</button>
-        </form>
-      </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
