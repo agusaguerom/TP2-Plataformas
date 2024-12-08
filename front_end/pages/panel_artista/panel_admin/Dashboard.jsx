@@ -1,14 +1,14 @@
 import React from "react";
-import Card from '../components/cards/card';
-import './Dashboard.css';
-import { useAuth } from '../../../src/context/AuthContext';
+import Card from "../components/cards/card";
+import "./Dashboard.css";
+import { useAuth } from "../../../src/context/AuthContext";
 
 const Dashboard = () => {
   const { userLogueado } = useAuth();
 
   return (
     <>
-      {userLogueado?.role === 'admin' ? (
+      {userLogueado?.rol.nombre === "Admin" ? (
         <>
           <h1 className="titulo_Dashboard">Panel del Admin</h1>
           <Card admin />

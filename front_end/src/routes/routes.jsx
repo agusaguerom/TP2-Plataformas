@@ -1,7 +1,7 @@
-import Home from "../../pages/Home"; // Asegúrate de importar Home correctamente
+import Home from "../../pages/Home";
 import Dashboard from "../../pages/panel_artista/panel_admin/Dashboard";
 import { RecentsReleases } from "../Components/RecentsRelease/RecentsRelease";
-import Gestion_Canciones from "../../pages/gestion_canciones/Gestion_Canciones"; // Asegúrate de importar Gestion_Canciones correctamente
+import Gestion_Canciones from "../../pages/gestion_canciones/Gestion_Canciones";
 import ArtistProfile from "../../pages/ArtistProfile";
 
 import LoginPage from "../../pages/LoginPage/Login";
@@ -25,7 +25,7 @@ export const rutas = [
   { path: "/", element: <Home />, name: "Home" },
   {
     path: "/Dashboard/*",
-    element: <ProtectedRoute roles={["artist", "admin"]} />,
+    element: <ProtectedRoute roles={["Artist", "Admin"]} />,
   },
   { path: "Dashboard", element: <Dashboard />, name: "Panel Artista" },
   {

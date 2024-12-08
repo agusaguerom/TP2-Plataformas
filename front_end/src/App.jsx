@@ -39,15 +39,24 @@ function App() {
             <Route path="/album/:id" element={<AlbumDetails />} />
             <Route
               path="/Dashboard/*"
-              element={<ProtectedRoute roles={["artist", "admin"]} />}
+              element={<ProtectedRoute roles={["Artist", "Admin"]} />}
             >
               <Route path="" element={<Dashboard />} />
               <Route path="Gestion_Canciones" element={<Gestion_Canciones />} />
-              <Route path="Gestion_Canciones/EditarCancion/:id" element={<EditarCancion />} />
+              <Route
+                path="Gestion_Canciones/EditarCancion/:id"
+                element={<EditarCancion />}
+              />
               <Route path="Gestion_Albumes" element={<Gestion_Albumes />} />
               <Route path="Gestion_Usuarios" element={<Gestion_Usuarios />} />
-              <Route path="Gestion_Usuarios/EditarUsuario/:id" element={<EditarUsuario />} />
-              <Route path="Gestion_Albumes/EditarAlbum/:id" element={<EditarAlbum />} />
+              <Route
+                path="Gestion_Usuarios/EditarUsuario/:id"
+                element={<EditarUsuario />}
+              />
+              <Route
+                path="Gestion_Albumes/EditarAlbum/:id"
+                element={<EditarAlbum />}
+              />
             </Route>
             <Route path="/generos/:id" element={<Generos />} />
             <Route path="/edit-profile" element={<EditProfilePage />} />
