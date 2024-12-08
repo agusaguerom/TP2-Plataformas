@@ -15,7 +15,21 @@ router.get('/suscripciones', async (req, res) => {
   }
 });
 
-
+// Obtener una suscripción por ID
+router.get('/suscripciones/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const suscripcion = await prisma.suscripcion.findUnique({
+      where: { id: parseInt(id) }
+    });
+    if (!suscripcion) {
+      return res.status(404).json({ message: "Suscripción no encontrada" });
+    }
+    res.json(suscripcion);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Crear una nueva suscripción
 router.post('/suscripciones', async (req, res) => {
@@ -44,8 +58,6 @@ router.post('/suscripciones', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-
 
 // Actualizar una suscripción existente
 router.put('/suscripciones/:id', async (req, res) => {
@@ -76,8 +88,6 @@ router.put('/suscripciones/:id', async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-
 
 // Eliminar una suscripción
 router.delete('/suscripciones/:id', async (req, res) => {

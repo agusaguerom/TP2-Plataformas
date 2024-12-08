@@ -1,0 +1,33 @@
+/* Gestion_Suscripciones.css */
+.titulo-suscripciones {
+    text-align: center;
+    padding: 60px;
+  }
+  
+  .button-volver-suscripciones {
+    background: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 15px;
+    text-decoration: none;
+  }
+  
+  .button-volver-suscripciones:hover {
+    background: #00f7ff;
+    color: #ff66b2;
+  }
+  
+  .contenedor-botones-suscripciones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 100px;
+    margin-bottom: 30px;
+  }
+  
+  .button-volver-suscripciones {
+    margin: 0 10px;
+  }
+  

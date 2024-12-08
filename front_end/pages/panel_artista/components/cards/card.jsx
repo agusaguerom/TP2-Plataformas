@@ -30,6 +30,22 @@ const Card = ({ admin }) => {
           titulo: "Administrar Usuarios",
           descripcion: "Administrar usuarios",
           link: "/Dashboard/Gestion_Usuarios"
+        },
+        {
+          tipo: "gestion",
+          imgSrc: "/Suscripciones.jpg",
+          alttxt: "Gestión de suscripciones",
+          titulo: "Administrar Suscripciones",
+          descripcion: "Gestionar suscripciones",
+          link: "/Dashboard/Gestion_Suscripciones"
+        },
+        {
+          tipo: "gestion",
+          imgSrc: "/Generos.jpg",
+          alttxt: "Gestión de géneros musicales",
+          titulo: "Géneros Musicales",
+          descripcion: "Administrar géneros musicales",
+          link: "/Dashboard/Gestion_Generos"
         }
       ]
     : [

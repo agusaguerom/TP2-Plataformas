@@ -5,7 +5,7 @@ import { ArtistaDto } from "../dto/ArtistaDTO.js";
 const router = Router();
 const prisma = new PrismaClient();
 
-// Obtener todos los artistas
+
 router.get("/artistas", async (req, res) => {
   try {
     const artistas = await prisma.artista.findMany();
@@ -15,7 +15,7 @@ router.get("/artistas", async (req, res) => {
   }
 });
 
-// Crear un nuevo artista
+
 router.post("/artistas", async (req, res) => {
   try {
     const { error, value } = ArtistaDto.validate(req.body);
@@ -45,7 +45,8 @@ router.post("/artistas", async (req, res) => {
   }
 });
 
-// Actualizar un artista existente
+
+
 router.put("/artistas/:id", async (req, res) => {
   try {
     const { id } = req.params;

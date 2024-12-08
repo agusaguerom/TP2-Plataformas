@@ -23,6 +23,8 @@ import EditarUsuario from "../pages/editar_Usuarios/EditarUsuario";
 import EditarAlbum from "../pages/editar_Albumes/EditarAlbumes";
 import AlbumDetails from "../pages/AlbumDetails";
 import Logout from "./Components/Auth/Logout";
+import Gestion_Suscripciones from "../pages/gestion_suscripciones/gestion_suscripciones";
+import EditarSuscripcion from "../pages/editar_Suscripciones/EditarSuscripcion";
 
 function App() {
   return (
@@ -56,6 +58,11 @@ function App() {
               <Route
                 path="Gestion_Albumes/EditarAlbum/:id"
                 element={<EditarAlbum />}
+              />
+              <Route path="Gestion_Suscripciones" element={<Gestion_Suscripciones />} />
+              <Route
+                path="Gestion_Suscripciones/EditarSuscripcion/:id"
+                element={<EditarSuscripcion />}
               />
             </Route>
             <Route path="/generos/:id" element={<Generos />} />

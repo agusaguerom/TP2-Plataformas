@@ -17,7 +17,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
   border: 2px solid black;
   margin: 30px;
-  max-width: 300px;
+  width: 300px; /* Cambiado de max-width a width */
+  height: 400px; /* Ajustado para que todas las cards tengan la misma altura */
   text-align: center;
   transition: transform 0.2s;
 }

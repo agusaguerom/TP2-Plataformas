@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, createContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import bcrypt from "bcryptjs"; 
 
@@ -29,9 +29,7 @@ export function AuthProvider({ children }) {
 
     const fetchSuscripciones = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/suscripciones"
-        );
+        const response = await axios.get("http://localhost:5000/api/suscripciones");
         setSuscripciones(response.data);
       } catch (error) {
         console.error("Error fetching suscripciones:", error);
@@ -59,7 +57,6 @@ export function AuthProvider({ children }) {
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (passwordMatch) {
         if (user.fk_rol === 1 || user.fk_rol === 2 || user.fk_rol === 3) {
-          // Verificar si es un rol permitido
           setIsLogueado(true);
           setUserLogueado(user);
           localStorage.setItem("isLogueado", true);
@@ -85,14 +82,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("user");
   };
 
-  const register = async (
-    nombre,
-    apellido,
-    correo,
-    password,
-    fk_rol,
-    fk_suscripcion
-  ) => {
+  const register = async (nombre, apellido, correo, password, fk_rol, fk_suscripcion) => {
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = {
@@ -105,15 +95,10 @@ export function AuthProvider({ children }) {
       };
 
       console.log("Datos enviados al backend:", newUser);
-      const response = await axios.post(
-        "http://localhost:5000/api/register",
-        newUser
-      );
+      const response = await axios.post("http://localhost:5000/api/register", newUser);
       const createdUser = response.data.user;
 
-      const updatedUsersResponse = await axios.get(
-        "http://localhost:5000/api/usuarios"
-      );
+      const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
       setUsers(updatedUsersResponse.data);
 
       return true;
@@ -126,11 +111,8 @@ export function AuthProvider({ children }) {
 
   const updateAdminUser = async (id, updatedUser) => {
     try {
-      console.log("ID enviado para actualización (admin):", id); // Log para verificar el ID enviado
-      const response = await axios.put(
-        `http://localhost:5000/api/admin/usuarios/${id}`,
-        updatedUser
-      );
+      console.log("ID enviado para actualización (admin):", id);
+      const response = await axios.put(`http://localhost:5000/api/admin/usuarios/${id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) => (user.id === id ? response.data.user : user))
       );
@@ -147,11 +129,8 @@ export function AuthProvider({ children }) {
 
   const updateRegularUser = async (id, updatedUser) => {
     try {
-      console.log("ID enviado para actualización (regular):", id); // Log para verificar el ID enviado
-      const response = await axios.put(
-        `http://localhost:5000/api/usuarios/actualizar/${id}`,
-        updatedUser
-      );
+      console.log("ID enviado para actualización (regular):", id);
+      const response = await axios.put(`http://localhost:5000/api/usuarios/actualizar/${id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) => (user.id === id ? response.data.user : user))
       );
@@ -162,6 +141,32 @@ export function AuthProvider({ children }) {
       return true;
     } catch (error) {
       console.error("Error al actualizar (regular):", error);
+      return false;
+    }
+  };
+
+  const registerSuscripcion = async ({ nombre, precio_mensual, duracion_dias }) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/suscripciones", {
+        nombre, precio_mensual, duracion_dias
+      });
+      setSuscripciones([...suscripciones, response.data.suscripcion]);
+      return true;
+    } catch (error) {
+      console.error("Error al registrar suscripción:", error);
+      return false;
+    }
+  };
+
+  const updateSuscripcion = async (id, updatedSuscripcion) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/suscripciones/${id}`, updatedSuscripcion);
+      setSuscripciones((prevSuscripciones) =>
+        prevSuscripciones.map((suscripcion) => (suscripcion.id === id ? response.data : suscripcion))
+      );
+      return true;
+    } catch (error) {
+      console.error("Error al actualizar suscripción:", error);
       return false;
     }
   };
@@ -179,6 +184,8 @@ export function AuthProvider({ children }) {
         users,
         suscripciones,
         roles,
+        registerSuscripcion,
+        updateSuscripcion
       }}
     >
       {children}
