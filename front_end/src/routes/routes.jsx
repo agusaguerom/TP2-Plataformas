@@ -20,6 +20,7 @@ import Generos from "../../pages/Generos";
 import GlobalRanking from "../../pages/GlobalRanking";
 import Search from "../../.pages/Search";
 import EditarAlbumes from "../../pages/editar_Albumes/EditarAlbumes";
+import { Playlists } from "../../pages/Playlists/Playlists";
 
 export const rutas = [
   { path: "/", element: <Home />, name: "Home" },
@@ -75,4 +76,7 @@ export const rutas = [
 
   // Buscador
   { path: "/search", element: <Search />, name: "Search" },
+
+  //Playlists
+  { path: "/playlist", element: <Playlists />, name: "Playlist" },
 ];
