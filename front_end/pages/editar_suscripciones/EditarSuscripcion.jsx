@@ -88,7 +88,7 @@ const EditarSuscripcion = () => {
           </div>
           <div className="botones-formulario">
             <Link to="/Dashboard/Gestion_Suscripciones" className="btn btn-primary">Volver</Link>
-            <button type="submit" className="btn btn-primary">Actualizar Suscripción</button>
+            <button type="submit" className="btn btn-primary">Actualizar</button>
           </div>
         </form>
       </div>
