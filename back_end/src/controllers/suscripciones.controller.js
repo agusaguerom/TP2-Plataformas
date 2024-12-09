@@ -4,16 +4,16 @@ import { SuscripcionDto } from "../dto/SuscripcionDTO.js";
 export class suscripcionesController {
 
 
-static async getAll(req, res){
-
+  static async getAll(req, res) {
     try {
       const suscripciones = await suscripcionService.getAll();
+      suscripciones.sort((a, b) => a.id - b.id);  // Ordenar por ID de menor a mayor
       res.json(suscripciones);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
- 
-}
+  }
+  
 
 
 static async getById(req, res) {
