@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [suscripciones, setSuscripciones] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [generos, setGeneros] = useState([]); // Añadido para géneros
   const [isLogueado, setIsLogueado] = useState(
     localStorage.getItem("isLogueado") ? true : false
   );
@@ -45,9 +46,19 @@ export function AuthProvider({ children }) {
       }
     };
 
+    const fetchGeneros = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/generos");
+        setGeneros(response.data);
+      } catch (error) {
+        console.error("Error fetching generos:", error);
+      }
+    };
+
     fetchUsers();
     fetchSuscripciones();
     fetchRoles();
+    fetchGeneros(); // Añadido para géneros
   }, []);
 
   const login = async (correo, password) => {
@@ -171,6 +182,31 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const registerGenero = async ({ nombre }) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/generos", { nombre });
+      setGeneros([...generos, response.data.genero]);
+      return true;
+    } catch (error) {
+      console.error("Error al registrar género:", error);
+      return false;
+    }
+  };
+
+  const updateGenero = async (id, updatedGenero) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/generos/${id}`, updatedGenero);
+      setGeneros((prevGeneros) =>
+        prevGeneros.map((genero) => (genero.id === id ? response.data.genero : genero))
+      );
+      return true;
+    } catch (error) {
+      console.error("Error al actualizar género:", error);
+      return false;
+    }
+  };
+  
+
   return (
     <AuthContext.Provider
       value={{
@@ -185,7 +221,10 @@ export function AuthProvider({ children }) {
         suscripciones,
         roles,
         registerSuscripcion,
-        updateSuscripcion
+        updateSuscripcion,
+        generos, 
+        registerGenero, 
+        updateGenero 
       }}
     >
       {children}

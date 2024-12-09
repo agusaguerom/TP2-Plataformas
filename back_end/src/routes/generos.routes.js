@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { generosController } from "../controllers/generos.controller.js";
 
-
-
 const router = Router();
-
 
 // Obtener todos los géneros
 router.get("/generos", generosController.getAll);
+
+// Obtener un género por ID
+router.get("/generos/:id", generosController.getById);  // Añadido
 
 // Crear un nuevo género
 router.post("/generos", generosController.create);

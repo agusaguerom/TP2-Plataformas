@@ -3,9 +3,10 @@ import { generoService } from "../services/generos.service.js";
 
 export class generosController {
 
-static async getAll(req, res){
+  static async getAll(req, res) {
     try {
       const generos = await generoService.getAll();
+      generos.sort((a, b) => a.id - b.id);  // Ordenar por ID de menor a mayor
       res.json(generos);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -13,16 +14,30 @@ static async getAll(req, res){
   }
 
 
-static async create(req, res){
+
+  static async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const genero = await generoService.getById({ id });
+      if (!genero) {
+        return res.status(404).json({ message: "Género no encontrado" });
+      }
+      res.json(genero);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async create(req, res) {
     try {
       const { error, value } = GeneroDto.validate(req.body);
-  
+
       if (error) {
         return res.status(400).json({ error: error.details[0].message });
       }
-  
+
       const { nombre } = value;
-  
+
       const nuevoGenero = await generoService.create({ nombre });
 
       res.status(201).json({
@@ -34,20 +49,19 @@ static async create(req, res){
     }
   }
 
-
-static async update(req, res){
+  static async update(req, res) {
     try {
       const { id } = req.params;
       const { error, value } = GeneroDto.validate(req.body);
-  
+
       if (error) {
         return res.status(400).json({ error: error.details[0].message });
       }
-  
+
       const { nombre } = value;
-  
-      const generoActualizado = await generoService.update({id, nombre});
-  
+
+      const generoActualizado = await generoService.update({ id, nombre });
+
       res.json({
         message: "Género actualizado con éxito",
         genero: generoActualizado,
@@ -57,7 +71,7 @@ static async update(req, res){
     }
   }
 
-static async delete(req, res){
+  static async delete(req, res) {
     try {
       const { id } = req.params;
       await generoService.delete({ id });
@@ -66,5 +80,4 @@ static async delete(req, res){
       res.status(400).json({ error: error.message });
     }
   }
-
 }
