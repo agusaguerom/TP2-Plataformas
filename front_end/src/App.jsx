@@ -49,7 +49,7 @@ function App() {
                 path="Gestion_Canciones/EditarCancion/:id"
                 element={<EditarCancion />}
               />
-              <Route path="Gestion_Albumes" element={<Gestion_Albumes />} />
+              <Route path="Gestion_Albumes/:id" element={<Gestion_Albumes />} />
               <Route path="Gestion_Usuarios" element={<Gestion_Usuarios />} />
               <Route
                 path="Gestion_Usuarios/EditarUsuario/:id"

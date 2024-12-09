@@ -1,31 +1,43 @@
-import React, { useState } from "react";
-import { albums as initialAlbums, artists } from "../../../../src/data/data";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Filas_Albumes from "../Filas_Albumes/filas_albumes";
 import "./Tabla_albumes.css";
-import { useAuth } from "../../../../src/context/AuthContext"; 
+import { useAuth } from "../../../../src/context/AuthContext";
 
 const TablaAlbum = () => {
-  const { userLogueado } = useAuth(); 
-  const [albums, setAlbums] = useState(initialAlbums);
+  const { userLogueado } = useAuth();
+  const [albums, setAlbums] = useState([]);
   const [name, setName] = useState("");
   const [artistIds, setArtistIds] = useState("");
   const [image, setImage] = useState("");
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Filtrar los álbumes solo del artista logueado
-  const albumsDelArtista = userLogueado
-    ? albums.filter((album) => album.artistIds.includes(userLogueado.artistId))
-    : [];
-
-  // Método para obtener los nombres de los artistas
-  const getArtistNames = (artistIds) => {
-    return artistIds
-      .map((id) => {
-        const artist = artists.find((artist) => artist.id === id);
-        return artist ? artist.name : "No se encontró el artista";
-      })
-      .join(", ");
+  const fetchAlbums = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/albums/user/${userLogueado.id}`);
+      console.log("Respuesta de la API:", response.data);
+      setAlbums(response.data);
+      setLoading(false);
+    } catch (error) {
+      setError("No se pudieron cargar los álbumes");
+      setLoading(false);
+    }
   };
+  
+  useEffect(() => {
+    if (userLogueado) {
+      fetchAlbums();
+    }
+  }, [userLogueado]);
+
+
+
+
+  if (loading) return <p>Cargando álbumes...</p>;
+  if (error) return <p>{error}</p>;
+
 
   const handleSubirImagen = (e) => {
     const file = e.target.files[0];
@@ -51,6 +63,7 @@ const TablaAlbum = () => {
     setMostrarFormulario(false);
   };
 
+
   return (
     <div className="tabla-padding-albumes">
       <div className="contenedor-btn-mostrar-form">
@@ -61,6 +74,7 @@ const TablaAlbum = () => {
           {mostrarFormulario ? "Ocultar Formulario" : "Agregar Álbum"}
         </button>
       </div>
+
       {mostrarFormulario && (
         <form onSubmit={handleAgregarAlbum} className="form-agregar-album">
           <div>
@@ -90,29 +104,27 @@ const TablaAlbum = () => {
           </button>
         </form>
       )}
+
       <table className="tabla-de-albumes">
         <thead>
           <tr>
             <th className="centrar-th-album">Id</th>
             <th className="centrar-th-album">Imágen</th>
             <th className="centrar-th-album">Álbum</th>
-            <th className="centrar-th-album">Artista</th>
+            <th className="centrar-th-album">Artista Id</th>
             <th className="centrar-th-album">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {albumsDelArtista.map((album) => {
-            const artistNames = getArtistNames(album.artistIds);
-            return (
-              <Filas_Albumes
-                key={album.id}
-                id={album.id}
-                nombre={album.name}
-                artista={artistNames}
-                imagen={album.image}
-              />
-            );
-          })}
+          {albums.map((album) => (
+            <Filas_Albumes
+              key={album.id}
+              id={album.id}
+              nombre={album.nombre}
+              artista={album.fk_artista} 
+              imagen={album.imagen}
+            />
+          ))}
         </tbody>
       </table>
     </div>

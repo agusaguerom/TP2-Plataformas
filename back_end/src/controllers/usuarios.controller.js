@@ -94,7 +94,7 @@ export class UsuariosController{
 
 static async updateAdmin(req, res){
     const { id } = req.params;
-    console.log("PUT /admin/usuarios/:id - ID recibido:", id); // Log para verificar el ID recibido
+    console.log("PUT /admin/usuarios/:id - ID recibido:", id); 
     const { error, value } = updateUserAdminDto.validate(req.body);
   
     if (error) {

@@ -7,7 +7,8 @@ import { useState, useEffect } from 'react';
 const Card = ({ admin }) => {
   const [cantidadSeguidores, setCantidadSeguidores] = useState(0);
   const [cantidadCanciones, setCantidadCanciones] = useState(0);
-
+  const id = JSON.parse(localStorage.getItem("user"))?.id;
+  
   useEffect(() => {
     setCantidadSeguidores(1200);
     setCantidadCanciones(56);
@@ -73,7 +74,7 @@ const Card = ({ admin }) => {
           alttxt: "Gestión de álbumes",
           titulo: "Gestión de álbumes",
           descripcion: "Administrar mis álbumes",
-          link: "/Dashboard/Gestion_Albumes"
+          link: `/Dashboard/Gestion_Albumes/${id}`,
         },
         {
           tipo: "gestion",

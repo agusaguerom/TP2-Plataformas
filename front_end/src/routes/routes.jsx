@@ -39,7 +39,7 @@ export const rutas = [
     name: "Editar Canción",
   },
   {
-    path: "Dashboard/Gestion_Albumes",
+    path: "/Dashboard/Gestion_Albumes/:id",
     element: <Gestion_Albumes />,
     name: "Panel álbumes",
   },

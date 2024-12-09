@@ -14,6 +14,19 @@ static async getAll (req, res) {
       }
 
 
+    static async getByUser(req, res) {
+      try {
+        const { id } = req.params; 
+        console.log("User ID:", id); 
+        const albums = await albumsService.getAlbumsByUserId({id}); 
+        res.json(albums);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+    
+
+
 
 static async create (req, res) {
     try {

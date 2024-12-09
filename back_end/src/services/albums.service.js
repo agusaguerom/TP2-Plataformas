@@ -12,6 +12,19 @@ static async getAll(){
 }
 
 
+
+static async getAlbumsByUserId( {id}) {
+  return prisma.album.findMany({
+    where: {
+      artista: {
+        usuario: {
+          id: id,
+        },
+      },
+    },
+  });
+}
+
 static async create({nombre,publicacion,descripcion,fk_artista}){
 
  return   prisma.album.create({
