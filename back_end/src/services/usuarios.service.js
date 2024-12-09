@@ -47,7 +47,7 @@ export class UsuariosService{
     }
 
 
-    static async newArtist({nombreArtista, descripcion, image, fk_genero}){
+    static async newArtist({nombreArtista, descripcion, image, fk_genero,fk_usuario}){
         
      return   prisma.artista.create({
         data: {
@@ -55,7 +55,7 @@ export class UsuariosService{
           descripcion,
           image,
           fk_genero,
-          fk_usuario: newUser.id,
+          fk_usuario: fk_usuario,
         },
       });
     

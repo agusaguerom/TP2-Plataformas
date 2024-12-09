@@ -31,51 +31,64 @@ export class UsuariosController{
       }
 
 
-    static async register(req, res){
+      static async register(req, res) {
         try {
-          console.log("Datos recibidos del frontend:", req.body);
-          const { error, value } = createUserDto.validate(req.body);
-      
-          if (error) {
-            console.log("Error de validación:", error.details);
-            return res.status(400).json({ error: error.details[0].message });
-          }
-      
-          const {
-            nombre,
-            apellido,
-            correo,
-            password,
-            fk_suscripcion,
-            fk_rol,
-            artistaInfo,
-          } = value;
-      
-          const hashedPassword = await bcrypt.hash(password, 10);
-      
-          const newUser = await UsuariosService.newUser({nombre, apellido, correo, hashedPassword, fk_suscripcion, fk_rol});
-      
-          if (fk_rol === 2 && artistaInfo) {
-            const { nombreArtista, descripcion, image, fk_genero } = artistaInfo;
-      
-            const nuevoArtista = await UsuariosService.newArtist({nombreArtista, descripcion, image, fk_genero});
-      
-            return res.status(201).json({
-              message: "Usuario y Artista creados con éxito",
-              user: newUser,
-              artista: nuevoArtista,
+            console.log("Datos recibidos del frontend:", req.body);
+            const { error, value } = createUserDto.validate(req.body);
+    
+            if (error) {
+                console.log("Error de validación:", error.details);
+                return res.status(400).json({ error: error.details[0].message });
+            }
+    
+            const {
+                nombre,
+                apellido,
+                correo,
+                password,
+                fk_suscripcion,
+                fk_rol,
+                artistaInfo,
+            } = value;
+    
+            const hashedPassword = await bcrypt.hash(password, 10);
+    
+            const newUser = await UsuariosService.newUser({
+                nombre,
+                apellido,
+                correo,
+                hashedPassword,
+                fk_suscripcion,
+                fk_rol,
             });
-          }
-      
-          res.status(201).json({
-            message: "Usuario creado con éxito",
-            user: newUser,
-          });
+    
+            if (fk_rol === 2 && artistaInfo) {
+                const { nombreArtista, descripcion, image, fk_genero } = artistaInfo;
+    
+                const nuevoArtista = await UsuariosService.newArtist({
+                    nombreArtista,
+                    descripcion,
+                    image,
+                    fk_genero,
+                    fk_usuario: newUser.id, 
+                });
+    
+                return res.status(201).json({
+                    message: "Usuario y Artista creados con éxito",
+                    user: newUser,
+                    artista: nuevoArtista,
+                });
+            }
+    
+            res.status(201).json({
+                message: "Usuario creado con éxito",
+                user: newUser,
+            });
         } catch (error) {
-          console.error("Error al crear el usuario o artista:", error);
-          res.status(400).json({ error: error.message });
+            console.error("Error al crear el usuario o artista:", error);
+            res.status(400).json({ error: error.message });
         }
-      }
+    }
 
 
 
