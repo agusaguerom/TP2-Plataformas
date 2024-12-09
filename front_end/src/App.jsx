@@ -25,6 +25,7 @@ import AlbumDetails from "../pages/AlbumDetails";
 import Logout from "./Components/Auth/Logout";
 import Gestion_Suscripciones from "../pages/gestion_suscripciones/gestion_suscripciones";
 import EditarSuscripcion from "../pages/editar_Suscripciones/EditarSuscripcion";
+import { Playlists } from "../pages/Playlists/Playlists";
 
 function App() {
   return (
@@ -59,7 +60,10 @@ function App() {
                 path="Gestion_Albumes/EditarAlbum/:id"
                 element={<EditarAlbum />}
               />
-              <Route path="Gestion_Suscripciones" element={<Gestion_Suscripciones />} />
+              <Route
+                path="Gestion_Suscripciones"
+                element={<Gestion_Suscripciones />}
+              />
               <Route
                 path="Gestion_Suscripciones/EditarSuscripcion/:id"
                 element={<EditarSuscripcion />}
@@ -69,6 +73,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfilePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/playlist" element={<Playlists />} />
           </Routes>
         </main>
       </BrowserRouter>
