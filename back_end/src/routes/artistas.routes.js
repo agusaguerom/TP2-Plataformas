@@ -1,25 +1,24 @@
 import { Router } from "express";
 
-
 import { artistaController } from "../controllers/artistas.controller.js";
 
 const router = Router();
 
-
 // Obtener todos los artistas
-router.get('/artistas', artistaController.getAll);
+router.get("/artistas", artistaController.getAll);
 
 router.get('/artistas/:id',artistaController.getById);
 
 // Crear un nuevo artista
-router.post('/artistas', artistaController.create);
+router.post("/artistas", artistaController.create);
 
 // Actualizar un artista existente
-router.put('/artistas/:id', artistaController.update);
+router.put("/artistas/:id", artistaController.update);
 
 // Eliminar un artista
-router.delete('/artistas/:id', artistaController.delete);
+router.delete("/artistas/:id", artistaController.delete);
 
+//Buscador
 router.get("/search/artista", artistaController.obtenerArtista);
 
 export default router;

@@ -75,7 +75,7 @@ export class playlistController {
     try {
       const { userId } = req.params;
       // Asegúrate de que la función del servicio esté devolviendo datos correctamente
-      const playlists = await playlistService.getPlaylistsByUser(userId);
+      const playlists = await playlistService.getPlaylistByUser(userId);
 
       if (playlists.length === 0) {
         return res

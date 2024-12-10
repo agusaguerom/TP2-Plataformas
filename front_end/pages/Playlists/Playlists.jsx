@@ -9,19 +9,18 @@ export function Playlists() {
 
   const id = userLogueado.id;
 
-  // Obtener las playlists del usuario al cargar el componente
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
         const response = await fetch(
           `http://localhost:5000/api/playlists/user/${id}`
         );
-        const data = await response.json(); // Obtener la respuesta JSON
+        const data = await response.json();
 
         if (response.ok) {
           setPlaylists(data);
         } else {
-          console.log(data); // Verifica si la API devuelve algún error
+          console.log(data);
           alert("No se pudieron obtener las playlists.");
         }
       } catch (error) {

@@ -20,7 +20,7 @@ export function SearchComponent() {
           `http://localhost:5000/api/search/canciones?query=${searchQuery}`
         );
         console.log(response);
-        setResults(Array.isArray(response.data.data) ? response.data.data : []);
+        setResults(Array.isArray(response.data) ? response.data : []);
       } else if (searchType === "Artistas") {
         console.log("antes del link");
         response = await axios.get(
@@ -95,8 +95,8 @@ export function SearchComponent() {
                 >
                   <SongItem
                     name={item.nombre}
-                    artist={item.descripcion}
-                    image={item.image}
+                    artist={item.artist}
+                    image="aa"
                     audio="aa"
                   />
                 </div>
