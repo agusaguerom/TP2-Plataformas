@@ -38,5 +38,6 @@ export class playlistService {
         fk_usuario: userId,
       },
     });
+    return playlists;
   }
 }
