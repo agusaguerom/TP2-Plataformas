@@ -11,6 +11,7 @@ const EditarAlbum = () => {
     const [name, setName] = useState(album ? album.name : '');
     const [artist, setArtist] = useState(album ? album.artist : '');
     const [image, setImage] = useState(album ? album.image : '');
+    const id_usuario = JSON.parse(localStorage.getItem("user"))?.id;
 
     if (!album) {
         return <div>Álbum no encontrado</div>;
@@ -43,7 +44,7 @@ const EditarAlbum = () => {
                         <input type="file" onChange={handleSubirImagen} />
                         {image && <img src={image} alt={name} style={{ width: '100px', height: '100px' }} />}
                     </div>
-                    <Link to={"/Dashboard/Gestion_Albumes"} className="button-volver">Volver</Link>
+                    <Link to={`/Dashboard/Gestion_Albumes/${id_usuario}`} className="button-volver">Volver</Link>
                 </form>
             </div>
         </div>

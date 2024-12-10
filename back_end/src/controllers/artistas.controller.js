@@ -15,6 +15,25 @@ static async getAll(req, res){
   }
 
 
+static async getById(req, res){
+
+  try{
+
+    const { id } = req.params;
+
+
+    const artista = await artistaService.getById({ id });
+    res.json(artista);
+
+  } catch (error){
+
+    res.status(500).json({ error: error.message });
+
+  }
+
+
+}
+
 
 static async create(req, res){
     try {

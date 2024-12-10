@@ -9,6 +9,8 @@ const router = Router();
 // Obtener todos los artistas
 router.get('/artistas', artistaController.getAll);
 
+router.get('/artistas/:id',artistaController.getById);
+
 // Crear un nuevo artista
 router.post('/artistas', artistaController.create);
 
