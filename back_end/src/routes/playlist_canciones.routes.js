@@ -3,14 +3,17 @@ import { PlaylistCancionController } from "../controllers/playlist_canciones.con
 
 const router = Router();
 
-
 // Obtener todas las relaciones playlist-canción
-router.get('/playlist_canciones', PlaylistCancionController.getAll);
+router.get("/playlist_canciones", PlaylistCancionController.getAll);
 
 // Crear una nueva relación playlist-canción
-router.post('/playlist_canciones', PlaylistCancionController.create);
+router.post("/playlist_canciones", PlaylistCancionController.create);
 
 // Eliminar una relación playlist-canción
-router.delete('/playlist_canciones/:id', PlaylistCancionController.delete);
+router.delete("/playlist_canciones/:id", PlaylistCancionController.delete);
 
+//Obtener canciones por id de Playlist
+router.get("/playlist_canciones/:id", PlaylistCancionController.getSongs);
+
+router.post("/playlist_canciones/check", PlaylistCancionController.checkSongs);
 export default router;

@@ -16,6 +16,7 @@ export function GlobalRanking() {
               className="col-12 col-md-4 col-lg-4 col-xl-4 mb-4"
             >
               <SongItem
+                idSong={song.id}
                 name={song.name}
                 artist={artistLinks}
                 image={song.image}

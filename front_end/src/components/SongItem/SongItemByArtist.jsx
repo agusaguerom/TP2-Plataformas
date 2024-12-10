@@ -15,6 +15,7 @@ export function SongItemByArtist({ artist, songs }) {
           cancionesDelArtista.map((song) => (
             <div key={song.id} className="mb-3">
               <SongItem
+                idSong={song.id}
                 name={song.name}
                 artist={artist.name}
                 image={song.image}

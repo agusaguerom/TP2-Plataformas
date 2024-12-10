@@ -83,6 +83,7 @@ export const AlbumDetails = () => {
             albumSongs.map((song) => (
               <div key={song.id} className="col-12 col-md-6 col-lg-4">
                 <SongItem
+                  idSong={song.id}
                   name={song.name}
                   artist={song.artistIds
                     .map(
@@ -106,6 +107,5 @@ export const AlbumDetails = () => {
     </>
   );
 };
-
 
 export default AlbumDetails;

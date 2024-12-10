@@ -94,6 +94,7 @@ export function SearchComponent() {
                   className="col-12 col-md-4 col-lg-4 col-xl-4 mb-4"
                 >
                   <SongItem
+                    idSong={item.id}
                     name={item.nombre}
                     artist={item.artist}
                     image="aa"
