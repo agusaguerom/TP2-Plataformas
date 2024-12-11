@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/seguidores', seguidorController.getAll);
 
-router.get('/seguidores/:idArtista', seguidorController)
+router.get('/seguidores/:idArtista', seguidorController.getCantidadSeguidores);
 
 
 export default router;

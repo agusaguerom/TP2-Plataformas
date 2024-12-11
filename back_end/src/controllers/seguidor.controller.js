@@ -32,7 +32,7 @@ export class seguidorController{
         const cantidadSeguidores = await seguidorService.cantidadSeguidores({ idArtista });
 
 
-        res.json(cantidadSeguidores);
+        res.json({ cantidadSeguidores }); 
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
