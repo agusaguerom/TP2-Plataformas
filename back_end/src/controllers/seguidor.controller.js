@@ -31,13 +31,18 @@ export class seguidorController {
       const artistasdelUsuario = await seguidorService.getArtistasByUser(
         idUser
       );
+
       if (artistasdelUsuario.length === 0) {
         return res
           .status(404)
           .json({ message: "No se encontraron Artistas para este usuario." });
       }
 
-      res.status(200).json(artistasdelUsuario);
+      const cantidadSeguidores = await seguidorService.cantidadSeguidores({
+        idArtista: idUser, // Asegúrate de que `idArtista` sea el parámetro correcto aquí.
+      });
+
+      res.json({ artistasdelUsuario, cantidadSeguidores });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -63,16 +68,17 @@ export class seguidorController {
   static async check(req, res) {
     const { userId, artistaId } = req.params;
 
-    const followExists = await seguidorService.checkFollow(userId, artistaId);
+    try {
+      const followExists = await seguidorService.checkFollow(userId, artistaId);
 
-    if (followExists) {
-      return res.status(200).json({ isFollowing: true });
-    } else {
-      return res.status(200).json({ isFollowing: false });
+      if (followExists) {
+        return res.status(200).json({ isFollowing: true });
+      } else {
+        return res.status(200).json({ isFollowing: false });
+      }
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
     }
-  }
-  catch(error) {
-    return res.status(500).json({ error: error.message });
   }
 
   static async delete(req, res) {

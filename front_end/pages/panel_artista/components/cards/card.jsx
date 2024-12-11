@@ -1,19 +1,45 @@
 import React from 'react';
 import './card.css';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Contador from '../contadores/contador';
 import { useState, useEffect } from 'react';
 
 const Card = ({ admin }) => {
+  const [fkArtista, setFkArtista] = useState(null);
   const [cantidadSeguidores, setCantidadSeguidores] = useState(0);
-  const [cantidadCanciones, setCantidadCanciones] = useState(0);
+  const [cantidadCanciones, setCantidadCanciones] = useState(330);
+  const [loading, setLoading] = useState(true);
   const id = JSON.parse(localStorage.getItem("user"))?.id;
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const isAdmin = user?.rol?.id === 3;
   
   useEffect(() => {
-    setCantidadSeguidores(1200);
-    setCantidadCanciones(56);
-  }, []);
+    const fetchDatos = async () => {
+      try {
 
+        if (isAdmin) {
+          setLoading(false);
+          return; 
+        }
+
+        const fkArtistaResponse = await axios.get(`http://localhost:5000/api/artistas/user/${id}`);
+        setFkArtista(fkArtistaResponse.data.fk_artista);
+       
+        const seguidoresResponse = await axios.get(`http://localhost:5000/api/seguidores/${fkArtista}`);
+        setCantidadSeguidores(seguidoresResponse.data.cantidadSeguidores);
+        
+        setLoading(false);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+        setLoading(false);
+      }
+    };
+  
+    fetchDatos();
+  }, [id]);
+  
+  
   const cardData = admin
     ? [
         {
@@ -50,6 +76,8 @@ const Card = ({ admin }) => {
         }
       ]
     : [
+
+      
         {
           tipo: "info",
           titulo: "Cantidad de Seguidores:",
@@ -85,6 +113,8 @@ const Card = ({ admin }) => {
           link: "/profile"
         }
       ];
+
+    
 
   return (
     <div className="contenedor-card">

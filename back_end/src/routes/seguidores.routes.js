@@ -8,6 +8,7 @@ router.get("/seguidores", seguidorController.getAll);
 router.get("/seguidores/:idArtista", seguidorController.getCantidadSeguidores);
 
 router.get("/seguidores/:userId/:artistaId", seguidorController.check);
+router.get("/seguidores/:idArtista", seguidorController.getCantidadSeguidores);
 
 router.delete("/seguidores/:userId/:artistaId", seguidorController.delete);
 
