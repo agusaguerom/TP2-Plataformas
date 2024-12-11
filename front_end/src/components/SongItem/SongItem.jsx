@@ -13,46 +13,43 @@ export function SongItem({ idSong, name, artist, image, audio }) {
   const [popoverPosition, setPopoverPosition] = useState({});
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  const id = userLogueado.id;
-
   useEffect(() => {
+    if (!userLogueado) return; // Si no hay usuario logueado, no hacemos nada.
+
     const fetchPlaylists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/playlists/user/${id}`
+          `http://localhost:5000/api/playlists/user/${userLogueado.id}`
         );
         const data = await response.json();
 
         if (response.ok) {
-          if (data.length === 0) {
-            setPlaylists([]);
-          } else {
-            setPlaylists(data);
-          }
+          setPlaylists(data.length > 0 ? data : []);
         } else {
-          console.log(data);
-          alert("No se pudieron obtener las playlists.");
+          console.error("Error al obtener las playlists:", data);
+          toast.error("No se pudieron obtener las playlists.");
         }
       } catch (error) {
         console.error("Error al obtener las playlists:", error);
+        toast.error("Hubo un error al obtener las playlists.");
       }
     };
 
     fetchPlaylists();
-  }, [id]);
+  }, [userLogueado]);
 
   async function checkSongInPlaylist(fk_playlist, fk_cancion) {
     try {
       const response = await fetch(
         `http://localhost:5000/api/playlist_canciones/check`,
         {
-          method: "POST", // Cambié GET por POST si usas el controlador de POST
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fk_playlist: fk_playlist,
-            fk_cancion: fk_cancion,
+            fk_playlist,
+            fk_cancion,
           }),
         }
       );
@@ -61,19 +58,16 @@ export function SongItem({ idSong, name, artist, image, audio }) {
       if (response.ok) {
         console.log("La canción no está en la playlist.");
         return false;
+      } else if (data.error === "La canción ya está en la playlist.") {
+        console.log("La canción ya está en la playlist.");
+        return true;
       } else {
-        // Si se recibe un mensaje de error, significa que la canción ya está en la playlist
-        if (data.error === "La canción ya está en la playlist.") {
-          console.log("La canción ya está en la playlist.");
-          return true;
-        } else {
-          console.error("Error desconocido:", data.error);
-          return false;
-        }
+        console.error("Error desconocido:", data.error);
+        return false;
       }
     } catch (error) {
       console.error("Error al verificar la canción en la playlist:", error);
-      return false; // Si hay error, asumimos que no está
+      return false;
     }
   }
 
@@ -81,10 +75,8 @@ export function SongItem({ idSong, name, artist, image, audio }) {
     const songExist = await checkSongInPlaylist(fk_playlist, fk_cancion);
 
     if (songExist) {
-      const notifyErrorPlaylist = () =>
-        toast.error("La cancion ya esta en la playlist");
-      console.log("La canción ya está en la playlist.");
-      return; // No hacer nada si la canción ya está en la playlist
+      toast.error("La canción ya está en la playlist.");
+      return;
     }
 
     try {
@@ -96,8 +88,8 @@ export function SongItem({ idSong, name, artist, image, audio }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            fk_playlist: fk_playlist,
-            fk_cancion: fk_cancion,
+            fk_playlist,
+            fk_cancion,
           }),
         }
       );
@@ -105,22 +97,18 @@ export function SongItem({ idSong, name, artist, image, audio }) {
       const data = await response.json();
 
       if (response.ok) {
-        console.log(
-          "Relación Playlist-Canción creada con éxito:",
-          data.playlist_cancion
-        );
-        const notify = () => toast.success("Canción agregada exitosamente");
+        console.log("Canción agregada exitosamente:", data);
+        toast.success("Canción agregada exitosamente");
       } else {
-        console.error(
-          "Error al crear la relación Playlist-Canción:",
-          data.error
-        );
+        console.error("Error al agregar la canción:", data.error);
+        toast.error("No se pudo agregar la canción.");
       }
     } catch (error) {
       console.error("Error en la llamada a la API:", error.message);
-      toast.error("Hubo un error al agregar la canción");
+      toast.error("Hubo un error al agregar la canción.");
     }
   }
+
   const togglePlayPause = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -144,16 +132,11 @@ export function SongItem({ idSong, name, artist, image, audio }) {
   return (
     <>
       <div className="d-flex align-items-center bg-slate-100 text-white rounded p-3 shadow-sm">
-        {/* Imagen */}
         <img
           src={image}
           alt={name}
           className="rounded"
-          style={{
-            width: "100px",
-            height: "100px",
-            objectFit: "cover",
-          }}
+          style={{ width: "100px", height: "100px", objectFit: "cover" }}
         />
 
         <div className="ms-3">

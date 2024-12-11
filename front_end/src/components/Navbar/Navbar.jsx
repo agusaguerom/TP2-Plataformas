@@ -15,11 +15,14 @@ export function Navbar() {
             </Link>
           </li>
 
-          <li className="nav-item">
-            <Link to="/" className="nav-link">
-              <i className="bi bi-music-note-beamed"></i>
-            </Link>
-          </li>
+          {userLogueado && (
+            <li className="nav-item">
+              <Link to="/playlist" className="nav-link">
+                <i className="bi bi-music-note-beamed"></i>
+              </Link>
+            </li>
+          )}
+
           <li className="nav-item">
             <a href="/search" className="nav-link">
               <i className="bi bi-search"></i>
