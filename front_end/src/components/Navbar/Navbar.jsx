@@ -16,11 +16,19 @@ export function Navbar() {
           </li>
 
           {userLogueado && (
-            <li className="nav-item">
-              <Link to="/playlist" className="nav-link">
-                <i className="bi bi-music-note-beamed"></i>
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link to="/playlist" className="nav-link">
+                  <i className="bi bi-music-note-beamed"></i>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to="/seguidos" className="nav-link">
+                  <i className="bi bi-boombox"></i>
+                </Link>
+              </li>
+            </>
           )}
 
           <li className="nav-item">

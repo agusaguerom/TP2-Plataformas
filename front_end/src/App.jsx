@@ -29,6 +29,7 @@ import Gestion_Generos from "../pages/gestion_generos/gestion_generos";
 import EditarGenero from "../pages/editar_Generos/EditarGenero";
 import { Playlists } from "../pages/Playlists/Playlists";
 import { PlaylistDetails } from "../pages/PlaylistDetails/PlaylistDetails";
+import { Seguidos } from "../pages/Seguidos/Seguidos";
 
 function App() {
   return (
@@ -83,6 +84,8 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/playlist" element={<Playlists />} />
             <Route path="/playlist/:id" element={<PlaylistDetails />} />
+
+            <Route path="/seguidos" element={<Seguidos />} />
           </Routes>
         </main>
       </BrowserRouter>

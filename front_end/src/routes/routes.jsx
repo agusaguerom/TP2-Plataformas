@@ -22,6 +22,7 @@ import Search from "../../.pages/Search";
 import EditarAlbumes from "../../pages/editar_Albumes/EditarAlbumes";
 import { Playlists } from "../../pages/Playlists/Playlists";
 import { PlaylistDetails } from "../../pages/PlaylistDetails/PlaylistDetails";
+import { Seguidos } from "../../pages/Seguidos/Seguidos";
 
 export const rutas = [
   { path: "/", element: <Home />, name: "Home" },
@@ -81,4 +82,7 @@ export const rutas = [
   //Playlists
   { path: "/playlist", element: <Playlists />, name: "Playlist" },
   { path: "/playlist/:id", element: <PlaylistDetails />, name: "Playlist" },
+
+  //Seguidos
+  { path: "/seguidos", element: <Seguidos />, name: "Seguidos" },
 ];
