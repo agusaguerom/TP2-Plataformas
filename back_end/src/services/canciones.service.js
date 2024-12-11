@@ -60,4 +60,12 @@ export class cancionesService {
       },
     });
   }
+
+  static async getCantidadCanciones({ id }) {
+    return prisma.cancion.count({
+      where: {
+        fk_artista: id,
+      },
+    });
+  }
 }

@@ -96,4 +96,16 @@ export class cancionesController {
       res.status(500).send("Error al buscar canciones");
     }
   }
+
+  static async cantidadCancionesArtista(req, res) {
+    try {
+      const { id } = req.params;
+      const cantidadCanciones = await cancionesService.getCantidadCanciones({
+        id,
+      });
+      res.json({ cantidadCanciones: cantidadCanciones });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
