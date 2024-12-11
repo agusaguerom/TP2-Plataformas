@@ -11,6 +11,12 @@ export function Navbar() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/" className="nav-link">
+              <img src="/Logo.png" alt="Logo" height={"50px"} width={"50px"} />
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
               <i className="bi bi-music-note-beamed"></i>
             </Link>
           </li>

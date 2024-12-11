@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SongItem } from "../../src/components/SongItem/SongItem";
+import "./PlaylistDetails.css";
 
 export function PlaylistDetails() {
   const { id } = useParams();
@@ -30,21 +31,56 @@ export function PlaylistDetails() {
     }
   }, [id]);
 
+  const handleDelete = async (songId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/playlist_canciones/${songId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar la canción");
+      }
+
+      // Actualizar la lista de canciones después de eliminar
+      const updatedResponse = await fetch(
+        `http://localhost:5000/api/playlist_canciones/${id}`
+      );
+
+      if (!updatedResponse.ok) {
+        throw new Error("Error al actualizar las canciones");
+      }
+
+      const updatedSongs = await updatedResponse.json();
+      setSongs(updatedSongs);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   if (error) {
     return <p>Error: {error}</p>;
   }
 
   return (
     <div className="container">
-      <h1>Detalles de la Playlist</h1>
       {songs.length > 0 ? (
-        <ul>
+        <ul className="song-list">
           {songs.map((song) => (
-            <SongItem
-              key={song.cancion.id}
-              idSong={song.cancion.id}
-              name={song.cancion.nombre}
-            />
+            <li key={song.cancion.id} className="song-item">
+              <SongItem idSong={song.cancion.id} name={song.cancion.nombre} />
+              <button
+                onClick={() => {
+                  console.log(song.cancion.id);
+                  handleDelete(song.id);
+                }}
+                className="delete-button"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </li>
           ))}
         </ul>
       ) : (
