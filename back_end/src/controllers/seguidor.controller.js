@@ -18,7 +18,7 @@ export class seguidorController {
         idArtista,
       });
 
-      res.json(cantidadSeguidores);
+      res.json({cantidadSeguidores});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 const Card = ({ admin }) => {
   const [fkArtista, setFkArtista] = useState(null);
   const [cantidadSeguidores, setCantidadSeguidores] = useState(0);
-  const [cantidadCanciones, setCantidadCanciones] = useState(330);
+  const [cantidadCanciones, setCantidadCanciones] = useState(0);
   const [loading, setLoading] = useState(true);
   const id = JSON.parse(localStorage.getItem("user"))?.id;
   const user = JSON.parse(localStorage.getItem("user")) || {};
@@ -17,17 +17,24 @@ const Card = ({ admin }) => {
   useEffect(() => {
     const fetchDatos = async () => {
       try {
-
+        
         if (isAdmin) {
           setLoading(false);
-          return; 
+          return;
         }
 
+      
         const fkArtistaResponse = await axios.get(`http://localhost:5000/api/artistas/user/${id}`);
         setFkArtista(fkArtistaResponse.data.fk_artista);
-       
-        const seguidoresResponse = await axios.get(`http://localhost:5000/api/seguidores/${fkArtista}`);
-        setCantidadSeguidores(seguidoresResponse.data.cantidadSeguidores);
+
+        const cantCancionesResponse = await axios.get(`http://localhost:5000/api/canciones/artista/${fkArtistaResponse.data.fk_artista}`);
+        const nuevoCantCanciones = cantCancionesResponse.data.cantidadCanciones;
+
+        const seguidoresResponse = await axios.get(`http://localhost:5000/api/seguidores/${fkArtistaResponse.data.fk_artista}`);
+        const newCantidadSeguidores = seguidoresResponse.data.cantidadSeguidores;
+
+        setCantidadCanciones(nuevoCantCanciones);
+        setCantidadSeguidores(newCantidadSeguidores);
         
         setLoading(false);
       } catch (error) {
@@ -35,11 +42,16 @@ const Card = ({ admin }) => {
         setLoading(false);
       }
     };
+
+    
+    if (id && !isAdmin) {
+      fetchDatos();
+    } else {
+      setLoading(false);
+    }
+  }, [id, isAdmin]);  
   
-    fetchDatos();
-  }, [id]);
-  
-  
+  console.log(cantidadSeguidores);
   const cardData = admin
     ? [
         {

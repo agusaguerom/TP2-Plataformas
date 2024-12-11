@@ -13,6 +13,8 @@ router.post("/canciones", cancionesController.create);
 // Actualizar una canción existente
 router.put("/canciones/:id", cancionesController.update);
 
+router.get('/canciones/artista/:id', cancionesController.cantidadCancionesArtista);
+
 // Eliminar una canción
 router.delete("/canciones/:id", cancionesController.delete);
 
