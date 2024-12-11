@@ -9,6 +9,8 @@ router.get("/artistas", artistaController.getAll);
 
 router.get('/artistas/:id',artistaController.getById);
 
+router.get('/artistas/user/:id_usuario', artistaController.getArtistaByIdUser);
+
 // Crear un nuevo artista
 router.post("/artistas", artistaController.create);
 

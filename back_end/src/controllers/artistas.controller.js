@@ -34,6 +34,27 @@ static async getById(req, res){
 
 }
 
+static async getArtistaByIdUser(req, res) {
+
+  const { id_usuario } = req.params;
+
+  try {
+  
+    const artista = await artistaService.getByIdUsuario({ id_usuario })
+
+    if (!artista) {
+      return res.status(404).json({ message: "Artista no encontrado para este usuario" });
+    }
+
+    return res.json({ fk_artista: artista.id}); 
+  } catch (error) {
+    return res.status(500).json({ message: "Error al obtener el artista" });
+  }
+}
+
+
+
+
 
 static async create(req, res){
     try {

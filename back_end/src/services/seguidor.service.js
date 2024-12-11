@@ -13,7 +13,17 @@ static async getAll(){
 
 }
 
+static async cantidadSeguidores({ idArtista }) {
 
+
+    return prisma.seguidor.count({
+        where: {
+          fk_artista: idArtista, 
+        },
+      });
+
+
+}
 
 
 

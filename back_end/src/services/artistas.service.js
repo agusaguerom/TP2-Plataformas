@@ -26,6 +26,12 @@ static async getById({ id }) {
 }
 
 
+static async getByIdUsuario({ id_usuario }) {
+  return prisma.artista.findFirst({
+    where: { fk_usuario: id_usuario }
+  });
+}
+
 static async create({nombre, descripcion, image, fk_genero, fk_usuario}){
 
   return  prisma.artista.create({

@@ -14,12 +14,13 @@
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [fk_artista, setFk_artista] = useState(null);
+    
     const fetchAlbums = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/albums/user/${userLogueado.id}`);
         const albumsData = response.data;
         console.log("Respuesta de la API:", albumsData);
-
+        
         const albumesConNombres = await Promise.all(albumsData.map(async album => {
           const nombreArtista = await fetchArtista(album.fk_artista);
           
@@ -38,7 +39,7 @@
     const fetchArtista = async (fk_artista) => {
       try {
         const response = await axios.get(`http://localhost:5000/api/artistas/${fk_artista}`);
-        setFk_artista(response.data.id);
+        
         return response.data.nombre; 
 
       } catch (error) {
@@ -47,9 +48,24 @@
         return "Artista desconocido";
       }
     };
+
+    const fetchFk_artista = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/artistas/user/${userLogueado.id}`);
+        
+        
+        setFk_artista(response.data.fk_artista); 
+      } catch (error) {
+        setError("No se encontró la fk del artista");
+        setLoading(false);
+        setFk_artista(null); 
+      }
+    };
+
     
     useEffect(() => {
       if (userLogueado) {
+        fetchFk_artista();
         fetchAlbums();
       }
     }, [userLogueado]);
@@ -104,7 +120,6 @@
         setNombre("");
         setPublicacion("");
         setDescripcion("");
-        setFk_artista("");
         setMostrarFormulario(false);
       } catch (error) {
         console.error("Error al agregar el álbum:", error);
