@@ -10,6 +10,7 @@ import playlistsRoutes from "./routes/playlists.routes.js";
 import playlistCancionesRoutes from "./routes/playlist_canciones.routes.js";
 import usuarioRoutes from './routes/usuarios.routes.js';
 import rolRoutes from './routes/roles.routes.js';
+import seguidorRoutes from "./routes/seguidor.routes.js"
 
 const app = express();
 app.use(cors());
@@ -26,6 +27,7 @@ app.use("/api", cancionesRoutes);
 app.use("/api", playlistsRoutes);
 app.use("/api", playlistCancionesRoutes);
 app.use('/api', rolRoutes);
+app.use("/api", seguidorRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
