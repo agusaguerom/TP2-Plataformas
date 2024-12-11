@@ -10,6 +10,9 @@ router.get('/albums', AlbumController.getAll);
 // Crear un nuevo álbum
 router.post('/albums', AlbumController.create);
 
+// Obtener un album por id
+
+router.get('/albums/:id', AlbumController.getById);
 
 // obtener albums por id del usuario
 router.get('/albums/user/:id', AlbumController.getByUser);

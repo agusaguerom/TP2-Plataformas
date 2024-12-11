@@ -190,6 +190,7 @@
               <th className="centrar-th-album">Id</th>
               <th className="centrar-th-album">publicación</th>
               <th className="centrar-th-album">Álbum</th>
+              <th className="centrar-th-album">Descripción</th>
               <th className="centrar-th-album">Artista</th>
               <th className="centrar-th-album">Acciones</th>
             </tr>
@@ -200,6 +201,7 @@
                 key={album.id}
                 id={album.id}
                 nombre={album.nombre}
+                descripcion={album.descripcion}
                 artista={album.nombreArtista} 
                 publicacion={album.publicacion}
               />

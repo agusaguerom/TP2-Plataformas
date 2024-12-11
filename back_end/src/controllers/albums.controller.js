@@ -24,6 +24,22 @@ static async getAll (req, res) {
         res.status(500).json({ error: error.message });
       }
     }
+
+
+    static async getById(req, res){
+
+      const { id } = req.params;
+
+      try {
+        const album = await albumsService.getAlbumById({id});
+        res.json(album);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    
+
+
+    }
     
 
 

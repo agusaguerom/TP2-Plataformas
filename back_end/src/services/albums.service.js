@@ -25,6 +25,20 @@ static async getAlbumsByUserId( {id}) {
   });
 }
 
+
+static async getAlbumById( { id } ){
+
+
+  return prisma.album.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+
+}
+
+
 static async create({nombre,publicacion,descripcion,fk_artista}){
 
  return   prisma.album.create({
