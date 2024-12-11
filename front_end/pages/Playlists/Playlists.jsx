@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CreatePlaylist } from "../../src/components/CreatePlaylist/CreatePlaylist";
 import { UserPlaylistCard } from "../../src/components/UserPlaylistCard/UserPlaylistCard";
 import { useAuth } from "../../src/context/AuthContext";
+import { Link, Links } from "react-router-dom";
 
 export function Playlists() {
   const { userLogueado } = useAuth();
@@ -38,11 +39,17 @@ export function Playlists() {
       <CreatePlaylist />
       {playlists.length > 0 ? (
         playlists.map((playlist) => (
-          <UserPlaylistCard
+          <Link
             key={playlist.id}
-            nombre={playlist.nombre}
-            descripcion={playlist.descripcion}
-          />
+            to={`/playlist/${playlist.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <UserPlaylistCard
+              key={playlist.id}
+              nombre={playlist.nombre}
+              descripcion={playlist.descripcion}
+            />
+          </Link>
         ))
       ) : (
         <p>No tienes playlists creadas.</p>
