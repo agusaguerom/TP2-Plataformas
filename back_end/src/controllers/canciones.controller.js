@@ -85,4 +85,15 @@ export class cancionesController {
       res.status(500).send("Error al buscar Cancion");
     }
   }
+  static async getCancionByArtist(req, res) {
+    const { idArtista } = req.params;
+
+    try {
+      const songs = await cancionesService.getCancionByArtist(idArtista);
+      res.json(songs);
+    } catch (error) {
+      console.error("Error al buscar canciones:" + error);
+      res.status(500).send("Error al buscar canciones");
+    }
+  }
 }

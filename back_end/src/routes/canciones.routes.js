@@ -19,4 +19,7 @@ router.delete("/canciones/:id", cancionesController.delete);
 //Buscador
 router.get("/search/canciones", cancionesController.obtenerCancion);
 
+//Obtener canciones por artista
+router.get("/canciones/:idArtista", cancionesController.getCancionByArtist);
+
 export default router;

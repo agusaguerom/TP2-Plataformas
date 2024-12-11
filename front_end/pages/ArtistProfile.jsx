@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { artists } from "../src/data/data";
 import { songs } from "../src/data/data";
 
 import "../src/styles/styles.css";
@@ -8,15 +7,31 @@ import { SongItemByArtist } from "../src/components/SongItem/SongItemByArtist";
 
 const ArtistProfile = () => {
   const { id } = useParams();
-  const [artist, setArtist] = useState(null);
+  const [artista, setArtista] = useState(null); // Initialize state with null
 
   useEffect(() => {
-    const foundArtist = artists.find((artist) => artist.id === parseInt(id));
-    setArtist(foundArtist);
-  }, [id]);
+    const fetchArtists = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/artistas/${id}`
+        );
+        const data = await response.json();
 
-  if (!artist) {
-    return <div>Cargando...</div>;
+        if (response.ok) {
+          setArtista(data);
+        } else {
+          console.log(data);
+        }
+      } catch (error) {
+        console.error("Error al obtener informacion del artista", error);
+      }
+    };
+
+    fetchArtists(); // Call the function
+  }, [id]); // Add dependency array to avoid infinite loop
+
+  if (!artista) {
+    return <p>Loading...</p>; // Display a loading state while fetching data
   }
 
   return (
@@ -37,8 +52,8 @@ const ArtistProfile = () => {
           <div className="row g-0">
             <div className="col-md-12">
               <img
-                src={artist.image}
-                alt={artist.name}
+                src={artista.image}
+                alt={artista.nombre}
                 className="img-fluid rounded-3"
                 style={{ height: "300px", objectFit: "cover", width: "100%" }}
               />
@@ -53,13 +68,13 @@ const ArtistProfile = () => {
                     color: "#333",
                   }}
                 >
-                  {artist.name}
+                  {artista.nombre}
                 </h2>
                 <p
                   className="card-text"
                   style={{ fontSize: "1rem", color: "#555" }}
                 >
-                  {artist.description}
+                  {artista.descripcion}
                 </p>
               </div>
             </div>
@@ -67,7 +82,7 @@ const ArtistProfile = () => {
         </div>
       </div>
 
-      <SongItemByArtist artist={artist} songs={songs} />
+      <SongItemByArtist artist={artista} />
     </>
   );
 };

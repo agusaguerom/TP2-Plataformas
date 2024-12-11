@@ -53,4 +53,11 @@ export class cancionesService {
       },
     });
   }
+  static async getCancionByArtist(idArtista) {
+    return prisma.cancion.findMany({
+      where: {
+        fk_artista: idArtista,
+      },
+    });
+  }
 }
