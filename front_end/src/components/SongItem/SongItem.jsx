@@ -109,12 +109,39 @@ export function SongItem({ idSong, name, artist, image, audio }) {
     }
   }
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     if (isPlaying) {
       audioRef.current.pause();
     } else {
       audioRef.current.play();
+
+      // Enviar la solicitud para incrementar las reproducciones
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/incrementReproducciones",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id: idSong }), // Enviar el id de la canción
+          }
+        );
+
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Reproducción incrementada:", data);
+        } else {
+          console.error("Error al incrementar las reproducciones:", data);
+        }
+      } catch (error) {
+        console.error(
+          "Error al enviar solicitud para incrementar las reproducciones:",
+          error
+        );
+      }
     }
+
     setIsPlaying(!isPlaying);
   };
 

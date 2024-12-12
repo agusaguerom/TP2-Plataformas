@@ -31,7 +31,7 @@ export function SongItemByArtist({ artist }) {
 
   return (
     <div className="container p-4">
-      <h2>Canciones de {artist.name}</h2>
+      <h2>Canciones de {artist.nombre}</h2>
       <div className="list-group">
         {songs.length === 0 ? (
           <p>No hay canciones disponibles para este artista.</p>

@@ -1,25 +1,54 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { albums, songs } from "../src/data/data";
 import "../src/styles/styles.css";
 import { SongItem } from "../src/components/SongItem/SongItem";
-import { artists } from "../src/data/data";
 
 export const AlbumDetails = () => {
   const { id } = useParams();
   const [album, setAlbum] = useState(null);
+  const [albumSongs, setAlbumSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Obtener álbum y canciones por el id
   useEffect(() => {
-    const foundAlbum = albums.find((album) => album.id === parseInt(id));
-    setAlbum(foundAlbum);
-  }, [id]);
+    const fetchAlbumDetails = async () => {
+      try {
+        setLoading(true); // Establecer loading a true cuando inicie el fetch
 
-  if (!album) {
-    return <div>Cargando...</div>;
+        // Fetch para obtener el álbum
+        const albumResponse = await fetch(
+          `http://localhost:5000/api/albums/${id}`
+        );
+        const albumData = await albumResponse.json();
+        setAlbum(albumData);
+
+        // Fetch para obtener las canciones del álbum
+        const songsResponse = await fetch(
+          `http://localhost:5000/api/canciones/albums/${id}`
+        );
+        const songsData = await songsResponse.json();
+        setAlbumSongs(songsData);
+
+        setLoading(false); // Finaliza el estado de carga
+      } catch (error) {
+        console.error(
+          "Error al obtener los datos del álbum y canciones:",
+          error
+        );
+        setLoading(false);
+      }
+    };
+
+    fetchAlbumDetails();
+  }, [id]); // Reaccionar cuando el id cambie
+
+  if (loading) {
+    return <div>Cargando...</div>; // Muestra el texto de carga mientras se obtienen los datos
   }
 
-  // Filtrar canciones del álbum
-  const albumSongs = songs.filter((song) => song.album === album.id);
+  if (!album) {
+    return <div>Álbum no encontrado.</div>; // Si no se encuentra el álbum, mostrar un mensaje
+  }
 
   return (
     <>
@@ -38,14 +67,6 @@ export const AlbumDetails = () => {
           }}
         >
           <div className="row g-0">
-            <div className="col-md-12">
-              <img
-                src={album.image}
-                alt={album.name}
-                className="img-fluid rounded-3"
-                style={{ height: "300px", objectFit: "cover", width: "100%" }}
-              />
-            </div>
             <div className="col-md-12 text-center">
               <div className="card-body">
                 {/* Nombre del álbum */}
@@ -63,7 +84,7 @@ export const AlbumDetails = () => {
                   className="card-text"
                   style={{ fontSize: "1rem", color: "#555" }}
                 >
-                  Disfruta de las mejores canciones del álbum "{album.name}".
+                  Disfruta de las mejores canciones del álbum "{album.nombre}".
                 </p>
               </div>
             </div>
@@ -84,14 +105,10 @@ export const AlbumDetails = () => {
               <div key={song.id} className="col-12 col-md-6 col-lg-4">
                 <SongItem
                   idSong={song.id}
-                  name={song.name}
-                  artist={song.artistIds
-                    .map(
-                      (id) => artists.find((artist) => artist.id === id)?.name
-                    )
-                    .join(", ")} // Muestra los nombres de los artistas
-                  image={song.image}
-                  audio={song.audio}
+                  name={song.nombre} // Asumiendo que el nombre de la canción está en "nombre"
+                  artist={song.artista?.nombre || "Desconocido"} // Asumiendo que el artista es un objeto con "nombre"
+                  image={song.imagen} // Asumiendo que tienes una propiedad "imagen"
+                  audio={song.audio} // Asumiendo que tienes un enlace al audio
                 />
               </div>
             ))

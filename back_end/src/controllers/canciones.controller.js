@@ -151,4 +151,101 @@ export class cancionesController {
       res.status(500).send("Error al buscar Cancion");
     }
   }
+
+  static async incrementReproduccion(req, res) {
+    const { id } = req.body;
+
+    try {
+      // Llamada al servicio para incrementar las reproducciones
+      const cancionActualizada = await cancionesService.incrementReproduccion(
+        id
+      );
+
+      // Responder con éxito y la canción actualizada
+      return res.status(200).json({
+        message: "Reproducción incrementada exitosamente",
+        cancion: cancionActualizada,
+      });
+    } catch (error) {
+      console.error("Error en el controlador:", error);
+      return res.status(500).json({
+        error: "Hubo un error al incrementar las reproducciones.",
+        details: error.message, // Incluir detalles del error para debug
+      });
+    }
+  }
+
+  static async obtenerCancionesPopulares(req, res) {
+    try {
+      const canciones = await cancionesService.cancionesPopulares();
+
+      return res.status(200).json(canciones);
+    } catch (error) {
+      console.error(
+        "Error en el controlador al obtener las canciones populares:",
+        error
+      );
+      return res.status(500).json({
+        error: "Hubo un error al obtener las canciones populares.",
+      });
+    }
+  }
+
+  static async obtenerTop10(req, res) {
+    try {
+      const canciones = await cancionesService.getTop10();
+
+      return res.status(200).json(canciones);
+    } catch (error) {
+      console.error(
+        "Error en el controlador al obtener las canciones populares:",
+        error
+      );
+      return res.status(500).json({
+        error: "Hubo un error al obtener las canciones populares.",
+      });
+    }
+  }
+
+  static async getCancionesPorGenero(req, res) {
+    const { id } = req.params;
+
+    try {
+      const canciones = await cancionesService.getCancionPorGenero(id);
+
+      if (canciones.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No se encontraron canciones para este género." });
+      }
+
+      return res.status(200).json(canciones);
+    } catch (error) {
+      console.error("Error al obtener las canciones:", error);
+      return res
+        .status(500)
+        .json({ message: "Hubo un error al obtener las canciones." });
+    }
+  }
+
+  static async getCancionesByAlbumId(req, res) {
+    const { id } = req.params; // Obtener el id del álbum desde los parámetros de la URL
+
+    try {
+      const canciones = await cancionesService.getCancionesByAlbumId(id);
+
+      if (canciones.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No se encontraron canciones para este álbum." });
+      }
+
+      return res.status(200).json(canciones); // Responder con las canciones
+    } catch (error) {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Hubo un error al obtener las canciones." });
+    }
+  }
 }

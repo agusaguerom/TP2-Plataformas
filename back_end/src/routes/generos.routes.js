@@ -7,7 +7,7 @@ const router = Router();
 router.get("/generos", generosController.getAll);
 
 // Obtener un género por ID
-router.get("/generos/:id", generosController.getById);  // Añadido
+router.get("/generos/:id", generosController.getById); // Añadido
 
 // Crear un nuevo género
 router.post("/generos", generosController.create);
