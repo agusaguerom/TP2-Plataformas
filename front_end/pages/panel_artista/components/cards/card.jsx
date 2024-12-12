@@ -72,7 +72,7 @@ const Card = ({ admin }) => {
         },
         {
           tipo: "gestion",
-          imgSrc: "/Suscripciones.jpg",
+          imgSrc: "/Suscriptores.png",
           alttxt: "Gestión de suscripciones",
           titulo: "Administrar Suscripciones",
           descripcion: "Gestionar suscripciones",
@@ -80,7 +80,7 @@ const Card = ({ admin }) => {
         },
         {
           tipo: "gestion",
-          imgSrc: "/Generos.jpg",
+          imgSrc: "/Generos.png",
           alttxt: "Gestión de géneros musicales",
           titulo: "Géneros Musicales",
           descripcion: "Administrar géneros musicales",
