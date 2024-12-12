@@ -62,7 +62,7 @@ const TablaCancion = () => {
   const fetchCanciones = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/canciones/artista/${artista.id}`
+        `http://localhost:5000/api/canciones/${artista.id}`
       );
       const cancionesData = response.data;
 
@@ -74,6 +74,8 @@ const TablaCancion = () => {
       );
 
       setCanciones(cancionesConNombres);
+      console.log(cancionesConNombres);
+      console.log(canciones);
       setLoading(false);
     } catch (error) {
       setLoading(false);
