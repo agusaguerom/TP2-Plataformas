@@ -1,20 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../../../src/context/AuthContext";
 import "./filas_canciones.css";
-const CancionFila = ({ id, nombre, artista, imagen }) => {
-  const { userLogueado } = useAuth();
+
+const CancionFila = ({ id, nombre, artista, imagen, duracion, genero, reproducciones }) => {
   return (
     <tr>
       <td className="centrar-txt">{id}</td>
       <td>
-        
-        <img src={imagen} alt={nombre} className="imagenes-cancion"/>
-        
-
+        {imagen ? <img src={imagen} alt={nombre} className="imagenes-cancion"/> : "No disponible"}
       </td>
       <td className="centrar-txt">{nombre}</td>
       <td className="centrar-txt">{artista}</td>
+      <td className="centrar-txt">{duracion}</td>
+      <td className="centrar-txt">{genero}</td>
+      <td className="centrar-txt">{reproducciones}</td>
       <td className="centrar-txt">
         <div className="centrarBtns">
           <Link

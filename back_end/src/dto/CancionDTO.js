@@ -6,4 +6,6 @@ export const CancionDto = Joi.object({
   fk_album: Joi.string().uuid().required(),
   fk_genero: Joi.number().integer().required(),
   fk_artista: Joi.string().uuid().required(),
+  audio: Joi.string().uri().optional(),   // Agregado campo `audio`
+  imagen: Joi.string().uri().optional()   // Agregado campo `imagen`
 });

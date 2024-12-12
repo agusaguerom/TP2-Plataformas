@@ -86,11 +86,14 @@ model Cancion {
   fk_genero        Int
   fk_artista       String
   reproducciones   Int                @default(0)
+  imagen           String?
+  audio            String?
   album            Album              @relation(fields: [fk_album], references: [id])
   artista          Artista            @relation(fields: [fk_artista], references: [id])
   genero           Genero             @relation(fields: [fk_genero], references: [id])
   Playlist_cancion Playlist_cancion[]
 }
+
 
 model Playlist_cancion {
   id          String   @id @default(uuid())

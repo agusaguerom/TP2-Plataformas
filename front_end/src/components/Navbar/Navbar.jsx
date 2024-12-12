@@ -39,8 +39,8 @@ export function Navbar() {
 
           {}
           {userLogueado &&
-            (userLogueado.rol.nombre === "Artist" ||
-              userLogueado.rol.nombre === "Admin") && (
+            (userLogueado.rol.nombre === "artist" ||
+              userLogueado.rol.nombre === "admin") && (
               <li className="nav-item">
                 <Link to="/Dashboard" className="nav-link">
                   <i className="bi bi-star"></i>

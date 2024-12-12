@@ -27,11 +27,10 @@ const ArtistProfile = () => {
       }
     };
 
-    fetchArtists(); // Call the function
-  }, [id]); // Add dependency array to avoid infinite loop
-
+    fetchArtists(); 
+  }, [id]); 
   if (!artista) {
-    return <p>Loading...</p>; // Display a loading state while fetching data
+    return <p>Loading...</p>;
   }
 
   return (

@@ -8,13 +8,11 @@ export const Gestion_Canciones = () => {
         <>
             <h1 className="titulo-canciones">Gestión de canciones</h1>
             <div className="contenedor-botones">
-                
                 <Link to={"/Dashboard"} className="button-volver">Volver</Link>
             </div>
             <Tabla />
         </>
     );
 }
-
 
 export default Gestion_Canciones;

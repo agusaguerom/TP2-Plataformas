@@ -42,11 +42,11 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/globalRanking" element={<GlobalRanking />} />
-            <Route path="/artist/:id" element={<ArtistProfile />} />
+            <Route path="/artista/:id" element={<ArtistProfile />} />
             <Route path="/album/:id" element={<AlbumDetails />} />
             <Route
               path="/Dashboard/*"
-              element={<ProtectedRoute roles={["Artist", "Admin"]} />}
+              element={<ProtectedRoute roles={["artist", "admin"]} />}
             >
               <Route path="" element={<Dashboard />} />
               <Route path="Gestion_Canciones" element={<Gestion_Canciones />} />

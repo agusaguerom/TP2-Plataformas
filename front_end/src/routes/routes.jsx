@@ -28,7 +28,7 @@ export const rutas = [
   { path: "/", element: <Home />, name: "Home" },
   {
     path: "/Dashboard/*",
-    element: <ProtectedRoute roles={["Artist", "Admin"]} />,
+    element: <ProtectedRoute roles={["artist", "Admin"]} />,
   },
   { path: "Dashboard", element: <Dashboard />, name: "Panel Artista" },
   {
