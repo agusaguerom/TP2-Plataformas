@@ -34,6 +34,8 @@ export class cancionesService {
     fk_album,
     fk_genero,
     fk_artista,
+    audio,
+    imagen,
   }) {
     return prisma.cancion.update({
       where: { id },
@@ -43,6 +45,8 @@ export class cancionesService {
         fk_album,
         fk_genero,
         fk_artista,
+        audio,
+        imagen,
       },
     });
   }
@@ -53,16 +57,6 @@ export class cancionesService {
     });
   }
 
-  static async getCancion({ query }) {
-    return prisma.cancion.findMany({
-      where: {
-        nombre: {
-          contains: query,
-          mode: "insensitive",
-        },
-      },
-    });
-  }
   static async getCancionByArtist(idArtista) {
     return prisma.cancion.findMany({
       where: {
@@ -77,5 +71,28 @@ export class cancionesService {
         fk_artista: id,
       },
     });
+  }
+
+  static async getCancionById({ id }) {
+    return prisma.cancion.findFirst({
+      where: { id: id },
+    });
+  }
+
+  static async getCancion({ query }) {
+    try {
+      return await prisma.cancion.findMany({
+        where: {
+          nombre: {
+            contains: query,
+            mode: "insensitive",
+          },
+          estado: 1,
+        },
+      });
+    } catch (error) {
+      console.error("Error en getCancion:", error);
+      throw new Error("Error al consultar la base de datos");
+    }
   }
 }

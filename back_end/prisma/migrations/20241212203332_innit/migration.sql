@@ -4,6 +4,7 @@ CREATE TABLE "Suscripcion" (
     "nombre" TEXT NOT NULL,
     "precio_mensual" DOUBLE PRECISION NOT NULL,
     "duracion_dias" INTEGER NOT NULL,
+    "estado" INTEGER NOT NULL DEFAULT 1,
 
     CONSTRAINT "Suscripcion_pkey" PRIMARY KEY ("id")
 );
@@ -46,6 +47,7 @@ CREATE TABLE "Artista" (
 CREATE TABLE "Genero" (
     "id" SERIAL NOT NULL,
     "nombre" TEXT NOT NULL,
+    "estado" INTEGER NOT NULL DEFAULT 1,
 
     CONSTRAINT "Genero_pkey" PRIMARY KEY ("id")
 );
@@ -81,6 +83,9 @@ CREATE TABLE "Cancion" (
     "fk_genero" INTEGER NOT NULL,
     "fk_artista" TEXT NOT NULL,
     "reproducciones" INTEGER NOT NULL DEFAULT 0,
+    "imagen" TEXT,
+    "audio" TEXT,
+    "estado" INTEGER NOT NULL DEFAULT 1,
 
     CONSTRAINT "Cancion_pkey" PRIMARY KEY ("id")
 );
@@ -107,10 +112,10 @@ CREATE TABLE "Seguidor" (
 CREATE UNIQUE INDEX "Usuario_correo_key" ON "Usuario"("correo");
 
 -- AddForeignKey
-ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_suscripcion_fkey" FOREIGN KEY ("fk_suscripcion") REFERENCES "Suscripcion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_rol_fkey" FOREIGN KEY ("fk_rol") REFERENCES "Rol"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_rol_fkey" FOREIGN KEY ("fk_rol") REFERENCES "Rol"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Usuario" ADD CONSTRAINT "Usuario_fk_suscripcion_fkey" FOREIGN KEY ("fk_suscripcion") REFERENCES "Suscripcion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Artista" ADD CONSTRAINT "Artista_fk_genero_fkey" FOREIGN KEY ("fk_genero") REFERENCES "Genero"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -128,19 +133,19 @@ ALTER TABLE "Album" ADD CONSTRAINT "Album_fk_artista_fkey" FOREIGN KEY ("fk_arti
 ALTER TABLE "Cancion" ADD CONSTRAINT "Cancion_fk_album_fkey" FOREIGN KEY ("fk_album") REFERENCES "Album"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Cancion" ADD CONSTRAINT "Cancion_fk_genero_fkey" FOREIGN KEY ("fk_genero") REFERENCES "Genero"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Cancion" ADD CONSTRAINT "Cancion_fk_artista_fkey" FOREIGN KEY ("fk_artista") REFERENCES "Artista"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Playlist_cancion" ADD CONSTRAINT "Playlist_cancion_fk_playlist_fkey" FOREIGN KEY ("fk_playlist") REFERENCES "Playlist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Cancion" ADD CONSTRAINT "Cancion_fk_genero_fkey" FOREIGN KEY ("fk_genero") REFERENCES "Genero"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Playlist_cancion" ADD CONSTRAINT "Playlist_cancion_fk_cancion_fkey" FOREIGN KEY ("fk_cancion") REFERENCES "Cancion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Seguidor" ADD CONSTRAINT "Seguidor_fk_usuario_fkey" FOREIGN KEY ("fk_usuario") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Playlist_cancion" ADD CONSTRAINT "Playlist_cancion_fk_playlist_fkey" FOREIGN KEY ("fk_playlist") REFERENCES "Playlist"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Seguidor" ADD CONSTRAINT "Seguidor_fk_artista_fkey" FOREIGN KEY ("fk_artista") REFERENCES "Artista"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Seguidor" ADD CONSTRAINT "Seguidor_fk_usuario_fkey" FOREIGN KEY ("fk_usuario") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

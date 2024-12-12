@@ -57,7 +57,15 @@ export class cancionesController {
         return res.status(400).json({ error: error.details[0].message });
       }
 
-      const { nombre, duracion, fk_album, fk_genero, fk_artista } = value;
+      const {
+        nombre,
+        duracion,
+        fk_album,
+        fk_genero,
+        fk_artista,
+        audio,
+        imagen,
+      } = value;
 
       const cancionActualizada = await cancionesService.update({
         id,
@@ -66,6 +74,8 @@ export class cancionesController {
         fk_album,
         fk_genero,
         fk_artista,
+        audio,
+        imagen,
       });
       res.json({
         message: "Canción actualizada con éxito",
@@ -86,16 +96,6 @@ export class cancionesController {
     }
   }
 
-  static async obtenerCancion(req, res) {
-    const { query } = req.query;
-
-    try {
-      const songs = await cancionesService.getCancion({ query });
-      res.json(songs);
-    } catch (error) {
-      res.status(500).send("Error al buscar Cancion");
-    }
-  }
   static async getCancionByArtist(req, res) {
     const { idArtista } = req.params;
 
@@ -117,6 +117,38 @@ export class cancionesController {
       res.json({ cantidadCanciones: cantidadCanciones });
     } catch (error) {
       res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async getCancionById(req, res) {
+    try {
+      const { id } = req.params;
+
+      const cancion = await cancionesService.getCancionById({ id });
+      res.json(cancion);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async obtenerCancion(req, res) {
+    const { query } = req.query;
+    console.log("Parámetro recibido:", query);
+
+    if (!query) {
+      console.log("El parámetro 'query' es obligatorio");
+      return res
+        .status(400)
+        .json({ error: "El parámetro 'query' es obligatorio" });
+    }
+
+    try {
+      const songs = await cancionesService.getCancion({ query });
+      console.log("Canciones encontradas:", songs);
+      res.json(songs);
+    } catch (error) {
+      console.error("Error al buscar aaa canción:", error);
+      res.status(500).send("Error al buscar Cancion");
     }
   }
 }

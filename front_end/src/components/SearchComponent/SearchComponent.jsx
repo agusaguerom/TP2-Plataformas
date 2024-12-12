@@ -97,8 +97,8 @@ export function SearchComponent() {
                     idSong={item.id}
                     name={item.nombre}
                     artist={item.artist}
-                    image="aa"
-                    audio="aa"
+                    image={item.imagen}
+                    audio={item.audio}
                   />
                 </div>
               );

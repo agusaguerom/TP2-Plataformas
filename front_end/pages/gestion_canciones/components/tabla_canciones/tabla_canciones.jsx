@@ -55,32 +55,36 @@ const TablaCancion = () => {
       fetchGeneros();
       fetchAlbumes();
       fetchArtista();
-      fetchCanciones();
     }
   }, [userLogueado]);
 
-  const fetchCanciones = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5000/api/canciones/${artista.id}`
-      );
-      const cancionesData = response.data;
+  useEffect(() => {
+    if (artista && artista.id) {
+      const fetchCanciones = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/api/canciones/${artista.id}`
+          );
+          const cancionesData = response.data;
 
-      const cancionesConNombres = await Promise.all(
-        cancionesData.map(async (song) => {
-          const nombreArtista = await fetchArtistaNombre(song.fk_artista);
-          return { ...song, nombreArtista };
-        })
-      );
+          const cancionesConNombres = await Promise.all(
+            cancionesData.map(async (song) => {
+              const nombreArtista = await fetchArtistaNombre(song.fk_artista);
+              return { ...song, nombreArtista };
+            })
+          );
 
-      setCanciones(cancionesConNombres);
-      console.log(cancionesConNombres);
-      console.log(canciones);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
+          setCanciones(cancionesConNombres);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error al cargar canciones:", error);
+          setLoading(false);
+        }
+      };
+
+      fetchCanciones();
     }
-  };
+  }, [artista]);
 
   const fetchArtistaNombre = async (fk_artista) => {
     try {
@@ -89,6 +93,7 @@ const TablaCancion = () => {
       );
       return response.data.nombre;
     } catch (error) {
+      console.error("Error al obtener el nombre del artista:", error);
       return "Artista desconocido";
     }
   };
@@ -121,7 +126,19 @@ const TablaCancion = () => {
       await axios.post("http://localhost:5000/api/canciones", nuevaCancion);
       console.log("Canción agregada");
 
-      fetchCanciones();
+      const response = await axios.get(
+        `http://localhost:5000/api/canciones/${artista.id}`
+      );
+      const cancionesData = response.data;
+
+      const cancionesConNombres = await Promise.all(
+        cancionesData.map(async (song) => {
+          const nombreArtista = await fetchArtistaNombre(song.fk_artista);
+          return { ...song, nombreArtista };
+        })
+      );
+
+      setCanciones(cancionesConNombres);
 
       setNombre("");
       setDuracion("");
@@ -132,7 +149,6 @@ const TablaCancion = () => {
       setMostrarFormulario(false);
     } catch (error) {
       if (error.response) {
-        // La respuesta de error viene del servidor
         console.error("Error de respuesta:", error.response);
         alert(
           `Error al agregar la canción: ${
@@ -142,11 +158,9 @@ const TablaCancion = () => {
           }`
         );
       } else if (error.request) {
-        // La solicitud fue realizada pero no se obtuvo respuesta
         console.error("Error en la solicitud:", error.request);
         alert("Error en la solicitud: No se recibió respuesta del servidor.");
       } else {
-        // Otros errores que pueden surgir
         console.error("Error desconocido:", error.message);
         alert(`Error al agregar la canción: ${error.message}`);
       }
@@ -220,11 +234,6 @@ const TablaCancion = () => {
               required
             />
           </div>
-          {/* <div>
-           // <label>Imagen:</label>
-           // <input type="file" onChange={handleSubirImagen} />
-         // </div>*/}
-
           <div>
             <label>Imagen:</label>
             <input
@@ -233,10 +242,6 @@ const TablaCancion = () => {
               onChange={(e) => setImagen(e.target.value)}
               required
             />
-          </div>
-          <div>
-            <label>Artista (ID):</label>
-            <input type="text" value={artista ? artista.id : ""} readOnly />
           </div>
           <button type="submit" className="btn-agregar-cancion">
             Agregar Canción
@@ -250,7 +255,6 @@ const TablaCancion = () => {
             <th className="centrar-th-tabla">Imagen</th>
             <th className="centrar-th-tabla">Canción</th>
             <th className="centrar-th-tabla">Artista</th>
-            <th className="centrar-th-tabla">Artista (ID)</th>
             <th className="centrar-th-tabla">Duración</th>
             <th className="centrar-th-tabla">Género</th>
             <th className="centrar-th-tabla">Reproducciones</th>
