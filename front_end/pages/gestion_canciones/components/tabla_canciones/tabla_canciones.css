@@ -1,71 +1,70 @@
 .tabla-de-canciones{
 
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  
 
 }
 
 
 .tabla-de-canciones th,
 .tabla-de-canciones td {
-  border: 1px solid #ddd;
-  padding: 8px;
+border: 1px solid #ddd;
+padding: 8px;
 }
 
 .tabla-de-canciones th {
-    background-color: #f4f4f4;
-  }
+  background-color: #f4f4f4;
+}
 
 
-  .tabla-padding{
+.tabla-padding{
 
 
-    padding-left: 70px;
-    padding-right: 70px;
+  padding-left: 70px;
+  padding-right: 70px;
 
-  }
-
-
-  .centrar-th-tabla{
+}
 
 
-    text-align: center;
+.centrar-th-tabla{
 
 
-  }
+  text-align: center;
 
 
-  .form-agregar-cancion {
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #EAA9A9;
+}
+
+
+.form-agregar-cancion {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #EAA9A9;
 }
 
 .form-agregar-cancion div {
-  margin-bottom: 10px;
+margin-bottom: 10px;
 }
 
 .form-agregar-cancion label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: white;
+display: block;
+font-weight: bold;
+margin-bottom: 5px;
+color: white;
 }
 
 .btn-agregar-cancion {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
 }
 
 .btn-agregar-cancion:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
-
