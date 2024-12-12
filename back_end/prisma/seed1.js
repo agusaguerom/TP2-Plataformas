@@ -3,25 +3,25 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // Insertar suscripciones
+  // Insertar suscripciones con estado: 1
   await prisma.suscripcion.createMany({
     data: [
-      { nombre: "Basic", precio_mensual: 5.99, duracion_dias: 30 },
-      { nombre: "Standard", precio_mensual: 9.99, duracion_dias: 30 },
-      { nombre: "Premium", precio_mensual: 14.99, duracion_dias: 30 }
+      { nombre: "Basic", precio_mensual: 5.99, duracion_dias: 30, estado: 1 },
+      { nombre: "Standard", precio_mensual: 9.99, duracion_dias: 30, estado: 1 },
+      { nombre: "Premium", precio_mensual: 14.99, duracion_dias: 30, estado: 1 }
     ]
   });
 
-  // Insertar roles
+  // Insertar roles (sin el campo estado)
   await prisma.rol.createMany({
     data: [
       { nombre: "oyente" },
       { nombre: "artist" },
-      { nombre: "admin" },
+      { nombre: "admin" }
     ]
   });
 
-  // Insertar géneros
+  // Insertar géneros (sin el campo estado)
   await prisma.genero.createMany({
     data: [
       { nombre: "Rock" },
@@ -67,7 +67,6 @@ async function main() {
       { nombre: "Lo-fi" }
     ]
   });
-
 
   console.log("Datos insertados correctamente");
 }
