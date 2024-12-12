@@ -12,6 +12,7 @@ model Suscripcion {
   nombre         String
   precio_mensual Float
   duracion_dias  Int
+  estado         Int       @default(1)
   Usuario        Usuario[]
 }
 
@@ -54,6 +55,7 @@ model Artista {
 model Genero {
   id      Int       @id @default(autoincrement())
   nombre  String
+  estado  Int       @default(1)
   Artista Artista[]
   Cancion Cancion[]
 }
@@ -93,7 +95,6 @@ model Cancion {
   genero           Genero             @relation(fields: [fk_genero], references: [id])
   Playlist_cancion Playlist_cancion[]
 }
-
 
 model Playlist_cancion {
   id          String   @id @default(uuid())

@@ -12,6 +12,7 @@ export class cancionesController {
   }
 
   static async create(req, res) {
+    console.log("Datos recibidos:", req.body);
     try {
       const { error, value } = CancionDto.validate(req.body);
 
@@ -19,7 +20,15 @@ export class cancionesController {
         return res.status(400).json({ error: error.details[0].message });
       }
 
-      const { nombre, duracion, fk_album, fk_genero, fk_artista } = value;
+      const {
+        nombre,
+        duracion,
+        fk_album,
+        fk_genero,
+        fk_artista,
+        imagen,
+        audio,
+      } = value;
 
       const nuevaCancion = await cancionesService.create({
         nombre,
@@ -27,6 +36,8 @@ export class cancionesController {
         fk_album,
         fk_genero,
         fk_artista,
+        imagen,
+        audio,
       });
       res.status(201).json({
         message: "Canción creada con éxito",

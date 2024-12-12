@@ -7,7 +7,7 @@ import { SongItemByArtist } from "../src/components/SongItem/SongItemByArtist";
 
 const ArtistProfile = () => {
   const { id } = useParams();
-  const [artista, setArtista] = useState(null); // Initialize state with null
+  const [artista, setArtista] = useState(); // Initialize state with null
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -27,8 +27,8 @@ const ArtistProfile = () => {
       }
     };
 
-    fetchArtists(); 
-  }, [id]); 
+    fetchArtists();
+  }, [id]);
   if (!artista) {
     return <p>Loading...</p>;
   }

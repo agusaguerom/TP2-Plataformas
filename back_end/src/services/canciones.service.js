@@ -5,7 +5,15 @@ export class cancionesService {
     return prisma.cancion.findMany();
   }
 
-  static async create({ nombre, duracion, fk_album, fk_genero, fk_artista }) {
+  static async create({
+    nombre,
+    duracion,
+    fk_album,
+    fk_genero,
+    fk_artista,
+    audio,
+    imagen,
+  }) {
     return prisma.cancion.create({
       data: {
         nombre,
@@ -13,6 +21,8 @@ export class cancionesService {
         fk_album,
         fk_genero,
         fk_artista,
+        audio,
+        imagen,
       },
     });
   }

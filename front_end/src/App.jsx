@@ -42,7 +42,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/globalRanking" element={<GlobalRanking />} />
-            <Route path="/artista/:id" element={<ArtistProfile />} />
+            <Route path="/artist/:id" element={<ArtistProfile />} />
             <Route path="/album/:id" element={<AlbumDetails />} />
             <Route
               path="/Dashboard/*"

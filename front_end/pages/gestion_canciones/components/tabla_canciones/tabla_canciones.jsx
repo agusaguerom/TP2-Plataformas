@@ -31,7 +31,9 @@ const TablaCancion = () => {
 
     const fetchAlbumes = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/albumes/artista/${userLogueado.id}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/albums/user/${userLogueado.id}`
+        );
         setAlbumes(response.data);
       } catch (error) {
         console.error("Error al obtener los álbumes:", error);
@@ -40,7 +42,9 @@ const TablaCancion = () => {
 
     const fetchArtista = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/artistas/usuario/${userLogueado.id}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/artistas/user/${userLogueado.id}`
+        );
         setArtista(response.data);
       } catch (error) {
         console.error("Error al obtener el artista:", error);
@@ -57,7 +61,9 @@ const TablaCancion = () => {
 
   const fetchCanciones = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/canciones/artista/${artista.id}`);
+      const response = await axios.get(
+        `http://localhost:5000/api/canciones/artista/${artista.id}`
+      );
       const cancionesData = response.data;
 
       const cancionesConNombres = await Promise.all(
@@ -76,7 +82,9 @@ const TablaCancion = () => {
 
   const fetchArtistaNombre = async (fk_artista) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/artistas/${fk_artista}`);
+      const response = await axios.get(
+        `http://localhost:5000/api/artistas/${fk_artista}`
+      );
       return response.data.nombre;
     } catch (error) {
       return "Artista desconocido";
@@ -100,11 +108,11 @@ const TablaCancion = () => {
     const nuevaCancion = {
       nombre,
       duracion,
-      fk_genero: genero,
-      imagen,
-      fk_artista: artista.id,
       fk_album: album,
-      audio_url: audioUrl
+      fk_genero: parseInt(genero),
+      fk_artista: artista.id,
+      imagen,
+      audio: audioUrl,
     };
 
     try {
@@ -121,7 +129,25 @@ const TablaCancion = () => {
       setImagen("");
       setMostrarFormulario(false);
     } catch (error) {
-      console.error("Error al agregar la canción:", error);
+      if (error.response) {
+        // La respuesta de error viene del servidor
+        console.error("Error de respuesta:", error.response);
+        alert(
+          `Error al agregar la canción: ${
+            error.response.data.error ||
+            error.response.data.message ||
+            "Error desconocido"
+          }`
+        );
+      } else if (error.request) {
+        // La solicitud fue realizada pero no se obtuvo respuesta
+        console.error("Error en la solicitud:", error.request);
+        alert("Error en la solicitud: No se recibió respuesta del servidor.");
+      } else {
+        // Otros errores que pueden surgir
+        console.error("Error desconocido:", error.message);
+        alert(`Error al agregar la canción: ${error.message}`);
+      }
     }
   };
 
@@ -192,17 +218,23 @@ const TablaCancion = () => {
               required
             />
           </div>
+          {/* <div>
+           // <label>Imagen:</label>
+           // <input type="file" onChange={handleSubirImagen} />
+         // </div>*/}
+
           <div>
             <label>Imagen:</label>
-            <input type="file" onChange={handleSubirImagen} />
+            <input
+              type="text"
+              value={imagen}
+              onChange={(e) => setImagen(e.target.value)}
+              required
+            />
           </div>
           <div>
             <label>Artista (ID):</label>
-            <input
-              type="text"
-              value={artista ? artista.id : ""}
-              readOnly
-            />
+            <input type="text" value={artista ? artista.id : ""} readOnly />
           </div>
           <button type="submit" className="btn-agregar-cancion">
             Agregar Canción
