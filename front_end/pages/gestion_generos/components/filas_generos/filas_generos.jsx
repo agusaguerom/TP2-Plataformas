@@ -10,7 +10,6 @@ const FilasGeneros = ({ id, nombre }) => {
       <td className="contenido-txt-generos">
         <div className="centrar-btns-generos">
           <Link to={`/Dashboard/Gestion_Generos/EditarGenero/${id}`} className="btn btn-warning">Modificar</Link>
-          <button className="btn btn-danger btn-deshabilitar">Deshabilitar</button>
         </div>
       </td>
     </tr>
