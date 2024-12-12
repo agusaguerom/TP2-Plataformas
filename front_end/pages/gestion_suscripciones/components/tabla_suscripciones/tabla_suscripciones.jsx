@@ -72,8 +72,9 @@ const TablaSuscripciones = () => {
           <tr>
             <th className="centrar-th-suscripciones">Id</th>
             <th className="centrar-th-suscripciones">Nombre</th>
-            <th className="centrar-th-suscripciones">Precio Mensual</th>
-            <th className="centrar-th-suscripciones">Duración en Días</th>
+            <th className="centrar-th-suscripciones">Precio</th>
+            <th className="centrar-th-suscripciones">Duración</th>
+            <th className="centrar-th-suscripciones">Estado</th>
             <th className="centrar-th-suscripciones">Acciones</th>
           </tr>
         </thead>
@@ -85,6 +86,7 @@ const TablaSuscripciones = () => {
               nombre={suscripcion.nombre}
               precio_mensual={suscripcion.precio_mensual}
               duracion_dias={suscripcion.duracion_dias}
+              estado={suscripcion.estado} // Agregamos el estado aquí
             />
           ))}
         </tbody>

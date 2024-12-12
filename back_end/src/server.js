@@ -10,7 +10,7 @@ import playlistsRoutes from "./routes/playlists.routes.js";
 import playlistCancionesRoutes from "./routes/playlist_canciones.routes.js";
 import usuarioRoutes from './routes/usuarios.routes.js';
 import rolRoutes from './routes/roles.routes.js';
-import seguidorRoutes from "./routes/seguidores.routes.js"
+import seguidorRoutes from "./routes/seguidores.routes.js";
 
 const app = express();
 app.use(cors());

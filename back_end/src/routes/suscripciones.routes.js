@@ -3,7 +3,6 @@ import { suscripcionesController } from "../controllers/suscripciones.controller
 
 const router = Router();
 
-
 // Obtener todas las suscripciones
 router.get('/suscripciones', suscripcionesController.getAll);
 
@@ -13,14 +12,13 @@ router.get('/suscripciones/:id', suscripcionesController.getById);
 // Crear una nueva suscripción
 router.post('/suscripciones', suscripcionesController.create);
 
-
-
 // Actualizar una suscripción existente
 router.put('/suscripciones/:id', suscripcionesController.update);
 
-
-
 // Eliminar una suscripción
 router.delete('/suscripciones/:id', suscripcionesController.delete);
+
+// Cambiar estado de una suscripción
+router.patch('/suscripciones/:id/estado', suscripcionesController.updateEstado);
 
 export default router;
