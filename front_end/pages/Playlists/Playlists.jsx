@@ -22,7 +22,6 @@ export function Playlists() {
           setPlaylists(data);
         } else {
           console.log(data);
-          alert("No se pudieron obtener las playlists.");
         }
       } catch (error) {
         console.error("Error al obtener las playlists:", error);

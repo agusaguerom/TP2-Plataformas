@@ -42,7 +42,7 @@ export function SongItemByArtist({ artist }) {
                 idSong={song.id}
                 name={song.nombre}
                 artist={artist.name}
-                image={song.image}
+                image={song.imagen}
               />
             </div>
           ))

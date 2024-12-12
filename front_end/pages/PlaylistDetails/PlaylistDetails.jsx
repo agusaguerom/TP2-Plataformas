@@ -70,7 +70,12 @@ export function PlaylistDetails() {
         <ul className="song-list">
           {songs.map((song) => (
             <li key={song.cancion.id} className="song-item">
-              <SongItem idSong={song.cancion.id} name={song.cancion.nombre} />
+              <SongItem
+                idSong={song.cancion.id}
+                name={song.cancion.nombre}
+                image={song.cancion.imagen}
+                audio={song.cancion.audio}
+              />
               <button
                 onClick={() => {
                   console.log(song.cancion.id);
