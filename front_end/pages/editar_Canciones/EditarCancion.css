@@ -1,4 +1,12 @@
 /* Estilo del botón */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
 .btn-custom {
   background-color: #eaa9a9;
   color: white;

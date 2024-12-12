@@ -89,103 +89,105 @@ const ModificarCancion = () => {
   if (loading) return <p>Cargando...</p>;
 
   return (
-    <form className="custom-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="nombre">Nombre de la Canción</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          placeholder="Escribe el nombre"
-          value={formData.nombre}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="duracion">Duración</label>
-        <input
-          type="text"
-          id="duracion"
-          name="duracion"
-          placeholder="Duración (e.g., 3:45)"
-          value={formData.duracion}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="fk_genero">Género</label>
-        <select
-          id="fk_genero"
-          name="fk_genero"
-          value={formData.fk_genero}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona un género</option>
-          {generos.map((genero) => (
-            <option key={genero.id} value={genero.id}>
-              {genero.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label htmlFor="fk_album">Álbum</label>
-        <select
-          id="fk_album"
-          name="fk_album"
-          value={formData.fk_album}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Selecciona un álbum</option>
-          {albumes.map((album) => (
-            <option key={album.id} value={album.id}>
-              {album.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label htmlFor="imagen">URL de Imagen</label>
-        <input
-          type="text"
-          id="imagen"
-          name="imagen"
-          placeholder="URL de la imagen"
-          value={formData.imagen}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="audio">URL de Audio</label>
-        <input
-          type="text"
-          id="audio"
-          name="audio"
-          placeholder="URL del audio"
-          value={formData.audio}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="fk_artista">Artista</label>
-        <input
-          type="text"
-          id="fk_artista"
-          name="fk_artista"
-          value={artista ? artista.nombre : ""}
-          disabled
-        />
-      </div>
-      <button type="submit" className="submit-btn">
-        Guardar Cambios
-      </button>
-    </form>
+    <div className="form-container">
+      <form className="custom-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre de la Canción</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            placeholder="Escribe el nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="duracion">Duración</label>
+          <input
+            type="text"
+            id="duracion"
+            name="duracion"
+            placeholder="Duración (e.g., 3:45)"
+            value={formData.duracion}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fk_genero">Género</label>
+          <select
+            id="fk_genero"
+            name="fk_genero"
+            value={formData.fk_genero}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona un género</option>
+            {generos.map((genero) => (
+              <option key={genero.id} value={genero.id}>
+                {genero.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="fk_album">Álbum</label>
+          <select
+            id="fk_album"
+            name="fk_album"
+            value={formData.fk_album}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Selecciona un álbum</option>
+            {albumes.map((album) => (
+              <option key={album.id} value={album.id}>
+                {album.nombre}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="imagen">URL de Imagen</label>
+          <input
+            type="text"
+            id="imagen"
+            name="imagen"
+            placeholder="URL de la imagen"
+            value={formData.imagen}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="audio">URL de Audio</label>
+          <input
+            type="text"
+            id="audio"
+            name="audio"
+            placeholder="URL del audio"
+            value={formData.audio}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fk_artista">Artista</label>
+          <input
+            type="text"
+            id="fk_artista"
+            name="fk_artista"
+            value={artista ? artista.nombre : ""}
+            disabled
+          />
+        </div>
+        <button type="submit" className="submit-btn">
+          Guardar Cambios
+        </button>
+      </form>
+    </div>
   );
 };
 
