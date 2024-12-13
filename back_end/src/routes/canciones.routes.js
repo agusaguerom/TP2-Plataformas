@@ -34,7 +34,9 @@ router.get(
 );
 
 // Eliminar una canción
-router.delete("/canciones/:id", cancionesController.delete);
+//router.delete("/canciones/:id", cancionesController.delete);
+
+router.put("/canciones/actualizarestado/:id", cancionesController.updateEstado);
 
 router.get("/canciones/albums/:id", cancionesController.getCancionesByAlbumId);
 

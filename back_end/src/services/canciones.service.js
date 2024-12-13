@@ -51,10 +51,24 @@ export class cancionesService {
       },
     });
   }
-
-  static async delete({ id }) {
-    return prisma.cancion.delete({
+  static async updateEstado({ id }) {
+    // Obtén el estado actual de la canción
+    const cancion = await prisma.cancion.findUnique({
       where: { id },
+      select: { estado: true }, // Selecciona solo el campo "estado"
+    });
+
+    if (!cancion) {
+      throw new Error("Canción no encontrada");
+    }
+
+    // Cambiar el estado entre 1 y 2
+    const nuevoEstado = cancion.estado === 1 ? 2 : 1;
+
+    // Actualizar el estado en la base de datos
+    return prisma.cancion.update({
+      where: { id },
+      data: { estado: nuevoEstado },
     });
   }
 

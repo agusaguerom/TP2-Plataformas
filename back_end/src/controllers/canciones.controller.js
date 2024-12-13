@@ -86,11 +86,14 @@ export class cancionesController {
     }
   }
 
-  static async delete(req, res) {
+  static async updateEstado(req, res) {
     try {
-      const { id } = req.params;
-      await cancionesService.delete({ id });
-      res.json({ message: "Canción eliminada con éxito" });
+      const { id } = req.params; // Obtenemos el ID de los parámetros de la URL
+      const cancionActualizada = await cancionesService.updateEstado({ id });
+      res.json({
+        message: "Estado actualizado con éxito",
+        estado: cancionActualizada.estado,
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
