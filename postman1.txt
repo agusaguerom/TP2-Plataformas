@@ -1,0 +1,623 @@
+
+------------------------------------------------------------------------------------SUSCRIPCIONES-----------------------------------------------------------------------------------------------------------------
+
+Suscripciones: 
+
+  {
+    "nombre": "Básico",
+    "precio_mensual": 5.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Estándar",
+    "precio_mensual": 9.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Premium",
+    "precio_mensual": 14.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Familiar",
+    "precio_mensual": 19.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Estudiante",
+    "precio_mensual": 4.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Business",
+    "precio_mensual": 29.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Pro",
+    "precio_mensual": 24.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "VIP",
+    "precio_mensual": 39.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Gold",
+    "precio_mensual": 49.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+  {
+    "nombre": "Ultra",
+    "precio_mensual": 59.99,
+    "duracion_dias": 30,
+    "estado": 1
+  }
+
+-----------------------------------------------------------------------------------Roles-----------------------------------------------------------------------------------------------------------------
+
+Roles:
+
+  {
+      "nombre": "oyente"
+    }
+
+    {
+      "nombre": "artist"
+    }
+
+    {
+      "nombre": "admin"
+    }
+
+
+------------------------------------------------------------------------------------Generos-----------------------------------------------------------------------------------------------------------------
+
+Generos: 
+  
+    {
+      "nombre": "Pop"
+    }
+
+    {
+      "nombre": "Rock"
+    }
+
+    {
+      "nombre": "Hip Hop"
+    }
+
+    {
+      "nombre": "Jazz"
+    }
+
+    {
+      "nombre": "Blues"
+    }
+
+    {
+      "nombre": "Reggae"
+    }
+
+    {
+      "nombre": "Electrónica"
+    }
+
+    {
+      "nombre": "R&B"
+    }
+
+    {
+      "nombre": "Country"
+    }
+
+    {
+      "nombre": "Metal"
+    }
+
+    {
+      "nombre": "Folk"
+    }
+
+    {
+      "nombre": "Salsa"
+    }
+
+    {
+      "nombre": "Cumbia"
+    }
+
+    {
+      "nombre": "Reggaeton"
+    }
+
+    {
+      "nombre": "Tango"
+    }
+
+    {
+      "nombre": "Vallenato"
+    }
+
+    {
+      "nombre": "Música Clásica"
+    }
+
+    {
+      "nombre": "Indie"
+    }
+
+    {
+      "nombre": "Punk"
+    }
+
+    {
+      "nombre": "Música Electrónica"
+    }
+  
+
+------------------------------------------------------------------------------------Usuarios-----------------------------------------------------------------------------------------------------------------
+
+Usuarios: 
+
+ {
+      "nombre": "Juan",
+      "apellido": "Pérez",
+      "correo": "juan.perez@email.com",
+      "password": "password123",
+      "fk_suscripcion": 1,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Carlos",
+      "apellido": "Sánchez",
+      "correo": "carlos.sanchez@email.com",
+      "password": "password789",
+      "fk_suscripcion": 3,
+      "fk_rol": 3
+    }
+
+    {
+      "nombre": "Laura",
+      "apellido": "Martínez",
+      "correo": "laura.martinez@email.com",
+      "password": "password101",
+      "fk_suscripcion": 4,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "David",
+      "apellido": "Rodríguez",
+      "correo": "david.rodriguez@email.com",
+      "password": "password202",
+      "fk_suscripcion": 5,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Ana",
+      "apellido": "López",
+      "correo": "ana.lopez@email.com",
+      "password": "password303",
+      "fk_suscripcion": 6,
+      "fk_rol": 3
+    }
+
+    {
+      "nombre": "Pedro",
+      "apellido": "Hernández",
+      "correo": "pedro.hernandez@email.com",
+      "password": "password404",
+      "fk_suscripcion": 7,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Sofía",
+      "apellido": "García",
+      "correo": "sofia.garcia@email.com",
+      "password": "password505",
+      "fk_suscripcion": 8,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Ricardo",
+      "apellido": "Ramírez",
+      "correo": "ricardo.ramirez@email.com",
+      "password": "password606",
+      "fk_suscripcion": 9,
+      "fk_rol": 3
+    }
+
+    {
+      "nombre": "Isabel",
+      "apellido": "Fernández",
+      "correo": "isabel.fernandez@email.com",
+      "password": "password707",
+      "fk_suscripcion": 10,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Fernando",
+      "apellido": "Jiménez",
+      "correo": "fernando.jimenez@email.com",
+      "password": "password808",
+      "fk_suscripcion": 11,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Patricia",
+      "apellido": "González",
+      "correo": "patricia.gonzalez@email.com",
+      "password": "password909",
+      "fk_suscripcion": 12,
+      "fk_rol": 3
+    }
+
+    {
+      "nombre": "Marta",
+      "apellido": "Pérez",
+      "correo": "marta.perez@email.com",
+      "password": "password1010",
+      "fk_suscripcion": 13,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Luis",
+      "apellido": "Méndez",
+      "correo": "luis.mendez@email.com",
+      "password": "password1111",
+      "fk_suscripcion": 14,
+      "fk_rol": 1
+    }
+
+    {
+      "nombre": "Javier",
+      "apellido": "Torres",
+      "correo": "javier.torres@email.com",
+      "password": "password1212",
+      "fk_suscripcion": 15,
+      "fk_rol": 3
+    }
+
+
+------------------------------------------------------------------------------------Artistas-----------------------------------------------------------------------------------------------------------------
+
+Artistas: 
+
+ {
+  "nombre": "Adele",
+  "apellido": "Adkins",
+  "correo": "adele.adkins@email.com",
+  "password": "adele123",
+  "fk_suscripcion": 1,
+  "fk_rol": 2,
+  "artistaInfo": {
+    "nombreArtista": "Adele",
+    "descripcion": "Cantante y compositora británica conocida por su potente voz.",
+    "image": "https://i.postimg.cc/6Q9M099M/Adele.png",
+    "fk_genero": 1
+  }
+}
+
+{
+  "nombre": "Edd",
+  "apellido": "Sheeran",
+  "correo": "ed.sheeran@email.com",
+  "password": "edsheeran123",
+  "fk_suscripcion": 1,
+  "fk_rol": 2,
+  "artistaInfo": {
+    "nombreArtista": "Ed Sheeran",
+    "descripcion": "Cantante y compositor británico conocido por sus baladas románticas.",
+    "image": "https://i.postimg.cc/fLd5Wk5T/Edsheeran-jpg.png",
+    "fk_genero": 1
+  }
+}
+
+
+{
+  "nombre": "Taylor",
+  "apellido": "Swift",
+  "correo": "taylor.swift@email.com",
+  "password": "taylor123",
+  "fk_suscripcion": 1,
+  "fk_rol": 2,
+  "artistaInfo": {
+    "nombreArtista": "Taylor Swift",
+    "descripcion": "Cantante y compositora estadounidense conocida por su estilo único de country-pop.",
+    "image": "https://i.postimg.cc/wvzRJvgB/Taylor.png",
+    "fk_genero": 2
+  }
+}
+
+{
+  "nombre": "Shakira",
+  "apellido": "Mebarak",
+  "correo": "shakira.mebarak@gmail.com",
+  "password": "shakira123",
+  "fk_suscripcion": 1,
+  "fk_rol": 2,
+  "artistaInfo": {
+    "nombreArtista": "Shakira",
+    "descripcion": "Cantante y compositora colombiana conocida por su fusión de pop y música latina.",
+    "image": "https://i.postimg.cc/3x7qSM7b/Shakira.png",
+    "fk_genero": 3
+  }
+}
+
+
+{
+  "nombre": "Rihanna",
+  "apellido": "Fenty",
+  "correo": "rihanna.fenty@email.com",
+  "password": "rihanna123",
+  "fk_suscripcion": 1,
+  "fk_rol": 2,
+  "artistaInfo": {
+    "nombreArtista": "Rihanna",
+    "descripcion": "Cantante, actriz y empresaria barbadense conocida por su música pop y R&B.",
+    "image": "https://i.postimg.cc/fTQqy43T/Rihanna.png",
+    "fk_genero": 4
+  }
+}
+
+
+------------------------------------------------------------------------------------Albumes-----------------------------------------------------------------------------------------------------------------
+
+Albumes: 
+
+
+Adele:
+
+ {
+    "nombre": "Album 21",
+    "publicacion": "2011-01-24T00:00:00Z",
+    "fk_artista": "",  (FK_Artista de Adele)
+    "descripcion": "El segundo álbum de estudio de Adele, conocido por sus éxitos como 'Rolling in the Deep' y 'Someone Like You'."
+  }
+
+ {
+    "nombre": "Album 25",
+    "publicacion": "2015-11-20T00:00:00Z",
+    "fk_artista": "b62d520b-2c35-4dd4-8c78-753a76de8364",
+    "descripcion": "El tercer álbum de Adele, que incluye los éxitos 'Hello' y 'When We Were Young'."
+  }
+
+
+Ed sheeran: 
+
+ {
+    "nombre": "Plus",
+    "publicacion": "2011-09-09T00:00:00Z",
+    "fk_artista": "64cd9fa0-9d8e-49ed-8ac4-56ec6954da17",
+    "descripcion": "El primer álbum de estudio de Ed Sheeran, que incluye éxitos como 'The A Team' y 'Lego House'."
+  }
+
+{
+    "nombre": "Divide",
+    "publicacion": "2017-03-03T00:00:00Z",
+    "fk_artista": "64cd9fa0-9d8e-49ed-8ac4-56ec6954da17",
+    "descripcion": "El tercer álbum de estudio de Ed Sheeran, conocido por los éxitos 'Shape of You' y 'Castle on the Hill'."
+  }
+
+Shakira:
+
+ {
+    "nombre": "Pies Descalzos",
+    "publicacion": "1995-02-06T00:00:00Z",
+    "fk_artista": "cae22e68-fc9c-43d6-92b8-6087d0956ba6",
+    "descripcion": "El primer álbum de estudio de Shakira, que incluye canciones como 'Estoy Aquí' y 'Pies Descalzos'."
+  }
+
+{
+    "nombre": "Laundry Service",
+    "publicacion": "2001-11-13T00:00:00Z",
+    "fk_artista": "cae22e68-fc9c-43d6-92b8-6087d0956ba6",
+    "descripcion": "El quinto álbum de estudio de Shakira, conocido por los éxitos 'Whenever, Wherever' y 'Underneath Your Clothes'."
+  }
+
+
+Rihanna:
+
+ {
+    "nombre": "Good Girl Gone Bad",
+    "publicacion": "2007-05-29T00:00:00Z",
+    "fk_artista": "uuid_de_rihanna",
+    "descripcion": "El tercer álbum de estudio de Rihanna, conocido por los éxitos 'Umbrella' y 'Shut Up and Drive'."
+  }
+
+
+Taylor Swift:
+
+ {
+    "nombre": "Fearless",
+    "publicacion": "2008-11-11T00:00:00Z",
+    "fk_artista": "b8a8c88e-3cb3-43e8-8111-cc39a4babda3",
+    "descripcion": "El segundo álbum de estudio de Taylor Swift, que incluye los éxitos 'Love Story' y 'You Belong with Me'."
+  }
+
+{
+    "nombre": "1989",
+    "publicacion": "2014-10-27T00:00:00Z",
+    "fk_artista": "b8a8c88e-3cb3-43e8-8111-cc39a4babda3",
+    "descripcion": "El quinto álbum de estudio de Taylor Swift, conocido por los éxitos 'Shake It Off' y 'Blank Space'."
+  }
+
+
+
+------------------------------------------------------------------------------------Canciones-----------------------------------------------------------------------------------------------------------------
+
+Canciones: 
+
+
+Adele: 
+
+Album 21:
+
+{
+  "nombre": "Rolling in the Deep",
+  "duracion": "03:48:00",
+  "fk_album": "2796731b-3608-4267-9ba3-43677e5999cf",
+  "fk_genero": 1,  
+  "fk_artista": "b62d520b-2c35-4dd4-8c78-753a76de8364",
+  "imagen": "https://i.postimg.cc/dV6JnjMr/adele21.png",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054508/Adele_-_Rolling_in_the_Deep_Official_Music_Video_ezmp3.cc_cvrcgk.mp3"
+}
+
+
+{
+  "nombre": "Someone Like You",
+  "duracion": "04:45:00",
+  "fk_album": "2796731b-3608-4267-9ba3-43677e5999cf",
+  "fk_genero": 1,  
+  "fk_artista": "b62d520b-2c35-4dd4-8c78-753a76de8364",
+  "imagen": "https://i.postimg.cc/6QD6G5Jm/Adele-Someone-Like-You.png",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054508/Adele_-_Someone_Like_You_Official_Music_Video_ezmp3.cc_tqfdbv.mp3"
+}
+
+
+Album 25:
+
+{
+  "nombre": "Hello",
+  "duracion": "04:55:00",
+  "fk_album": "7256f33d-d36b-4229-9b2c-403da1de617f",
+  "fk_genero": 1,  
+  "fk_artista": "b62d520b-2c35-4dd4-8c78-753a76de8364",
+  "imagen": "https://i.postimg.cc/0jVLDcKy/Hello-Adele.jpg",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054508/Adele_-_Hello_Official_Music_Video_ezmp3.cc_eob3pn.mp3"
+}
+
+
+Ed sheeran:
+
+Album  Plus:
+
+{
+  "nombre": "The A Team",
+  "duracion": "04:20:00",
+  "fk_album": "fb1bbf23-fb7d-4993-8c02-36b2e20f4aaf",
+  "fk_genero": 1,  
+  "fk_artista": "64cd9fa0-9d8e-49ed-8ac4-56ec6954da17",
+  "imagen": "https://i.postimg.cc/ZK9fwT1c/theAteam.jpg",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054507/Ed_Sheeran_-_The_A_Team_Official_Music_Video_ezmp3.cc_lalb0o.mp3"
+}
+
+
+Album Divide: 
+
+{
+  "nombre": "Shape of You",
+  "duracion": "03:53:00",
+  "fk_album": "1605adc9-455b-438f-82a0-d14c4bf28ecd",
+  "fk_genero": 1,  
+  "fk_artista": "64cd9fa0-9d8e-49ed-8ac4-56ec6954da17",
+  "imagen": "https://i.postimg.cc/8cfhmCjf/Shapeof-You.jpg",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054506/Ed_Sheeran_-_Shape_of_You_Official_Music_Video_ezmp3.cc_cdk3ih.mp3"
+}
+
+
+Rihanna:
+
+Album Good Girl Gone Bad:
+
+{
+  "nombre": "Umbrella",
+  "duracion": "03:25:00",
+  "fk_album": "c3732df5-6f59-4400-8154-cc0f3041b759",  
+  "fk_genero": 1, 
+  "fk_artista": "9d6d77f0-7503-4598-a4b7-a113a829acb4",  
+  "imagen": "https://i.postimg.cc/CLjc3vxB/Umbrella.jpg",  
+  "audio": "https://res.cloudinary.com/drswstgcv/video/upload/v1734054506/Rihanna_-_Umbrella_Orange_Version_Official_Music_Video_ft._JAY-Z_ezmp3.cc_o0tgnx.mp3"  
+}
+
+
+
+------------------------------------------------------------------------------------Playlist-----------------------------------------------------------------------------------------------------------------
+
+
+Playlist:
+
+
+{
+  "nombre": "Best of 2023",
+  "descripcion": "A collection of the best songs of 2023",
+  "fk_usuario": "94b2bc24-9040-4d69-97ea-625bd2f46902"
+}
+
+{
+  "nombre": "Chill Vibes",
+  "descripcion": "Relaxing and chill tracks for unwinding",
+  "fk_usuario": "170705c1-c1f6-4d37-9cb4-19f4d2d369db"
+}
+
+
+------------------------------------------------------------------------------------PlaylistCanciones-----------------------------------------------------------------------------------------------------------------
+
+
+Playlist canciones:
+
+{
+       "fk_playlist": 1, 
+      "fk_cancion": "28561678-3941-4a1e-81db-6c42caad7543"
+}
+
+{
+      "fk_playlist": 1,  
+      "fk_cancion": "ba1196ca-b1ad-4b7b-b6c3-8fcbbe5c8e40"
+}
+
+{
+      "fk_playlist": 2,  // Reemplaza con el ID real de la playlist
+      "fk_cancion": "ef69764d-852d-491f-b4a9-fa5b261e9123"
+    }
+
+
+------------------------------------------------------------------------------------Seguidores-----------------------------------------------------------------------------------------------------------------
+
+
+Seguidores: 
+
+{
+  
+  "fk_usuario": "94b2bc24-9040-4d69-97ea-625bd2f46902",
+  "fk_artista": "9d6d77f0-7503-4598-a4b7-a113a829acb4"
+} 
+
+{
+ 
+  "fk_usuario": "170705c1-c1f6-4d37-9cb4-19f4d2d369db",
+  "fk_artista": "9d6d77f0-7503-4598-a4b7-a113a829acb4"
+}
+
+{
+ 
+  "fk_usuario": "170705c1-c1f6-4d37-9cb4-19f4d2d369db",
+  "fk_artista": "525aff98-c062-4a23-ac91-583b2d2748b2"
+}
