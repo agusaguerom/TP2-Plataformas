@@ -30,6 +30,9 @@ const Register = () => {
   const descripcionRef = useRef(null);
   const fkGeneroRef = useRef(null);
 
+  const navigate = useNavigate();
+  const { login } = useAuth(); // Importar la función login del contexto de autenticación
+
   useEffect(() => {
     const fetchSuscripciones = async () => {
       try {
@@ -125,6 +128,15 @@ const Register = () => {
       const data = await response.json();
       setMensaje(data.message);
       alert(data.message);
+
+      // Iniciar sesión automáticamente después del registro
+      const success = await login(correo, password);
+      if (success) {
+        navigate("/"); // Redirigir al usuario a la página principal
+      } else {
+        setMensaje("Error al iniciar sesión automáticamente");
+      }
+
     } catch (error) {
       console.error("Error al registrar usuario:", error);
       setMensaje("Error al registrar usuario");

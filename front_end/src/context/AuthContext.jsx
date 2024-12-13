@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import bcrypt from "bcryptjs"; 
 
 const AuthContext = createContext();
 
@@ -8,9 +7,9 @@ export function AuthProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [suscripciones, setSuscripciones] = useState([]);
   const [roles, setRoles] = useState([]);
-  const [generos, setGeneros] = useState([]); // Añadido para géneros
+  const [generos, setGeneros] = useState([]);
   const [isLogueado, setIsLogueado] = useState(
-    localStorage.getItem("isLogueado") ? true : false
+    localStorage.getItem("token") ? true : false
   );
   const [userLogueado, setUserLogueado] = useState(
     localStorage.getItem("user")
@@ -19,69 +18,44 @@ export function AuthProvider({ children }) {
   );
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/usuarios");
-        setUsers(response.data);
+        const [usersResponse, suscripcionesResponse, rolesResponse, generosResponse] = await Promise.all([
+          axios.get("http://localhost:5000/api/usuarios"),
+          axios.get("http://localhost:5000/api/suscripciones"),
+          axios.get("http://localhost:5000/api/roles"),
+          axios.get("http://localhost:5000/api/generos"),
+        ]);
+
+        setUsers(usersResponse.data);
+        setSuscripciones(suscripcionesResponse.data);
+        setRoles(rolesResponse.data);
+        setGeneros(generosResponse.data);
       } catch (error) {
-        console.error("Error fetching users:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchSuscripciones = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/suscripciones");
-        setSuscripciones(response.data);
-      } catch (error) {
-        console.error("Error fetching suscripciones:", error);
-      }
-    };
-
-    const fetchRoles = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/roles");
-        setRoles(response.data);
-      } catch (error) {
-        console.error("Error fetching roles:", error);
-      }
-    };
-
-    const fetchGeneros = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/generos");
-        setGeneros(response.data);
-      } catch (error) {
-        console.error("Error fetching generos:", error);
-      }
-    };
-
-    fetchUsers();
-    fetchSuscripciones();
-    fetchRoles();
-    fetchGeneros(); // Añadido para géneros
+    fetchData();
   }, []);
 
   const login = async (correo, password) => {
-    const user = users.find((u) => u.correo === correo);
+    try {
+      const response = await axios.post("http://localhost:5000/api/login", {
+        email: correo,
+        password
+      });
 
-    if (user) {
-      const passwordMatch = await bcrypt.compare(password, user.password);
-      if (passwordMatch) {
-        if (user.fk_rol === 1 || user.fk_rol === 2 || user.fk_rol === 3) {
-          setIsLogueado(true);
-          setUserLogueado(user);
-          localStorage.setItem("isLogueado", true);
-          localStorage.setItem("user", JSON.stringify(user));
-          return true;
-        } else {
-          console.error("No tiene permisos suficientes");
-          return false;
-        }
-      } else {
-        console.error("Contraseña incorrecta");
+      if (response.status === 200) {
+        const { token, user } = response.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        setUserLogueado(user);
+        setIsLogueado(true);
+        return true;
       }
-    } else {
-      console.error("Usuario no encontrado");
+    } catch (error) {
+      console.error("Error logging in:", error);
     }
     return false;
   };
@@ -89,7 +63,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setIsLogueado(false);
     setUserLogueado(null);
-    localStorage.removeItem("isLogueado");
+    localStorage.removeItem("token");
     localStorage.removeItem("user");
   };
 
@@ -205,7 +179,6 @@ export function AuthProvider({ children }) {
       return false;
     }
   };
-  
 
   return (
     <AuthContext.Provider

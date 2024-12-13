@@ -37,16 +37,13 @@ export function Navbar() {
             </a>
           </li>
 
-          {}
-          {userLogueado &&
-            (userLogueado.rol.nombre === "artist" ||
-              userLogueado.rol.nombre === "admin") && (
-              <li className="nav-item">
-                <Link to="/Dashboard" className="nav-link">
-                  <i className="bi bi-star"></i>
-                </Link>
-              </li>
-            )}
+          {userLogueado && (userLogueado.fk_rol === 2 || userLogueado.fk_rol === 3) && (
+            <li className="nav-item">
+              <Link to="/Dashboard" className="nav-link">
+                <i className="bi bi-star"></i>
+              </Link>
+            </li>
+          )}
 
           <li className="nav-item">
             <a href="/profile" className="nav-link">

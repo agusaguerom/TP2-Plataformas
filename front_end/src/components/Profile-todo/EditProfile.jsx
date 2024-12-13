@@ -16,11 +16,12 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (userLogueado) {
+      console.log("Datos del usuario logueado:", userLogueado); // Verifica la estructura del usuario logueado
       setFormData({
         nombre: userLogueado.nombre,
         apellido: userLogueado.apellido,
         correo: userLogueado.correo,
-        fk_suscripcion: userLogueado.suscripcion.id,
+        fk_suscripcion: userLogueado.suscripcion ? userLogueado.suscripcion.id : '',
       });
     }
   }, [userLogueado]);
@@ -37,7 +38,7 @@ const EditProfile = () => {
     if (success) {
       setSuccessMessage('Perfil actualizado con éxito.');
     } else {
-      console.error("Error updating user data");
+      console.error("Error al actualizar los datos del usuario");
     }
   };
 

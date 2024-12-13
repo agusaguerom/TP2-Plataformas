@@ -46,7 +46,7 @@ function App() {
             <Route path="/album/:id" element={<AlbumDetails />} />
             <Route
               path="/Dashboard/*"
-              element={<ProtectedRoute roles={["artist", "admin"]} />}
+              element={<ProtectedRoute roles={[2, 3]} />} // Usar roles numéricos
             >
               <Route path="" element={<Dashboard />} />
               <Route path="Gestion_Canciones" element={<Gestion_Canciones />} />
@@ -84,7 +84,6 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/playlist" element={<Playlists />} />
             <Route path="/playlist/:id" element={<PlaylistDetails />} />
-
             <Route path="/seguidos" element={<Seguidos />} />
           </Routes>
         </main>

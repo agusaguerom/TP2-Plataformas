@@ -8,16 +8,22 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     setError("");
-    const success = await login(correo, password);
-    if (!success) {
-      setError(
-        "Correo o contraseña incorrectos o no tiene permisos suficientes"
-      );
-    } else {
-      navigate("/");
+    setIsLoading(true);
+    try {
+      const success = await login(correo, password);
+      if (!success) {
+        setError("Correo o contraseña incorrectos o no tiene permisos suficientes");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      setError("Error en el login. Inténtelo nuevamente.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,8 +44,8 @@ const Login = () => {
         placeholder="Contraseña"
         className="form-control"
       />
-      <button onClick={handleLogin} className="btn btn-primary">
-        Login
+      <button onClick={handleLogin} className="btn btn-primary" disabled={isLoading}>
+        {isLoading ? 'Cargando...' : 'Login'}
       </button>
       <div className="register-link">
         <span>¿No tienes cuenta?</span>

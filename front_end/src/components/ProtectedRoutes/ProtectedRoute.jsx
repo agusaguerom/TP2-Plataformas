@@ -6,11 +6,13 @@ const ProtectedRoute = ({ roles }) => {
   const { isLogueado, userLogueado } = useAuth();
   const location = useLocation();
 
-  if (isLogueado && roles.includes(userLogueado.rol.nombre)) {
+  const token = localStorage.getItem('token');
+
+  if (isLogueado && token && roles.includes(userLogueado.fk_rol)) {
     return <Outlet />;
   }
 
-  return <Navigate to="/" state={{ from: location }} />;
+  return <Navigate to="/login" state={{ from: location }} />;
 };
 
 export default ProtectedRoute;
