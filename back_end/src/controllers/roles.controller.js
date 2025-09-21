@@ -1,4 +1,4 @@
-import { RolDto } from "../dto/RolDTO.js";
+import { RolDto } from "../dto/RolDTo.js";
 import { RolesService } from "../services/roles.service.js";
 
 export class RolesController {
