@@ -1,6 +1,6 @@
 import React from "react";
 import TablaSuscripciones from "./components/tabla_suscripciones/tabla_suscripciones";
-import './Gestion_Suscripciones.css';
+import './gestion_suscripciones.css';
 import { Link } from "react-router-dom";
 
 export const Gestion_Suscripciones = () => {
