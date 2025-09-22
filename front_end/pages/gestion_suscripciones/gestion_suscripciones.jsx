@@ -1,5 +1,5 @@
 import React from "react";
-import TablaSuscripciones from "./components/Tabla_Suscripciones/tabla_suscripciones";
+import TablaSuscripciones from "./components/tabla_suscripciones/tabla_suscripciones";
 import './Gestion_Suscripciones.css';
 import { Link } from "react-router-dom";
 
