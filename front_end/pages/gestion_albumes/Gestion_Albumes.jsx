@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import TablaAlbum from "./components/Tabla_Albumes/tabla_albumes";
+import TablaAlbum from "./components/Tabla_albumes/tabla_albumes";
 import './Gestion_Albumes.css';
 
 export const Gestion_Albumes = () => {
