@@ -1,5 +1,5 @@
 import React from 'react';
-import EditProfile from '../../src/Components/Profile-todo/EditProfile'; 
+import EditProfile from '../../src/components/Profile-todo/EditProfile'; 
 import './EditProfile.css';
 
 const EditProfilePage = () => {
