@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import FilasGeneros from "../filas_generos/filas_generos";
 import { AuthContext } from "../../../../src/context/AuthContext";
-import './Tabla_Generos.css';
+import './tabla_generos.css';
 
 const TablaGeneros = () => {
   const { generos, loading, error, registerGenero } = useContext(AuthContext);
