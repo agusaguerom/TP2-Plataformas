@@ -14,7 +14,7 @@ const EditarGenero = () => {
   useEffect(() => {
     const fetchGenero = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/generos/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/generos/${id}`);
         setNombre(response.data.nombre);
       } catch (error) {
         alert('Género no encontrado');

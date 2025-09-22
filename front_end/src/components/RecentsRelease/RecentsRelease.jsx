@@ -9,7 +9,7 @@ export function RecentsReleases() {
   useEffect(() => {
     const fetchRecentAlbums = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/albumsfive", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/albumsfive`, {
           method: "POST", // Usamos POST
           headers: {
             "Content-Type": "application/json",

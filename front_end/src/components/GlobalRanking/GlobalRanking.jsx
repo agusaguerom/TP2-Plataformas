@@ -10,7 +10,7 @@ export function GlobalRanking() {
     const fetchSongs = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/canciones/populares"
+          `${import.meta.env.VITE_API_URL}/api/canciones/populares`
         );
         const data = await response.json();
 

@@ -7,7 +7,7 @@ const FilasSuscripciones = ({ id, nombre, precio_mensual, duracion_dias, estado 
   const cambiarEstado = async (id, nuevoEstado) => {
     try {
       console.log(`Cambiando estado de la suscripción ${id} a ${nuevoEstado}`); // Log para depuración
-      const response = await fetch(`http://localhost:5000/api/suscripciones/${id}/estado`, { // URL completa del servidor
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/suscripciones/${id}/estado`, { // URL completa del servidor
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

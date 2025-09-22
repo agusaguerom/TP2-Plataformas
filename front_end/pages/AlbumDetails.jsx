@@ -17,14 +17,14 @@ export const AlbumDetails = () => {
 
         // Fetch para obtener el álbum
         const albumResponse = await fetch(
-          `http://localhost:5000/api/albums/${id}`
+          `${import.meta.env.VITE_API_URL}/api/albums/${id}`
         );
         const albumData = await albumResponse.json();
         setAlbum(albumData);
 
         // Fetch para obtener las canciones del álbum
         const songsResponse = await fetch(
-          `http://localhost:5000/api/canciones/albums/${id}`
+          `${import.meta.env.VITE_API_URL}/api/canciones/albums/${id}`
         );
         const songsData = await songsResponse.json();
         setAlbumSongs(songsData);

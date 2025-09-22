@@ -33,7 +33,7 @@ const Register = () => {
   useEffect(() => {
     const fetchSuscripciones = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/suscripciones");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/suscripciones`);
         const data = await response.json();
         setSuscripciones(data);
       } catch (error) {
@@ -43,7 +43,7 @@ const Register = () => {
 
     const fetchGenero = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/generos");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/generos`);
         const data = await response.json();
         setGeneros(data);
       } catch (error) {
@@ -115,7 +115,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

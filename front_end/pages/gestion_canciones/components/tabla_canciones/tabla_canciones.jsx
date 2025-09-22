@@ -22,7 +22,7 @@ const TablaCancion = () => {
   useEffect(() => {
     const fetchGeneros = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/generos");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/generos`);
         setGeneros(response.data);
       } catch (error) {
         console.error("Error al obtener los géneros:", error);
@@ -32,7 +32,7 @@ const TablaCancion = () => {
     const fetchAlbumes = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/albums/user/${userLogueado.id}`
+          `${import.meta.env.VITE_API_URL}/api/albums/user/${userLogueado.id}`
         );
         setAlbumes(response.data);
       } catch (error) {
@@ -43,7 +43,7 @@ const TablaCancion = () => {
     const fetchArtista = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/artistas/user/${userLogueado.id}`
+          `${import.meta.env.VITE_API_URL}/api/artistas/user/${userLogueado.id}`
         );
         setArtista(response.data);
       } catch (error) {
@@ -63,7 +63,7 @@ const TablaCancion = () => {
       const fetchCanciones = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/canciones/${artista.id}`
+            `${import.meta.env.VITE_API_URL}/api/canciones/${artista.id}`
           );
           const cancionesData = response.data;
 
@@ -89,7 +89,7 @@ const TablaCancion = () => {
   const fetchArtistaNombre = async (fk_artista) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/artistas/${fk_artista}`
+        `${import.meta.env.VITE_API_URL}/api/artistas/${fk_artista}`
       );
       return response.data.nombre;
     } catch (error) {
@@ -123,11 +123,11 @@ const TablaCancion = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/canciones", nuevaCancion);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/canciones`, nuevaCancion);
       console.log("Canción agregada");
 
       const response = await axios.get(
-        `http://localhost:5000/api/canciones/${artista.id}`
+        `${import.meta.env.VITE_API_URL}/api/canciones/${artista.id}`
       );
       const cancionesData = response.data;
 

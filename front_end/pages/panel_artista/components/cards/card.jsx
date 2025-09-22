@@ -24,13 +24,13 @@ const Card = ({ admin }) => {
         }
 
       
-        const fkArtistaResponse = await axios.get(`http://localhost:5000/api/artistas/user/${id}`);
+        const fkArtistaResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/artistas/user/${id}`);
         setFkArtista(fkArtistaResponse.data.fk_artista);
 
-        const cantCancionesResponse = await axios.get(`http://localhost:5000/api/canciones/artista/${fkArtistaResponse.data.fk_artista}`);
+        const cantCancionesResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/canciones/artista/${fkArtistaResponse.data.fk_artista}`);
         const nuevoCantCanciones = cantCancionesResponse.data.cantidadCanciones;
 
-        const seguidoresResponse = await axios.get(`http://localhost:5000/api/seguidores/${fkArtistaResponse.data.fk_artista}`);
+        const seguidoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/seguidores/${fkArtistaResponse.data.fk_artista}`);
         const newCantidadSeguidores = seguidoresResponse.data.cantidadSeguidores;
 
         setCantidadCanciones(nuevoCantCanciones);

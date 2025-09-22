@@ -13,7 +13,7 @@ export function Seguidos() {
     const fetchSeguidos = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/seguidoresporUser/${id}`
+          `${import.meta.env.VITE_API_URL}/api/seguidoresporUser/${id}`
         );
         const data = await response.json();
 

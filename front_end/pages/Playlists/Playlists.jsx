@@ -14,7 +14,7 @@ export function Playlists() {
     const fetchPlaylists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/playlists/user/${id}`
+          `${import.meta.env.VITE_API_URL}/api/playlists/user/${id}`
         );
         const data = await response.json();
 

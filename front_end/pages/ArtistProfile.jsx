@@ -13,7 +13,7 @@ const ArtistProfile = () => {
     const fetchArtists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/artistas/${id}`
+          `${import.meta.env.VITE_API_URL}/api/artistas/${id}`
         );
         const data = await response.json();
 

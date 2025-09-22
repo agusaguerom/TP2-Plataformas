@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./EditarCancion.css";
@@ -29,10 +29,10 @@ const ModificarCancion = () => {
           cancionResponse,
           artistaResponse,
         ] = await Promise.all([
-          axios.get("http://localhost:5000/api/generos"),
-          axios.get("http://localhost:5000/api/albums"),
-          axios.get(`http://localhost:5000/api/canciones/source/${id}`),
-          axios.get("http://localhost:5000/api/artistas"),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/generos`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/albums`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/canciones/source/${id}`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/artistas`),
         ]);
 
         setGeneros(generosResponse.data);
@@ -72,7 +72,7 @@ const ModificarCancion = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5000/api/canciones/${id}`, formData);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/canciones/${id}`, formData);
       alert("Canción actualizada exitosamente.");
       navigate("/Dashboard/Gestion_Canciones");
     } catch (error) {

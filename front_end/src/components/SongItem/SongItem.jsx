@@ -19,7 +19,7 @@ export function SongItem({ idSong, name, artist, image, audio }) {
     const fetchPlaylists = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/playlists/user/${userLogueado.id}`
+          `${import.meta.env.VITE_API_URL}/api/playlists/user/${userLogueado.id}`
         );
         const data = await response.json();
 
@@ -41,7 +41,7 @@ export function SongItem({ idSong, name, artist, image, audio }) {
   async function checkSongInPlaylist(fk_playlist, fk_cancion) {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/playlist_canciones/check`,
+        `${import.meta.env.VITE_API_URL}/api/playlist_canciones/check`,
         {
           method: "POST",
           headers: {
@@ -81,7 +81,7 @@ export function SongItem({ idSong, name, artist, image, audio }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/playlist_canciones",
+        `${import.meta.env.VITE_API_URL}/api/playlist_canciones`,
         {
           method: "POST",
           headers: {
@@ -118,7 +118,7 @@ export function SongItem({ idSong, name, artist, image, audio }) {
       // Enviar la solicitud para incrementar las reproducciones
       try {
         const response = await fetch(
-          "http://localhost:5000/api/incrementReproducciones",
+          `${import.meta.env.VITE_API_URL}/api/incrementReproducciones`,
           {
             method: "POST",
             headers: {

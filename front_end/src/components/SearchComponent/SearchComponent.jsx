@@ -17,14 +17,14 @@ export function SearchComponent() {
       if (searchType === "Canciones") {
         console.log("antes del link");
         response = await axios.get(
-          `http://localhost:5000/api/search/canciones?query=${searchQuery}`
+          `${import.meta.env.VITE_API_URL}/api/search/canciones?query=${searchQuery}`
         );
         console.log(response);
         setResults(Array.isArray(response.data) ? response.data : []);
       } else if (searchType === "Artistas") {
         console.log("antes del link");
         response = await axios.get(
-          `http://localhost:5000/api/search/artista?query=${searchQuery}`
+          `${import.meta.env.VITE_API_URL}/api/search/artista?query=${searchQuery}`
         );
         console.log(response.data);
         setResults(Array.isArray(response.data) ? response.data : []);

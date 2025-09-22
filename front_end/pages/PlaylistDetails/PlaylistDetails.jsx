@@ -12,7 +12,7 @@ export function PlaylistDetails() {
     const fetchSongs = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/playlist_canciones/${id}`
+          `${import.meta.env.VITE_API_URL}/api/playlist_canciones/${id}`
         );
 
         if (!response.ok) {
@@ -34,7 +34,7 @@ export function PlaylistDetails() {
   const handleDelete = async (songId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/playlist_canciones/${songId}`,
+        `${import.meta.env.VITE_API_URL}/api/playlist_canciones/${songId}`,
         {
           method: "DELETE",
         }
@@ -46,7 +46,7 @@ export function PlaylistDetails() {
 
       // Actualizar la lista de canciones después de eliminar
       const updatedResponse = await fetch(
-        `http://localhost:5000/api/playlist_canciones/${id}`
+        `${import.meta.env.VITE_API_URL}/api/playlist_canciones/${id}`
       );
 
       if (!updatedResponse.ok) {

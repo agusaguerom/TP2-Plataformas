@@ -10,7 +10,7 @@ export function GenerosList() {
   useEffect(() => {
     const fetchGeneros = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/generos"); // URL de tu API
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/generos`); // URL de tu API
         const data = await response.json();
 
         if (response.ok) {

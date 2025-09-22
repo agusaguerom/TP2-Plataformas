@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import './EditarAlbumes.css';
@@ -20,7 +20,7 @@ const EditarAlbum = () => {
             try {
 
                 console.log(id)
-                const response = await axios.get(`http://localhost:5000/api/albums/${id}`); 
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/albums/${id}`); 
                 const album = response.data;  
 
                 console.log('Datos recibidos:', album);
@@ -53,7 +53,7 @@ const EditarAlbum = () => {
         e.preventDefault(); 
         try {
             
-            await axios.put(`http://localhost:5000/api/albums/${id}`, {
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/albums/${id}`, {
                 nombre: nombre,
                 publicacion: publicacion,
                 fk_artista: artista,

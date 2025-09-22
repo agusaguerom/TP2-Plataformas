@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/usuarios");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/usuarios`);
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
 
     const fetchSuscripciones = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/suscripciones");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/suscripciones`);
         setSuscripciones(response.data);
       } catch (error) {
         console.error("Error fetching suscripciones:", error);
@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
 
     const fetchRoles = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/roles");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/roles`);
         setRoles(response.data);
       } catch (error) {
         console.error("Error fetching roles:", error);
@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
 
     const fetchGeneros = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/generos");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/generos`);
         setGeneros(response.data);
       } catch (error) {
         console.error("Error fetching generos:", error);
@@ -106,10 +106,10 @@ export function AuthProvider({ children }) {
       };
 
       console.log("Datos enviados al backend:", newUser);
-      const response = await axios.post("http://localhost:5000/api/register", newUser);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/register`, newUser);
       const createdUser = response.data.user;
 
-      const updatedUsersResponse = await axios.get("http://localhost:5000/api/usuarios");
+      const updatedUsersResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/usuarios`);
       setUsers(updatedUsersResponse.data);
 
       return true;
@@ -123,7 +123,7 @@ export function AuthProvider({ children }) {
   const updateAdminUser = async (id, updatedUser) => {
     try {
       console.log("ID enviado para actualización (admin):", id);
-      const response = await axios.put(`http://localhost:5000/api/admin/usuarios/${id}`, updatedUser);
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/admin/usuarios/${id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) => (user.id === id ? response.data.user : user))
       );
@@ -141,7 +141,7 @@ export function AuthProvider({ children }) {
   const updateRegularUser = async (id, updatedUser) => {
     try {
       console.log("ID enviado para actualización (regular):", id);
-      const response = await axios.put(`http://localhost:5000/api/usuarios/actualizar/${id}`, updatedUser);
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/usuarios/actualizar/${id}`, updatedUser);
       setUsers((prevUsers) =>
         prevUsers.map((user) => (user.id === id ? response.data.user : user))
       );
@@ -158,7 +158,7 @@ export function AuthProvider({ children }) {
 
   const registerSuscripcion = async ({ nombre, precio_mensual, duracion_dias }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/suscripciones", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/suscripciones`, {
         nombre, precio_mensual, duracion_dias
       });
       setSuscripciones([...suscripciones, response.data.suscripcion]);
@@ -171,7 +171,7 @@ export function AuthProvider({ children }) {
 
   const updateSuscripcion = async (id, updatedSuscripcion) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/suscripciones/${id}`, updatedSuscripcion);
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/suscripciones/${id}`, updatedSuscripcion);
       setSuscripciones((prevSuscripciones) =>
         prevSuscripciones.map((suscripcion) => (suscripcion.id === id ? response.data : suscripcion))
       );
@@ -184,7 +184,7 @@ export function AuthProvider({ children }) {
 
   const registerGenero = async ({ nombre }) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/generos", { nombre });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generos`, { nombre });
       setGeneros([...generos, response.data.genero]);
       return true;
     } catch (error) {
@@ -195,7 +195,7 @@ export function AuthProvider({ children }) {
 
   const updateGenero = async (id, updatedGenero) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/generos/${id}`, updatedGenero);
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/generos/${id}`, updatedGenero);
       setGeneros((prevGeneros) =>
         prevGeneros.map((genero) => (genero.id === id ? response.data.genero : genero))
       );

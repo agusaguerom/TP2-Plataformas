@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import Filas_Albumes from "../Filas_Albumes/filas_albumes";
 import "./Tabla_albumes.css";
@@ -18,7 +18,7 @@ const TablaAlbum = () => {
   const fetchAlbums = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/albums/user/${userLogueado.id}`
+       `${import.meta.env.VITE_API_URL}/api/albums/user/${userLogueado.id}`
       );
       const albumsData = response.data;
       console.log("Respuesta de la API:", albumsData);
@@ -42,7 +42,7 @@ const TablaAlbum = () => {
   const fetchArtista = async (fk_artista) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/artistas/${fk_artista}`
+        `${import.meta.env.VITE_API_URL}/api/artistas/${fk_artista}`
       );
 
       return response.data.nombre;
@@ -56,7 +56,7 @@ const TablaAlbum = () => {
   const fetchFk_artista = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/artistas/user/${userLogueado.id}`
+        `${import.meta.env.VITE_API_URL}/api/artistas/user/${userLogueado.id}`
       );
 
       setFk_artista(response.data.fk_artista);
@@ -106,7 +106,7 @@ const TablaAlbum = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/api/albums/", nuevoAlbum);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/albums/`, nuevoAlbum);
       console.log("Album agregado");
 
       fetchAlbums();

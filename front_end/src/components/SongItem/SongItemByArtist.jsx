@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SongItem } from "./SongItem";
 
 export function SongItemByArtist({ artist }) {
@@ -8,7 +8,7 @@ export function SongItemByArtist({ artist }) {
     const fetchSongs = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/canciones/${artist.id}`
+          `${import.meta.env.VITE_API_URL}/api/canciones/${artist.id}`
         );
         const data = await response.json();
 

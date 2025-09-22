@@ -13,7 +13,7 @@ export function ArtistItem({ name, image, id }) {
     const fetchFollowingStatus = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/seguidores/${userLogueado.id}/${id}`
+          `${import.meta.env.VITE_API_URL}/api/seguidores/${userLogueado.id}/${id}`
         );
         const data = await response.json();
 
@@ -41,7 +41,7 @@ export function ArtistItem({ name, image, id }) {
     try {
       if (isFollowing) {
         const response = await fetch(
-          `http://localhost:5000/api/seguidores/${userLogueado.id}/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/seguidores/${userLogueado.id}/${id}`,
           {
             method: "DELETE",
           }
@@ -53,7 +53,7 @@ export function ArtistItem({ name, image, id }) {
           console.log("Error al dejar de seguir al artista.");
         }
       } else {
-        const response = await fetch(`http://localhost:5000/api/seguidores`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/seguidores`, {
           method: "POST",
           body: JSON.stringify({
             fk_usuario: userLogueado.id,

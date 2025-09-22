@@ -13,7 +13,7 @@ const Generos = () => {
     const fetchCanciones = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/canciones/genero/${id}`
+          `${import.meta.env.VITE_API_URL}/api/canciones/genero/${id}`
         );
         if (!response.ok) {
           throw new Error("No se pudieron obtener las canciones.");
