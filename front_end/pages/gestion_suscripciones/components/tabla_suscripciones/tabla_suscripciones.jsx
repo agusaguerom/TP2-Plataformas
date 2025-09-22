@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import FilasSuscripciones from "../filas_suscripciones/filas_suscripciones";
 import { AuthContext } from "../../../../src/context/AuthContext";
-import './Tabla_Suscripciones.css';
+import './tabla_suscripciones.css';
 
 const TablaSuscripciones = () => {
   const { suscripciones, loading, error, registerSuscripcion } = useContext(AuthContext);
