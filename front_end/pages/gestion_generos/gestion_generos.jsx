@@ -1,5 +1,5 @@
 import React from "react";
-import TablaGeneros from "./components/tabla_Generos/tabla_Generos";
+import TablaGeneros from "./components/tabla_generos/tabla_generos";
 import './Gestion_Generos.css';
 import { Link } from "react-router-dom";
 
