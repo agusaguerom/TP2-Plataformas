@@ -1,14 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import RecentsReleases from "./Components/RecentsRelease/RecentsRelease";
 import GlobalRanking from "../pages/GlobalRanking";
 import Home from "../pages/Home";
 import { AuthProvider } from "./context/AuthContext";
 import LoginPage from "../pages/LoginPage/Login";
 import RegisterPage from "../pages/RegisterPage/Register";
-import Profile from "./Components/Profile-todo/Profile";
+import Profile from "./components/Profile-todo/Profile";
 import EditProfilePage from "../pages/ProfilePage/EditProfile";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
 import Dashboard from "../pages/panel_artista/panel_admin/Dashboard";
