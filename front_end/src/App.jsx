@@ -24,7 +24,7 @@ import EditarAlbum from "../pages/editar_Albumes/EditarAlbumes";
 import AlbumDetails from "../pages/AlbumDetails";
 import Logout from "./components/Auth/Logout";
 import Gestion_Suscripciones from "../pages/gestion_suscripciones/gestion_suscripciones";
-import EditarSuscripcion from "../pages/editar_Suscripciones/EditarSuscripcion";
+import EditarSuscripcion from "../pages/editar_suscripciones/EditarSuscripcion";
 import Gestion_Generos from "../pages/gestion_generos/gestion_generos";
 import EditarGenero from "../pages/editar_Generos/EditarGenero";
 import { Playlists } from "../pages/Playlists/Playlists";
