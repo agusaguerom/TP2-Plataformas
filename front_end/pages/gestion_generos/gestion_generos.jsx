@@ -1,6 +1,6 @@
 import React from "react";
 import TablaGeneros from "./components/tabla_generos/tabla_generos";
-import './Gestion_Generos.css';
+import './gestion_generos.css';
 import { Link } from "react-router-dom";
 
 export const Gestion_Generos = () => {
