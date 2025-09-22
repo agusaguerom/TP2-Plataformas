@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import FilasUsuarios from "../Filas_Usuarios/Filas_Usuarios";
 import { AuthContext } from "../../../../src/context/AuthContext";
-import './Tabla_Usuarios.css';
+import './tabla_usuarios.css';
 
 const TablaUsuarios = () => {
   const { users, loading, error, register, suscripciones, roles } = useContext(AuthContext);
