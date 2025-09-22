@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import FilasSuscripciones from "../Filas_Suscripciones/Filas_Suscripciones";
+import FilasSuscripciones from "../filas_suscripciones/filas_suscripciones";
 import { AuthContext } from "../../../../src/context/AuthContext";
 import './Tabla_Suscripciones.css';
 

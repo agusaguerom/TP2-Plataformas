@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import FilasGeneros from "../Filas_Generos/Filas_Generos";
+import FilasGeneros from "../filas_generos/filas_generos";
 import { AuthContext } from "../../../../src/context/AuthContext";
 import './Tabla_Generos.css';
 

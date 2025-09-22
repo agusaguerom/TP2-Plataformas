@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Filas_Generos.css";
+import "./filas_generos.css";
 
 const FilasGeneros = ({ id, nombre }) => {
   return (

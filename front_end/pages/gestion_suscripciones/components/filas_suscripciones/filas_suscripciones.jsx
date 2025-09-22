@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Filas_Suscripciones.css";
+import "./filas_suscripciones.css";
 
 const FilasSuscripciones = ({ id, nombre, precio_mensual, duracion_dias, estado }) => {
 
