@@ -26,7 +26,7 @@ import Logout from "./components/Auth/Logout";
 import Gestion_Suscripciones from "../pages/gestion_suscripciones/gestion_suscripciones";
 import EditarSuscripcion from "../pages/editar_suscripciones/EditarSuscripcion";
 import Gestion_Generos from "../pages/gestion_generos/gestion_generos";
-import EditarGenero from "../pages/editar_Generos/EditarGenero";
+import EditarGenero from "../pages/editar_generos/EditarGenero";
 import { Playlists } from "../pages/Playlists/Playlists";
 import { PlaylistDetails } from "../pages/PlaylistDetails/PlaylistDetails";
 import { Seguidos } from "../pages/Seguidos/Seguidos";
