@@ -14,7 +14,7 @@ import Logout from "./Components/Auth/Logout";
 
 import Profile from "./Components/Profile-todo/Profile";
 import EditProfilePage from "../pages/ProfilePage/EditProfile";
-import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoute";
+import ProtectedRoute from "./Components/ProtectedRoutes/ProtectedRoute";
 
 import Dashboard from "../pages/panel_artista/panel_admin/Dashboard";
 import ArtistProfile from "../pages/ArtistProfile";
